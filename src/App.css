@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+.img-about img {
+  position: relative;
+  z-index: 2;
+}
+
+.img-about.dots {
+  position: relative;
+}
+
+.img-about.dots:after {
+  position: absolute;
+  z-index: 1;
+  bottom: -50px;
+  right: -70px;
+  content: '';
+  width: 412px;
+  height: 220px;
+  /* background: url("../images/dots.png") no-repeat; */
+  background: url('./assets/images/') no-repeat;
+}
+
+.icon-circle {
+  display: inline-block;
+  width: 150px;
+  height: 83px;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  display: flex;
+  border: 2px solid transparent;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #000;
+}
+.icon-circle:hover {
+  border: 2px solid green;
+  background-color: transparent;
+}
+
+.counter-wrap {
+  text-align: center;
+}
+
+.number {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+@media (min-width: 1400px) {
+  .container,
+  .container-xl {
+    max-width: 1320px;
+  }
+}
+
+.zeluxe-section {
+  padding: 7em 0;
+  position: relative;
+  width: 100%;
+}
+
+@media (max-width: 575.98px) {
+  .zeluxe-section {
+    padding: 6em 0;
+  }
+}
+
+.zeluxe-no-pt {
+  padding-top: 0 !important;
+}
+
+.zeluxe-no-pb {
+  padding-bottom: 0 !important;
+}
+
+.zeluxe-intro {
+  color: rgba(255, 255, 255, 0.8);
+  z-index: 0;
+  position: relative;
+  padding: 6em 0;
+}
+
+.zeluxe-intro .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: '';
+  opacity: 0.9;
+  background: #5ea51d;
+  z-index: -1;
+}
+
+@media (max-width: 767.98px) {
+  .zeluxe-intro {
+    background-position: center center !important;
+  }
+}
+
+.zeluxe-intro h1,
+.zeluxe-intro .h1 {
+  color: #fff;
+  font-weight: 600;
+}
+
+.zeluxe-intro h2,
+.zeluxe-intro .h2 {
+  color: #fff;
+  font-weight: 600;
+  font-size: 40px !important;
+}
+
+@media (max-width: 575.98px) {
+  .zeluxe-intro h2,
+  .zeluxe-intro .h2 {
+    font-size: 20px;
+  }
+}
+
+.zeluxe-intro h2 span,
+.zeluxe-intro .h2 span {
+  background: #5ea51d;
+}
+
+.zeluxe-gallery .gallery-wrap {
+  width: 100%;
+  height: 300px;
+  display: block;
+  position: relative;
+  z-index: 0;
+}
+
+.zeluxe-gallery .gallery-wrap:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: '';
+  z-index: -1;
+  background: #000000;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.zeluxe-gallery .gallery-wrap .icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #5ea51d;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.zeluxe-gallery .gallery-wrap .icon span {
+  color: #fff;
+}
+
+.zeluxe-gallery .gallery-wrap:hover:after {
+  opacity: 0.3;
+}
+
+.zeluxe-gallery .gallery-wrap:hover .icon {
+  opacity: 1;
+}
+
+.img,
+.blog-img,
+.user-img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.testimony-wrap .icon {
+  position: absolute;
+  top: -20px;
+  left: 20px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #5ea51d;
+}
+
+.testimony-wrap .icon span {
+  color: #fff;
+}
+
+.testimony-wrap .tx {
+  width: calc(100% - 80px);
+}
+
+.testimony-wrap .user-img {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  border-radius: 50%;
+}
+
+.testimony-wrap .name {
+  font-weight: 600;
+  font-size: 22px;
+  margin-bottom: 0;
+  color: #000000;
+}
+
+.testimony-wrap .position {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #5ea51d;
+  font-weight: 600;
+}
+
+.testimony-wrap {
+  display: block;
+  position: relative;
+  background: white;
+  padding: 35px 30px 30px 30px !important;
+  border-radius: 4px;
+  width: 98%;
+  margin: 20px;
+  color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 5px 12px -9px rgba(0, 0, 0, 0.17);
+}
+
+.description .carousel-inner img {
+  height: 600px;
+  object-fit: cover;
+}
+
+.description .card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+.description .property-item .card-body p {
+  margin-bottom: 0.5rem;
+}
+
+.description .property-item img {
+  height: 300px;
+  object-fit: cover;
+}
+
+.description .shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.description .availability-line {
+  height: 5px;
+  width: 100%;
+}
+
+.description .available {
+  background-color: green;
+}
+
+.description .unavailable {
+  background-color: lightgray;
+}
+
+.description .section-colored {
+  background-color: #f8f9fa;
+  padding: 2rem 0;
+}
