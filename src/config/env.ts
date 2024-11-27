@@ -8,10 +8,10 @@ const createEnv = () => {
       .refine((s) => s === 'true' || s === 'false')
       .transform((s) => s === 'true')
       .optional(),
-    APP_URL: z.string().optional().default('http://localhost:3000'),
+    APP_URL: z.string().optional().default('https://api.zeluxe.ng'),
     APP_MOCK_API_PORT: z.string().optional().default('8080'),
   });
-  const envVars = Object.entries(import.meta.env).reduce<
+  const envVars = Object.entries(import.meta.env.BASE_URL).reduce<
     Record<string, string>
   >((acc, curr) => {
     const [key, value] = curr;
