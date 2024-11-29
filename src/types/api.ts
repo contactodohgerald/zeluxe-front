@@ -29,9 +29,9 @@ export type User = Entity<{
 
 export type UserResponse = {
   success?: boolean;
-  message?:string;
-  user:User;
-  accessToken:string
+  message?: string;
+  user: User;
+  accessToken: string;
 };
 
 export type Review = Entity<{
@@ -47,141 +47,136 @@ export type ListFeature = Entity<{
 }>;
 
 export type Active = Entity<{
-    id: string,
-    owner_id: string,
-    category_id: string,
-    address_id: string,
-    name: string,
-    slug: string,
-    cycle: string,
-    price: string,
-    description: string,
-    listing_type:string,
-    status: string,
-    availability_status: string,
-    duration: string,
-    deleted_at?: null,
-     created_at: string,
-    updated_at: string,
-    category:Category,
-    owner:Owner,
-    address:Address,
-    features: Feature[],
-    images: Image[],
-    reviews: [],
-    ratings: []
-  
-}>
+  id: string;
+  owner_id: string;
+  category_id: string;
+  address_id: string;
+  name: string;
+  slug: string;
+  cycle: string;
+  price: string;
+  description: string;
+  listing_type: string;
+  status: string;
+  availability_status: string;
+  duration: string;
+  deleted_at?: null;
+  created_at: string;
+  updated_at: string;
+  category: Category;
+  owner: Owner;
+  address: Address;
+  features: Feature[];
+  images: Image[];
+  reviews: [];
+  ratings: [];
+}>;
 export type Drafts = Entity<{
-    id: string,
-    owner_id: string,
-    category_id: string,
-    address_id: string,
-    name: string,
-    slug: string,
-    cycle: string,
-    price: string,
-    description: string,
-    listing_type:string,
-    status: string,
-    availability_status: string,
-    duration: string,
-    deleted_at?: null,
-     created_at: string,
-    updated_at: string,
-    category:Category,
-    owner:Owner,
-    address:Address,
-    features: Feature[],
-    images: Image[],
-    reviews: [],
-    ratings: []
-  
-}>
-export type  Reviewing= Entity<{
-    id: string,
-    owner_id: string,
-    category_id: string,
-    address_id: string,
-    name: string,
-    slug: string,
-    cycle: string,
-    price: string,
-    description: string,
-    listing_type:string,
-    status: string,
-    availability_status: string,
-    duration: string,
-    deleted_at?: null,
-     created_at: string,
-    updated_at: string,
-    category:Category,
-    owner:Owner,
-    address:Address,
-    features: Feature[],
-    images: Image[],
-    reviews: [],
-    ratings: []
-  
-}>
-export type Rejected= Entity<{
-    id: string,
-    owner_id: string,
-    category_id: string,
-    address_id: string,
-    name: string,
-    slug: string,
-    cycle: string,
-    price: string,
-    description: string,
-    listing_type:string,
-    status: string,
-    availability_status: string,
-    duration: string,
-    deleted_at?: null,
-     created_at: string,
-    updated_at: string,
-    category:Category,
-    owner:Owner,
-    address:Address,
-    features: Feature[],
-    images: Image[],
-    reviews: [],
-    ratings: []
-  
-}>
-export type Closed= Entity<{
-    id: string,
-    owner_id: string,
-    category_id: string,
-    address_id: string,
-    name: string,
-    slug: string,
-    cycle: string,
-    price: string,
-    description: string,
-    listing_type:string,
-    status: string,
-    availability_status: string,
-    duration: string,
-    deleted_at?: null,
-     created_at: string,
-    updated_at: string,
-    category:Category,
-    owner:Owner,
-    address:Address,
-    features: Feature[],
-    images: Image[],
-    reviews: [],
-    ratings: []
-  
-}>
+  id: string;
+  owner_id: string;
+  category_id: string;
+  address_id: string;
+  name: string;
+  slug: string;
+  cycle: string;
+  price: string;
+  description: string;
+  listing_type: string;
+  status: string;
+  availability_status: string;
+  duration: string;
+  deleted_at?: null;
+  created_at: string;
+  updated_at: string;
+  category: Category;
+  owner: Owner;
+  address: Address;
+  features: Feature[];
+  images: Image[];
+  reviews: [];
+  ratings: [];
+}>;
+export type Reviewing = Entity<{
+  id: string;
+  owner_id: string;
+  category_id: string;
+  address_id: string;
+  name: string;
+  slug: string;
+  cycle: string;
+  price: string;
+  description: string;
+  listing_type: string;
+  status: string;
+  availability_status: string;
+  duration: string;
+  deleted_at?: null;
+  created_at: string;
+  updated_at: string;
+  category: Category;
+  owner: Owner;
+  address: Address;
+  features: Feature[];
+  images: Image[];
+  reviews: [];
+  ratings: [];
+}>;
+export type Rejected = Entity<{
+  id: string;
+  owner_id: string;
+  category_id: string;
+  address_id: string;
+  name: string;
+  slug: string;
+  cycle: string;
+  price: string;
+  description: string;
+  listing_type: string;
+  status: string;
+  availability_status: string;
+  duration: string;
+  deleted_at?: null;
+  created_at: string;
+  updated_at: string;
+  category: Category;
+  owner: Owner;
+  address: Address;
+  features: Feature[];
+  images: Image[];
+  reviews: [];
+  ratings: [];
+}>;
+export type Closed = Entity<{
+  id: string;
+  owner_id: string;
+  category_id: string;
+  address_id: string;
+  name: string;
+  slug: string;
+  cycle: string;
+  price: string;
+  description: string;
+  listing_type: string;
+  status: string;
+  availability_status: string;
+  duration: string;
+  deleted_at?: null;
+  created_at: string;
+  updated_at: string;
+  category: Category;
+  owner: Owner;
+  address: Address;
+  features: Feature[];
+  images: Image[];
+  reviews: [];
+  ratings: [];
+}>;
 export type Listing = Entity<{
   active: Active[];
   drafts: Drafts[];
   reviewing: Reviewing[];
-  rejected:Rejected[];
-  closed: Closed[]
+  rejected: Rejected[];
+  closed: Closed[];
 }>;
 
 export type ListingResponse = {
@@ -205,7 +200,7 @@ export type Address = Entity<{
   created_at: string;
   updated_at: string;
   state: State;
-  country: Country
+  country: Country;
 }>;
 
 export type Owner = Entity<{
@@ -227,7 +222,6 @@ export type Owner = Entity<{
   created_at: string;
   updated_at: string;
 }>;
-
 
 export type Category = Entity<{
   id: string;
@@ -287,6 +281,23 @@ export type RentalResponse = {
   success: boolean;
   message: string;
   data: Rental;
+};
+
+export type ListFeatures = Entity<{
+  name: string;
+  value: number | string;
+}>;
+
+export type CreateListings = {
+  category_id: string;
+  name: string;
+  price: string;
+  discount?: number;
+  qty?: number;
+  description: string;
+  address_id: string;
+  listing_images: string[];
+  listing_features: ListFeatures[];
 };
 
 export type RegisterData = {

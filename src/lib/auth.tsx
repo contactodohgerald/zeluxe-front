@@ -6,13 +6,13 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { paths } from '../config/paths';
 import { setCookie } from './utils';
 
-const getUser = async (): Promise<User  | null> => {
-  const user = localStorage.getItem('user')
+const getUser = async (): Promise<User | null> => {
+  const user = localStorage.getItem('user');
   if (!user) {
     return null;
   }
   try {
-    return JSON.parse(user)
+    return JSON.parse(user);
   } catch (error) {
     console.log('error decoding', error);
     return null;
@@ -60,10 +60,8 @@ const authConfig = {
     const response = await loginWithEmailAndPassword(data);
     const token = response?.data?.access_token;
     if (token) {
-
-      setCookie('accessToken',response?.data?.access_token, {expires: 1})
-      localStorage.setItem('user',JSON.stringify(response?.data?.user))
-     
+      setCookie('accessToken', response?.data?.access_token, { expires: 1 });
+      localStorage.setItem('user', JSON.stringify(response?.data?.user));
     }
     return response?.data?.user;
   },

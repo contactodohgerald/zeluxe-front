@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 export const VerifyOtpRoute = () => {
   const { addNotification } = useNotifications();
   const navigate = useNavigate();
- 
+
   const redirectTo = paths.auth.login.getHref();
   const email = useUserStore((state) => state.email);
   const [otp, setOtp] = useState('');
@@ -84,7 +84,7 @@ export const VerifyOtpRoute = () => {
               onSubmit={handleSubmit}
               schema={sendOtpInputSchema}
             >
-              {({  formState }) => (
+              {({ formState }) => (
                 <>
                   <div className="flex flex-col space-y-16">
                     <div className="mx-auto flex w-full max-w-sm flex-row items-center justify-between">

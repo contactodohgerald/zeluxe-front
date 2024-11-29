@@ -27,6 +27,10 @@ export const LandingRoute = () => {
       : navigate(paths.home.getHref());
   }, [user?.data]);
 
+  if (!rentals || rentals.data?.data?.length === 0) {
+    return <p>No items to display in this category</p>;
+  }
+
   return (
     <>
       <Head description="Welcome to Zeluxe Listings Home Page" />
