@@ -11,6 +11,7 @@ import { SearchIcon } from '@/components/ui/svgs/search-icon';
 
 export const DashboardRoute = () => {
   const user = useUser();
+
   return (
     <ContentLayout title="">
       <div className="flex flex-col justify-center pb-20 lg:flex-row">

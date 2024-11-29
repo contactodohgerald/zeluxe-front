@@ -18,16 +18,21 @@ export type User = Entity<{
   first_name: string;
   last_name: string;
   email: string;
-  phone: string;
-  gender: string;
-  role_id: string;
-  username: string;
-  updated_at: string;
-  created_at: string;
+  phone?: string;
+  gender?: string;
+  role_id?: string;
+  username?: string;
+  updated_at?: string;
+  created_at?: string;
   role: 'ADMIN' | 'USER';
 }>;
 
-export type UserResponse = {};
+export type UserResponse = {
+  success?: boolean;
+  message?:string;
+  user:User;
+  accessToken:string
+};
 
 export type Review = Entity<{
   body: string;

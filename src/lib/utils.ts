@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from 'clsx';
+import Cookies from 'js-cookie';
 import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
@@ -21,4 +22,13 @@ export const calculateDaysFromNow =(dateString: string) => {
   }
 
   return `${daysDifference} days`
+}
+
+export const setCookie = (key:string,value:any,options={}) => {
+  Cookies.set(key,value,options)
+}
+
+export const getCoookie=<T>(key:string): T | null => {
+  const value = Cookies.get(key);
+  return value ? (value as T) : null
 }
