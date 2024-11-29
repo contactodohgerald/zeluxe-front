@@ -18,12 +18,12 @@ export const AuthLayout = ({ children, title }: LayoutProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user.data) {
+    if (user?.data) {
       navigate(redirectTo ? redirectTo : paths.app.dashboard.getHref(), {
         replace: true,
       });
     }
-  }, [user.data, navigate, redirectTo]);
+  }, [user?.data, navigate, redirectTo]);
   return (
     <>
       <Head title={title} />

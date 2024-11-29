@@ -1,8 +1,27 @@
 import { Head } from '@/components/seo';
 import { Footer } from '@/components/ui/footer';
 import { Header } from '@/components/ui/header';
-import Home9 from '@/assets/images/featured_properties/home12.jpg';
+// import Home9 from '@/assets/images/featured_properties/home12.jpg';
+import { useRental } from '@/features/guest/api/get-rental';
+import { useParams } from 'react-router-dom';
+import { Spinner } from '@/components/ui/spinner';
+import { currencyNGN } from '@/utils/constants';
 export const LandingDetailRoute = () => {
+  const { rentalId } = useParams<{ rentalId: string }>();
+  const rentalQuery = useRental({ rentalId } as any);
+
+  if (rentalQuery.isLoading) {
+    return (
+      <div className="flex h-48 w-full items-center justify-center">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
+
+  const rental = rentalQuery?.data?.data;
+  // console.log(rental);
+
+  if (!rental) return null;
   return (
     <>
       <Head description="Welcome to Zeluxe Listings Home Page" />
@@ -12,16 +31,22 @@ export const LandingDetailRoute = () => {
           <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
             <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
               <div className="max-w-md shrink-0 sm:mx-auto lg:max-w-lg">
-                <img className="h-full w-full" src={Home9} alt="" />
+                {/* <img className="h-full w-full" src={Home9} alt="" /> */}
+                <img
+                  className="h-full w-full"
+                  src={`https://api.zeluxe.ng/uploads/1ac8ffc06e72c0fe7d5af2b841d417cc1732820273.jpg`}
+                  alt=""
+                />
               </div>
 
               <div className="mt-6 sm:mt-8 lg:mt-0">
                 <h1 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
-                  4 Bedroom Apartment
+                  {rental?.name}
                 </h1>
                 <div className="mt-4 sm:flex sm:items-center sm:gap-4">
                   <p className="text-2xl font-extrabold text-gray-900 dark:text-white sm:text-3xl">
-                    ₦30,000 / day
+                    {/* ₦30,000 / day */}
+                    {`${currencyNGN} ${rental?.price} / ${rental?.cycle}`}
                   </p>
 
                   <div className="mt-2 flex items-center gap-2 sm:mt-0">
@@ -108,7 +133,8 @@ export const LandingDetailRoute = () => {
                 <hr className="my-6 border-gray-200 dark:border-gray-800 md:my-8" />
 
                 <p className="mb-6 text-gray-500 dark:text-gray-400">
-                  Good Road . 24/7 light . Serenity . Security
+                  {/* Good Road . 24/7 light . Serenity . Security */}
+                  {rental?.description}
                 </p>
               </div>
             </div>

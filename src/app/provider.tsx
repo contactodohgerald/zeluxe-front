@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient } from '@tanstack/react-query';
 import { queryConfig } from '@/lib/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import * as React from 'react';
@@ -8,6 +8,8 @@ import { Notifications } from '@/components/ui/notifications';
 import { AuthLoader } from '@/lib/auth';
 import { Spinner } from '@/components/ui/spinner';
 import { MainErrorFallback } from '@/components/errors/main';
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
 
 type AppProviderProps = {
   children: React.ReactNode;
@@ -17,6 +19,10 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   const [queryClient] = React.useState(
     () => new QueryClient({ defaultOptions: queryConfig }),
   );
+
+  const persister = createSyncStoragePersister({
+    storage: window.localStorage,
+  });
 
   return (
     <React.Suspense
@@ -28,7 +34,10 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     >
       <ErrorBoundary FallbackComponent={MainErrorFallback}>
         <HelmetProvider>
-          <QueryClientProvider client={queryClient}>
+          <PersistQueryClientProvider
+            client={queryClient}
+            persistOptions={{ persister }}
+          >
             {import.meta.env.DEV && <ReactQueryDevtools />}
             <Notifications />
             <AuthLoader
@@ -40,7 +49,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
             >
               {children}
             </AuthLoader>
-          </QueryClientProvider>
+          </PersistQueryClientProvider>
         </HelmetProvider>
       </ErrorBoundary>
     </React.Suspense>

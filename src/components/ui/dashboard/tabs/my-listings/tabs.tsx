@@ -1,36 +1,32 @@
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import { MyListingsTabCard } from './my-listings-tab';
+import { Listing } from '@/types/api';
 
-export const MyListingsTabs = () => {
-  const tabBtnItems = [
-    { id: 1, name: 'Active (30)' },
-    { id: 2, name: 'Drafts (4) ' },
-    { id: 3, name: 'Reviewing (20)' },
-    { id: 4, name: 'Rejected (0)' },
-    { id: 4, name: 'Closed (0)' },
-  ];
-
+export const MyListingsTabs = ({listings}:{listings:Listing}) => {
+   console.log('listings',listings)
+  if(!listings || Object.keys(listings).length === 0) {
+    return <p>No listings available</p>
+  }
   return (
     <TabGroup>
       <TabList className="">
-        {tabBtnItems.map((item) => (
+        {Object.keys(listings).map((item) => (
           <Tab
-            key={item.id}
+            key={item}
             className={({ selected }) =>
-              `mb-2 mr-4 w-[8.4rem] text-nowrap text-center ${selected ? 'bg-primary text-white focus:outline-none' : 'bg-light text-black'} rounded-[1.66rem] pb-[1.45rem] pl-[1.98rem] pr-[1.98rem] pt-[1.45rem] align-middle`
+              `mb-2 mr-4 w-[8.4rem] text-nowrap capitalize text-center ${selected ? 'bg-primary text-white focus:outline-none' : 'bg-light text-black'} rounded-[1.66rem] pb-[1.45rem] pl-[1.98rem] pr-[1.98rem] pt-[1.45rem] align-middle`
             }
           >
-            {item.name}
+            {item}
           </Tab>
         ))}
       </TabList>
       <TabPanels className="mt-4">
-        <TabPanel className="">
-          <MyListingsTabCard />
-        </TabPanel>
-        <TabPanel className="">
-          <MyListingsTabCard />
-        </TabPanel>
+        {Object.keys(listings).map((key)=>(
+           <TabPanel className="" key={key}>
+           <MyListingsTabCard listings={listings[key as keyof Listing] as any}/>
+         </TabPanel>
+        ))}
       </TabPanels>
     </TabGroup>
   );

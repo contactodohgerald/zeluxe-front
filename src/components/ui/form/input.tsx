@@ -6,7 +6,7 @@ import { FieldWrapper, FieldWrapperPassThroughProps } from './field-wrapper';
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement> &
   FieldWrapperPassThroughProps & {
     className?: string;
-    registration: Partial<UseFormRegisterReturn>;
+    registration?: Partial<UseFormRegisterReturn>;
   };
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -15,7 +15,10 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <FieldWrapper label={label} error={error}>
         <input
           type={type}
-          className={cn('bg-transparent', className)}
+          className={cn(
+            'block w-full rounded-lg border border-gray-300 bg-gray-50 bg-transparent p-2.5 text-sm text-secondary outline-none focus:border-primary focus:ring-primary',
+            className,
+          )}
           ref={ref}
           {...registration}
           {...props}
