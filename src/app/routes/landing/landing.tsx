@@ -9,19 +9,23 @@ import { Link } from 'react-router-dom';
 import { Select } from '@headlessui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { apartments, bookingLinks, cityLinks, icons } from '@/utils/constants';
+import { bookingLinks, cityLinks, currencyNGN, icons } from '@/utils/constants';
+import { useRentals } from '@/features/guest/api/get-rentals';
+// import Home9 from '@/assets/images/featured_properties/home9.jpg';
 
 export const LandingRoute = () => {
   const navigate = useNavigate();
   const user = useUser();
-  // const { id } = useParams<{ id: string }>();
   const [activeIndex, setActiveIndex] = useState(0);
+  const rentals = useRentals({});
+
+  // console.log(rentals?.data?.data);
 
   useEffect(() => {
-    user.data
+    user?.data
       ? navigate(paths.app.dashboard.getHref())
       : navigate(paths.home.getHref());
-  }, [user.data]);
+  }, [user?.data]);
 
   return (
     <>
@@ -121,27 +125,32 @@ export const LandingRoute = () => {
               </div>
             </div>
             <div className="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {apartments.map((apt, idx) => (
+              {rentals?.data?.data?.map((rental) => (
                 <div
-                  key={apt.id}
+                  key={rental?.id}
                   className="card card-shadow overflow-hidden bg-white pb-2.5 text-start"
                 >
                   <img
-                    src={apt.img}
-                    alt={`Home ${idx + 1}`}
+                    // src={rental?.images[0]?.url || Home9}
+                    src={
+                      'https://api.zeluxe.ng/uploads/1ac8ffc06e72c0fe7d5af2b841d417cc1732820273.jpg'
+                    }
+                    alt={`Home`}
                     className="h-[240px] w-full object-cover"
                   />
                   <div className="p-4">
-                    <Link to={`/${apt.id}`} className="hover:text-primary">
+                    <Link to={`/${rental?.id}`} className="hover:text-primary">
                       <h5 className="mb-2.5 text-[20px]">
-                        {apt.title} for Booking
+                        {rental?.name} for Booking
                       </h5>
                     </Link>
-                    <p className="mb-[5px] text-gray-700">{apt.location}</p>
-                    <p className="mb-2.5 text-sm text-gray-500">
-                      {apt.amenities}
+                    <p className="mb-[5px] text-gray-700">
+                      {rental?.address?.location}
                     </p>
-                    <p className="text-green-5">{apt.price}</p>
+                    <p className="mb-2.5 text-sm text-gray-500">
+                      {rental?.listing_type}
+                    </p>
+                    <p className="font-semibold text-green-5">{`${currencyNGN} ${rental?.price}`}</p>
                   </div>
                 </div>
               ))}

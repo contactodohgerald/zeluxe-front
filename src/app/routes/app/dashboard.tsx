@@ -4,19 +4,20 @@ import {
   listingCardItems,
 } from '@/components/ui/dashboard/cards/listings-card';
 import { Form } from '@/components/ui/form';
-import { loginInputSchema } from '@/lib/auth';
+import { loginInputSchema, useUser } from '@/lib/auth';
 import { Tabs } from '@/components/ui/dashboard/tabs';
 import { FeaturedRentals } from '@/components/ui/dashboard/cards/featured-rentals';
 import { SearchIcon } from '@/components/ui/svgs/search-icon';
 
 export const DashboardRoute = () => {
+  const user = useUser();
   return (
     <ContentLayout title="">
       <div className="flex flex-col justify-center pb-20 lg:flex-row">
         <div className="flex w-full flex-col lg:flex-row">
           <div className="flex-1">
             <h1 className="font-lato text-[2.3rem] font-medium leading-[3.68rem] tracking-[3%] text-primary">
-              Hey, <span className="font-bold">Femi!</span>
+              Hey, <span className="font-bold">{user?.data?.first_name}!</span>
             </h1>
             <p className="font-lato text-[2.3rem] font-medium leading-[3.68rem] tracking-[3%] text-primary">
               Let's start exploring

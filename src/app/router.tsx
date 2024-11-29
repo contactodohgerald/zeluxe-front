@@ -1,14 +1,13 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import { useQueryClient } from '@tanstack/react-query';
-// import { QueryClient, } from '@tanstack/react-query';
+import { QueryClient } from '@tanstack/react-query';
 import { paths } from '@/config/paths';
 import { useMemo } from 'react';
-// import { ProtectedRoute } from '../lib/auth';
 import { AppRoot, AppRootErrorBoundary } from './routes/app/root';
+import { ProtectedRoute } from '@/lib/auth';
 
-// export const createAppRouter = (queryClient: QueryClient) =>
-export const createAppRouter = () =>
+export const createAppRouter = (_queryClient: QueryClient) =>
   createBrowserRouter([
     {
       path: paths.home.path,
@@ -46,6 +45,13 @@ export const createAppRouter = () =>
       },
     },
     {
+      path: paths.auth.verify.path,
+      lazy: async () => {
+        const { VerifyOtpRoute } = await import('./routes/auth/verify-otp');
+        return { Component: VerifyOtpRoute };
+      },
+    },
+    {
       path: paths.auth.login.path,
       lazy: async () => {
         const { LoginRoute } = await import('./routes/auth/login');
@@ -64,9 +70,9 @@ export const createAppRouter = () =>
     {
       path: paths.app.root.path,
       element: (
-        // <ProtectedRoute>
-        <AppRoot />
-        // </ProtectedRoute>
+        <ProtectedRoute>
+          <AppRoot />
+        </ProtectedRoute>
       ),
       ErrorBoundary: AppRootErrorBoundary,
       children: [
@@ -160,6 +166,6 @@ export const createAppRouter = () =>
 
 export const AppRouter = () => {
   const queryClient = useQueryClient();
-  const router = useMemo(() => createAppRouter(), [queryClient]);
+  const router = useMemo(() => createAppRouter(queryClient), [queryClient]);
   return <RouterProvider router={router} />;
 };

@@ -1,40 +1,33 @@
 import { configureAuth } from 'react-query-auth';
 import { z } from 'zod';
-import { AuthResponse } from '../types/api';
+import { AuthResponse, User } from '../types/api';
 import { api } from './api-client';
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { paths } from '../config/paths';
+import Cookies from 'js-cookie';
 
-// api call definitions for auth (types, schemas, requests):
-// these are not part of features as this is a module shared across features
-// const getUser = async (): Promise<User> => {
-//   try {
-//     const response = await api.get('/photos');
-//     return response.data;
-//   } catch (error) {
-//     console.error('Failed to fetch user:', error);
-//     throw new Error('Failed to fetch user');
-//   }
-// };
-
-// export const getState= async () => {
-//   try {
-//     const response = await api.get('http://states-and-cities.com/api/v1/states')
-//     console.log(response)
-//     return response.data;
-//   } catch (error) {
-//     console.error('Failed to fetch state:', error);
-//     throw new Error('Failed to fetch state');
-//   }
-// }
+const getUser = async (): Promise<User | null> => {
+  const token = Cookies.get('accessToken');
+  if (!token) {
+    return null;
+  }
+  try {
+    const decodedToken: any = token;
+    const user: User = decodedToken;
+    return user;
+  } catch (error) {
+    console.log('error decoding', error);
+    return null;
+  }
+};
 
 const logout = (): Promise<void> => {
   return api.post('/auth/logout');
 };
 
 export const loginInputSchema = z.object({
-  email: z.string().min(1, 'Required').email('Invalid email'),
-  password: z.string().min(5, 'Required'),
+  email: z.string().min(1, 'Email is required').email('Invalid email'),
+  password: z.string().min(5, 'password is required'),
 });
 
 export type LoginInput = z.infer<typeof loginInputSchema>;
@@ -43,10 +36,16 @@ const loginWithEmailAndPassword = (data: LoginInput): Promise<AuthResponse> => {
 };
 
 export const registerInputSchema = z.object({
-  email: z.string().min(1, 'Required'),
   first_name: z.string().min(1, 'Required'),
   last_name: z.string().min(1, 'Required'),
+  email: z.string().min(1, 'Required'),
+  phone: z.string().min(1, 'Required'),
+  gender: z.string().optional(),
+  country_id: z.string().optional(),
+  state_id: z.string().optional(),
+  address: z.string().optional(),
   password: z.string().min(1, 'Required'),
+  password_confirmation: z.string().min(1, 'Required'),
 });
 
 export type RegisterInput = z.infer<typeof registerInputSchema>;
@@ -54,21 +53,22 @@ export type RegisterInput = z.infer<typeof registerInputSchema>;
 const registerWithEmailAndPassword = (
   data: RegisterInput,
 ): Promise<AuthResponse> => {
-  return api.post('/auth/register', data);
+  return api.post('/auth/register-renter', data);
 };
 
 const authConfig = {
-  userFn: async () => {
-    return new Promise((resolve) => setTimeout(() => resolve(null), 1000));
-  },
-  // userFn: getUser,
+  userFn: getUser,
   loginFn: async (data: LoginInput) => {
     const response = await loginWithEmailAndPassword(data);
-    return response.user;
+    const token = response?.data?.access_token;
+    if (token) {
+      Cookies.set('accessToken', token, { expires: 1 });
+    }
+    return response.data.user;
   },
   registerFn: async (data: RegisterInput) => {
     const response = await registerWithEmailAndPassword(data);
-    return response.user;
+    return response.data.user;
   },
   logoutFn: logout,
 };
@@ -78,6 +78,7 @@ export const { useUser, useLogin, useLogout, useRegister, AuthLoader } =
 
 export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const user = useUser();
+  console.log(user?.data);
   const location = useLocation();
 
   if (!user.data) {
@@ -86,12 +87,9 @@ export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
       redirectTo: paths.auth.login.getHref(location.pathname),
     });
     return (
-      <Navigate
-        to={paths.auth.login.getHref(location.pathname)}
-        replace={true}
-      />
+      <Navigate to={paths.auth.login.getHref(location.pathname)} replace />
     );
   }
 
-  return children || <Outlet />;
+  return children;
 };

@@ -6,7 +6,7 @@ import viteTsconfigPaths from 'vite-tsconfig-paths';
 // https://vite.dev/config/
 export default defineConfig({
   base: './',
-  plugins: [react(),viteTsconfigPaths()],
+  plugins: [react(), viteTsconfigPaths()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -18,6 +18,15 @@ export default defineConfig({
       external: ['fs/promises'],
       output: {
         experimentalMinChunkSize: 3500,
+      },
+    },
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://api.zeluxe.ng',
+        changeOrigin: true,
+        secure: false,
       },
     },
   },

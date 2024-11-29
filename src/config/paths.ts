@@ -4,8 +4,8 @@ export const paths = {
     getHref: () => '/',
   },
   homeDetail: {
-    path: '/:id',
-    getHref: (id: string) => `/${id}`,
+    path: '/:rentalId',
+    getHref: (rentalId: string) => `/${rentalId}`,
   },
   about: {
     path: '/about',
@@ -21,6 +21,11 @@ export const paths = {
       path: '/auth/register',
       getHref: (redirectTo?: string | null | undefined) =>
         `/auth/register${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ''}`,
+    },
+    verify: {
+      path: '/auth/verify',
+      getHref: (redirectTo?: string | null | undefined) =>
+        `/auth/verify${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ''}`,
     },
     login: {
       path: '/auth/login',

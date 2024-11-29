@@ -1,6 +1,5 @@
 import { ContentLayout } from '@/components/layouts';
-import { MyListingsTabs } from '@/components/ui/dashboard/tabs';
-import { Card } from 'antd';
+import { ListingsList } from '@/features/listings/component/listings-list';
 
 export const MyListingRoute = () => {
   const FormSearch = () => (
@@ -23,16 +22,16 @@ export const MyListingRoute = () => {
             <path
               d="M6.00386 9.47624C7.98808 9.47624 9.5966 7.86771 9.5966 5.8835C9.5966 3.89929 7.98808 2.29077 6.00386 2.29077C4.01965 2.29077 2.41113 3.89929 2.41113 5.8835C2.41113 7.86771 4.01965 9.47624 6.00386 9.47624Z"
               stroke="#1E7E34"
-              stroke-width="1.04516"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.04516"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               d="M11.5562 11.4356L8.50781 8.60498"
               stroke="#1E7E34"
-              stroke-width="1.04516"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.04516"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </div>
@@ -48,9 +47,7 @@ export const MyListingRoute = () => {
   );
   return (
     <ContentLayout title="My Listings" component={<FormSearch />}>
-      <Card className="mt-4">
-        <MyListingsTabs />
-      </Card>
+      <ListingsList/>
     </ContentLayout>
   );
 };

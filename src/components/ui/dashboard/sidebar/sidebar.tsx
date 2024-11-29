@@ -13,6 +13,7 @@ import {
 } from '../../svgs';
 import { LogoutIcon } from '../../svgs/logout-icon';
 import React from 'react';
+// import { useLogout } from '@/lib/auth';
 
 type SideNavigationItem = {
   id: number;
@@ -89,6 +90,8 @@ type SidebarProps = {
 };
 
 export const Sidebar = ({ show }: SidebarProps) => {
+  // const logout = useLogout();
+
   return (
     <aside
       className={cn(
@@ -105,6 +108,7 @@ export const Sidebar = ({ show }: SidebarProps) => {
           <ul>
             {mainNavItems.map((item) => (
               <NavLink
+                // onClick={()=> logout.mutate({})}
                 end
                 key={item.name}
                 to={item.to}
