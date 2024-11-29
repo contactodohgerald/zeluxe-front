@@ -47,7 +47,7 @@ export const MyListingRoute = () => {
   );
   return (
     <ContentLayout title="My Listings" component={<FormSearch />}>
-      <ListingsList/>
+      <ListingsList />
     </ContentLayout>
   );
 };

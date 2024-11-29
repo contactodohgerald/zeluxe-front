@@ -5,11 +5,18 @@ import { env } from '../config/env';
 import { useNotifications } from '../components/ui/notifications';
 
 function authRequestInterceptor(config: InternalAxiosRequestConfig) {
+  const token = document.cookie
+    .split(';')
+    .find((row) => row.startsWith('accessToken='))
+    ?.split('=')[1];
   if (config.headers) {
     config.headers.Accept = 'application/json';
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
   }
 
-  config.withCredentials = false;
+  // config.withCredentials = true;
   return config;
 }
 
@@ -32,10 +39,13 @@ api.interceptors.response.use(
     });
 
     if (error.response?.status === 401) {
-      const searchParams = new URLSearchParams();
-      const redirectTo =
-        searchParams.get('redirectTo') || window.location.pathname;
-      window.location.href = paths.auth.login.getHref(redirectTo);
+      const currentPath = window.location.pathname;
+      if (currentPath !== paths.auth.login.getHref()) {
+        const searchParams = new URLSearchParams();
+        const redirectTo =
+          searchParams.get('redirectTo') || window.location.pathname;
+        window.location.href = paths.auth.login.getHref(redirectTo);
+      }
     }
 
     return Promise.reject(error);

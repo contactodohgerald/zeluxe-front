@@ -22,7 +22,7 @@ export const Select = (props: SelectFieldProps) => {
     <FieldWrapper label={label} error={error}>
       <select
         className={cn(
-          'mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 bg-transparent p-2.5 text-sm text-secondary outline-none focus:border-primary focus:ring-primary',
+          'block w-full rounded-lg border border-gray-300 bg-gray-50 bg-transparent p-2.5 text-sm text-secondary outline-none focus:border-primary focus:ring-primary',
           className,
         )}
         defaultValue={defaultValue}

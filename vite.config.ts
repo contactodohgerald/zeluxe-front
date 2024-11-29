@@ -24,7 +24,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://api.zeluxe.ng',
+        target: 'https://api.zeluxe.ng/api/v1',
         changeOrigin: true,
         secure: false,
       },
