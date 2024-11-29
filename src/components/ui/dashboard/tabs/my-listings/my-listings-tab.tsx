@@ -57,7 +57,6 @@ type MyListingsTabCardProps = {
   listings: Active[] | Drafts[] | Reviewing[] | Rejected[] | Closed[];
 };
 export const MyListingsTabCard = ({listings}: MyListingsTabCardProps) => {
-  console.log('listings here',listings)
 
   if (!listings || listings.length === 0) {
     return <p>No items to display in this category</p>;
@@ -65,10 +64,10 @@ export const MyListingsTabCard = ({listings}: MyListingsTabCardProps) => {
   return (
     <>
         {listings.map((listing) => (
-             <Card className="mb-[1.63rem] w-full bg-[#D9D9D92B]">
+             <Card className="mb-[1.63rem] w-full bg-[#D9D9D92B]" key={listing?.id}>
              <div
                className="flex flex-col sm:flex-row md:items-center"
-               key={listing?.id}
+               
              >
                <div className="mr-[1.4rem]">
                  <img
