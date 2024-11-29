@@ -3,7 +3,6 @@ import { MyListingsTabCard } from './my-listings-tab';
 import { Listing } from '@/types/api';
 
 export const MyListingsTabs = ({listings}:{listings:Listing}) => {
-   console.log('listings',listings)
   if(!listings || Object.keys(listings).length === 0) {
     return <p>No listings available</p>
   }
