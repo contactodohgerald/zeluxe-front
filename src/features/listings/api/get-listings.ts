@@ -1,11 +1,11 @@
 import { api } from '@/lib/api-client';
 import { QueryConfig } from '@/lib/react-query';
-import { Listing } from '@/types/api';
+import { getCoookie } from '@/lib/utils';
+import { Listing} from '@/types/api';
 import { queryOptions, useQuery } from '@tanstack/react-query';
-import Cookies from 'js-cookie';
 
 export const getListings = (): Promise<{ data: Listing[] }> => {
-    const token = Cookies.get('accessToken')
+    const token = getCoookie('accessToken')
     const config={
         headers:{
             Authorization: `Bearer ${token}`

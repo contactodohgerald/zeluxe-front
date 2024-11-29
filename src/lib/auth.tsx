@@ -4,17 +4,15 @@ import { AuthResponse, User } from '../types/api';
 import { api } from './api-client';
 import { Navigate, useLocation } from 'react-router-dom';
 import { paths } from '../config/paths';
-import Cookies from 'js-cookie';
+import { setCookie } from './utils';
 
-const getUser = async (): Promise<User | null> => {
-  const token = Cookies.get('accessToken');
-  if (!token) {
+const getUser = async (): Promise<User  | null> => {
+  const user = localStorage.getItem('user')
+  if (!user) {
     return null;
   }
   try {
-    const decodedToken: any = token;
-    const user: User = decodedToken;
-    return user;
+    return JSON.parse(user)
   } catch (error) {
     console.log('error decoding', error);
     return null;
@@ -62,13 +60,16 @@ const authConfig = {
     const response = await loginWithEmailAndPassword(data);
     const token = response?.data?.access_token;
     if (token) {
-      Cookies.set('accessToken', token, { expires: 1 });
+
+      setCookie('accessToken',response?.data?.access_token, {expires: 1})
+      localStorage.setItem('user',JSON.stringify(response?.data?.user))
+     
     }
-    return response.data.user;
+    return response?.data?.user;
   },
   registerFn: async (data: RegisterInput) => {
     const response = await registerWithEmailAndPassword(data);
-    return response.data.user;
+    return response?.data?.user;
   },
   logoutFn: logout,
 };
@@ -78,7 +79,6 @@ export const { useUser, useLogin, useLogout, useRegister, AuthLoader } =
 
 export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const user = useUser();
-  console.log(user?.data);
   const location = useLocation();
 
   if (!user.data) {
