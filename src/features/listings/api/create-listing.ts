@@ -8,15 +8,18 @@ import { getListingsQueryOptions } from './get-listings';
 export const createListingInputSchema = z.object({
   category_id: z.string({ required_error: 'category is required' }),
   name: z.string({ required_error: 'name is required' }),
+  listing_type: z.string(),
   price: z.string({ required_error: 'price is required' }),
   discount: z.number().optional(),
   qty: z.number().optional(),
+  cycle: z.string(),
   description: z.string({ required_error: 'description is required' }),
   address_id: z.string(),
-  listing_images: z.string().array(),
+  listing_images: z.array(z.string()).optional(),
   listing_features: z
     .object({ name: z.string(), value: z.string().or(z.number()) })
-    .array(),
+    .array()
+    .optional(),
 });
 
 export type createListingInput = z.infer<typeof createListingInputSchema>;

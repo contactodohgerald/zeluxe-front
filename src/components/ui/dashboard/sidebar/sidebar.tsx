@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink} from 'react-router-dom';
 import { paths } from '../../../../config/paths';
 import LogoImg from '../../../../assets/images/logo.png';
 import ProfileImg from '../../../../assets/images/dashboard_profile.jpeg';
@@ -13,7 +13,8 @@ import {
 } from '../../svgs';
 import { LogoutIcon } from '../../svgs/logout-icon';
 import React from 'react';
-// import { useLogout } from '@/lib/auth';
+import { useUser } from '@/lib/auth';
+
 
 type SideNavigationItem = {
   id: number;
@@ -69,28 +70,41 @@ const mainNavItems = [
   },
 ].filter(Boolean) as SideNavigationItem[];
 
-const bottomNavItems = [
-  {
-    id: 7,
-    name: 'Femi Ademola',
-    icon: ProfileImg,
-    to: paths.app.profile.getHref(),
-  },
-  {
-    id: 8,
-    name: 'Log out',
-    icon: LogoutIcon,
-    to: paths.app.logout.getHref(),
-  },
-];
-
 type SidebarProps = {
   show: boolean;
   // setShow: React.Dispatch<SetStateAction<boolean>>;
 };
 
 export const Sidebar = ({ show }: SidebarProps) => {
-  // const logout = useLogout();
+  // const { addNotification } = useNotifications();
+  // const navigate = useNavigate();
+  // const logout = useLogout({
+  //   onSuccess() {
+  //     addNotification({
+  //       type: 'success',
+  //       title: 'success',
+  //       message: 'Logout Successfully',
+  //     });
+  //     navigate(paths.auth.login.getHref(), {
+  //       replace: true,
+  //     });
+  //   },
+  // });
+  const user = useUser();
+  const bottomNavItems = [
+    {
+      id: 7,
+      name: `${user?.data?.first_name}`,
+      icon: ProfileImg,
+      to: paths.app.profile.getHref(),
+    },
+    {
+      id: 8,
+      name: 'Log out',
+      icon: LogoutIcon,
+      to: paths.app.logout.getHref(),
+    },
+  ];
 
   return (
     <aside

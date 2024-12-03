@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import { Head } from '@/components/seo';
-import { useUser } from '@/lib/auth';
 import { paths } from '@/config/paths';
 import { useEffect, useState } from 'react';
 import { Header } from '@/components/ui/header';
@@ -9,23 +8,24 @@ import { Link } from 'react-router-dom';
 import { Select } from '@headlessui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { bookingLinks, cityLinks, currencyNGN, icons } from '@/utils/constants';
+import { bookingLinks, cityLinks, currencyNGN } from '@/utils/constants';
 import { useRentals } from '@/features/guest/api/get-rentals';
+import { getTokenFromCookie } from '@/lib/utils';
 // import Home9 from '@/assets/images/featured_properties/home9.jpg';
 
 export const LandingRoute = () => {
   const navigate = useNavigate();
-  const user = useUser();
+  const token = getTokenFromCookie();
   const [activeIndex, setActiveIndex] = useState(0);
   const rentals = useRentals({});
 
   // console.log(rentals?.data?.data);
 
   useEffect(() => {
-    user?.data
+    token
       ? navigate(paths.app.dashboard.getHref())
       : navigate(paths.home.getHref());
-  }, [user?.data]);
+  }, [token]);
 
   if (!rentals || rentals.data?.data?.length === 0) {
     return <p>No items to display in this category</p>;
@@ -52,25 +52,19 @@ export const LandingRoute = () => {
                   {/* <div className="flex justify-center py-24 mt-4 space-x-4"> */}
                   <div className="short-popular-category-list text-center">
                     <ul className="inline-flex space-x-4 pl-0">
-                      {bookingLinks.map((icon, idx) => {
-                        console.log(
-                          'icons',
-                          icons[icon as keyof typeof icons] as IconProp,
-                        );
-                        return (
-                          <Link
-                            key={idx}
-                            to="#"
-                            className="flex items-center space-x-1 border border-[#404040] px-2.5 py-[4px] text-[12px] font-[200] text-[#c1c1c1] hover:underline"
-                          >
-                            <FontAwesomeIcon
-                              //  icon={icons[icon as keyof typeof icons] as IconProp}
-                              icon={'fa fa-credit-card' as IconProp}
-                            />
-                            <span>{icon}</span>
-                          </Link>
-                        );
-                      })}
+                      {bookingLinks.map((icon, idx) => (
+                        <Link
+                          key={idx}
+                          to="#"
+                          className="flex items-center space-x-1 border border-[#404040] px-2.5 py-[4px] text-[12px] font-[200] text-[#c1c1c1] hover:underline"
+                        >
+                          <FontAwesomeIcon
+                            //  icon={icons[icon as keyof typeof icons] as IconProp}
+                            icon={'fa fa-credit-card' as IconProp}
+                          />
+                          <span>{icon}</span>
+                        </Link>
+                      ))}
                     </ul>
                   </div>
                 </div>

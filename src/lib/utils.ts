@@ -32,3 +32,25 @@ export const getCoookie = <T>(key: string): T | null => {
   const value = Cookies.get(key);
   return value ? (value as T) : null;
 };
+
+export const getTokenFromCookie = (): string | null => {
+  const token = document.cookie
+    .split(';')
+    .find((row) => row.trim().startsWith('accessToken='))
+    ?.split('=')[1];
+  return token || null;
+};
+
+export const formatErrors = (error: any) => {
+  const errorMessages = error?.response?.data?.errors;
+
+  if (errorMessages) {
+    return Object.entries(errorMessages)
+      .map(
+        ([field, messages]) =>
+          `${field}: ${Array.isArray(messages) ? messages.join(',') : messages}`,
+      )
+      .join('\n');
+  }
+  return 'An unexpected error occurred.';
+};

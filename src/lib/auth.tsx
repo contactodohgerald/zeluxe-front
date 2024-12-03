@@ -4,7 +4,8 @@ import { AuthResponse, User } from '../types/api';
 import { api } from './api-client';
 import { Navigate, useLocation } from 'react-router-dom';
 import { paths } from '../config/paths';
-import { setCookie } from './utils';
+import { getTokenFromCookie, setCookie } from './utils';
+import Cookies from 'js-cookie';
 
 const getUser = async (): Promise<User | null> => {
   const user = localStorage.getItem('user');
@@ -19,8 +20,16 @@ const getUser = async (): Promise<User | null> => {
   }
 };
 
-const logout = (): Promise<void> => {
-  return api.post('/auth/logout');
+const logout = async (): Promise<void> => {
+  try {
+    await api.post('/auth/logout');
+    // Clear authentication data
+    Cookies.remove('accessToken');
+    localStorage.removeItem('user');
+  } catch (error) {
+    console.error('Error during logout:', error);
+    throw error; // Allow `useLogout` to handle the error
+  }
 };
 
 export const loginInputSchema = z.object({
@@ -76,17 +85,15 @@ export const { useUser, useLogin, useLogout, useRegister, AuthLoader } =
   configureAuth(authConfig);
 
 export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const user = useUser();
+  const token = getTokenFromCookie();
   const location = useLocation();
 
-  if (!user.data) {
+  if (!token) {
     console.log({
       pathname: location.pathname,
       redirectTo: paths.auth.login.getHref(location.pathname),
     });
-    return (
-      <Navigate to={paths.auth.login.getHref(location.pathname)} replace />
-    );
+    return <Navigate to={paths.auth.login.getHref()} replace />;
   }
 
   return children;

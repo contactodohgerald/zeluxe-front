@@ -1,7 +1,7 @@
 import { UseFormRegisterReturn } from 'react-hook-form';
 import { cn } from '@/utils/cn';
 import { FieldWrapper, FieldWrapperPassThroughProps } from './field-wrapper';
-
+import { nanoid } from 'nanoid';
 type Option = {
   label: React.ReactNode;
   value: string | number | string[];
@@ -29,7 +29,7 @@ export const Select = (props: SelectFieldProps) => {
         {...registration}
       >
         {options.map(({ label, value }) => (
-          <option key={label?.toString()} value={value}>
+          <option key={nanoid()} value={value}>
             {label}
           </option>
         ))}

@@ -176,3 +176,34 @@ export const galleryImages = [
   { id: 5, imageUrl: Gallery5 },
   { id: 6, imageUrl: Gallery6 },
 ];
+
+// hourly,daily,weekly,monthly,yearly
+export const cycleItems = [
+  {
+    value: 'hourly',
+    label: 'hourly',
+  },
+  {
+    value: 'daily',
+    label: 'daily',
+  },
+  {
+    value: 'weekly',
+    label: 'weekly',
+  },
+  {
+    value: 'monthly',
+    label: 'monthly',
+  },
+  {
+    value: 'yearly',
+    label: 'yearly',
+  },
+];
+
+//rent,sale,lease
+export const listingTypes = [
+  { label: 'rent', value: 'rent' },
+  { label: 'sale', value: 'sale' },
+  { label: 'lease', value: 'lease' },
+];

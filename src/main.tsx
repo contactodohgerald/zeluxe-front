@@ -5,13 +5,13 @@ import './App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { App } from './app';
 import { library } from '@fortawesome/fontawesome-svg-core';
-
+import Modal from 'react-modal';
 // import your icons
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 library.add(fab, fas, far);
-
+Modal.setAppElement('#root');
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />

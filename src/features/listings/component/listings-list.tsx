@@ -8,19 +8,25 @@ export const ListingsList = () => {
 
   if (listingsQuery.isLoading) {
     return (
-      <div className="jsutify-center flex h-48 w-full items-center">
+      <div className="flex h-48 w-full items-center justify-center">
         <Spinner size="lg" />
       </div>
     );
   }
 
-  const listings = listingsQuery?.data;
+  const listings = listingsQuery?.data?.data;
 
-  if (!listings) return null;
+  if (!listings) {
+    return (
+      <Card>
+        <p>You have no Listings Yet</p>
+      </Card>
+    );
+  }
 
   return (
     <Card className="mt-4">
-      <MyListingsTabs listings={listings?.data as any} />
+      <MyListingsTabs listings={listings as any} />
     </Card>
   );
 };

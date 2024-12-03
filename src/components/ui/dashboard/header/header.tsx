@@ -4,12 +4,16 @@ import { PopOver } from '../../popover';
 import { SetStateAction } from 'react';
 import { HamburgerIcon } from '../../svgs/hamburger-icon';
 import { CloseIconLg } from '../../svgs/close-icon-lg';
+import {  useUser } from '@/lib/auth';
+
 type SidebarProps = {
   show: boolean;
   setShow: React.Dispatch<SetStateAction<boolean>>;
 };
 
 export const Header = ({ show, setShow }: SidebarProps) => {
+  const user = useUser();
+
   return (
     <div className="container mx-auto lg:mx-0">
       <div className="flex">
@@ -37,7 +41,7 @@ export const Header = ({ show, setShow }: SidebarProps) => {
             <CloseIconLg className={`w-6 ${show ? '' : 'hidden'}`} />
           </button>
           <div className="ml-[1.64rem] hidden lg:block">
-            <PopOver />
+            <PopOver content={`${user?.data?.first_name}`} />
           </div>
         </div>
       </div>

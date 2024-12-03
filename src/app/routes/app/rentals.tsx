@@ -1,6 +1,5 @@
 import { ContentLayout } from '@/components/layouts';
-import { RentalsCard } from '@/components/ui/dashboard/cards';
-import { AdvanceFilter } from '@/components/ui/dashboard/cards/advance-filter';
+import { GetRentalsList } from '@/features/guest/component/get-rentals-list';
 import { Card } from 'antd';
 
 export const RentalsRoute = () => {
@@ -50,14 +49,7 @@ export const RentalsRoute = () => {
   return (
     <ContentLayout title="Rentals" component={<FormSearch />}>
       <Card className="mt-4">
-        <div className="flex flex-col gap-[1.3rem] lg:flex-row">
-          <div>
-            <RentalsCard />
-          </div>
-          <div>
-            <AdvanceFilter />
-          </div>
-        </div>
+        <GetRentalsList />
       </Card>
     </ContentLayout>
   );
