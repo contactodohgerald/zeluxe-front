@@ -1,7 +1,9 @@
 import { Button } from '@/components/ui/button';
 import { Form, Input } from '@/components/ui/form';
+import { useNotifications } from '@/components/ui/notifications';
 import { paths } from '@/config/paths';
 import { loginInputSchema, useLogin } from '@/lib/auth';
+import { formatErrors } from '@/lib/utils';
 import { Link, useSearchParams } from 'react-router-dom';
 
 type LoginFormProps = {
@@ -11,12 +13,30 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const login = useLogin({ onSuccess });
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get('redirectTo');
+  const { addNotification } = useNotifications();
 
   return (
     <>
       <Form
         onSubmit={(values) => {
-          login.mutate(values);
+          login.mutate(values, {
+            mutationConfig: {
+              onSuccess: () => {
+                addNotification({
+                  type: 'success',
+                  title: 'Listing created',
+                });
+              },
+              onError: (error: any) => {
+                const formattedErrors = formatErrors(error);
+                addNotification({
+                  type: 'error',
+                  title: `Validation Error`,
+                  message: formattedErrors,
+                });
+              },
+            },
+          });
         }}
         schema={loginInputSchema}
         className="space-y-4 md:space-y-6"

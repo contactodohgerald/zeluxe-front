@@ -1,11 +1,14 @@
 import { Button } from '@/components/ui/button';
 import { Form, Input } from '@/components/ui/form';
 import { Select } from '@/components/ui/form/select';
+import { useNotifications } from '@/components/ui/notifications';
 import { paths } from '@/config/paths';
 import { useCountries } from '@/features/countries/api/get-countries';
 import { useStates } from '@/features/states/api/get-states';
 import { registerInputSchema, useRegister } from '@/lib/auth';
+import { formatErrors } from '@/lib/utils';
 import { useUserStore } from '@/store/user-store';
+
 import { Link, useSearchParams } from 'react-router-dom';
 
 type RegisterFormProps = {
@@ -17,6 +20,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
   const redirectTo = searchParams.get('redirectTo');
   const statesQuery = useStates({});
   const countriesQuery = useCountries({});
+  const { addNotification } = useNotifications();
 
   return (
     <div className="w-full rounded-lg bg-white shadow dark:border dark:border-gray-700 dark:bg-gray-800 sm:max-w-md md:mt-0 md:max-w-xl xl:p-0">
@@ -27,7 +31,25 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
         <Form
           onSubmit={(values) => {
             useUserStore.getState().setEmail(values.email);
-            registering.mutate(values);
+            registering.mutate(values, {
+              mutationConfig: {
+                onSuccess() {
+                  addNotification({
+                    type: 'success',
+                    title: 'Success',
+                    message: 'Registration Successful',
+                  });
+                },
+                onError: (error: any) => {
+                  const formattedErrors = formatErrors(error);
+                  addNotification({
+                    type: 'error',
+                    title: `Validation Error`,
+                    message: formattedErrors,
+                  });
+                },
+              },
+            });
           }}
           schema={registerInputSchema}
           options={{ shouldUnregister: true }}

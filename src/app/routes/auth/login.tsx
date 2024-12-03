@@ -2,11 +2,13 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { AuthLayout } from '../../../components/layouts/auth-layout';
 import { LoginForm } from '@/features/auth/components/login-form';
 import { paths } from '@/config/paths';
+import { useNotifications } from '@/components/ui/notifications';
 
 export const LoginRoute = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get('redirectTo');
+  const { addNotification } = useNotifications();
   return (
     <AuthLayout title="">
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -24,6 +26,10 @@ export const LoginRoute = () => {
                       replace: true,
                     },
                   );
+                  addNotification({
+                    type: 'success',
+                    title: 'Login Successful',
+                  });
                 }}
               />
             </div>

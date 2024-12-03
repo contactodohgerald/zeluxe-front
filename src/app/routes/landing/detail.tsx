@@ -6,7 +6,12 @@ import { useRental } from '@/features/guest/api/get-rental';
 import { useParams } from 'react-router-dom';
 import { Spinner } from '@/components/ui/spinner';
 import { currencyNGN } from '@/utils/constants';
+// import useEmblaCarousel from 'embla-carousel-react';
+// import EmblaCarousel from '@/components/ui/embla-carousel/embla-carousel';
+// const SLIDE_COUNT = 10;
+// const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 export const LandingDetailRoute = () => {
+  // const [emblaRef] = useEmblaCarousel();
   const { rentalId } = useParams<{ rentalId: string }>();
   const rentalQuery = useRental({ rentalId } as any);
 
@@ -31,12 +36,13 @@ export const LandingDetailRoute = () => {
           <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
             <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
               <div className="max-w-md shrink-0 sm:mx-auto lg:max-w-lg">
-                {/* <img className="h-full w-full" src={Home9} alt="" /> */}
+                {/* <img className="w-full h-full" src={Home9} alt="" /> */}
                 <img
                   className="h-full w-full"
                   src={`https://api.zeluxe.ng/uploads/1ac8ffc06e72c0fe7d5af2b841d417cc1732820273.jpg`}
                   alt=""
                 />
+                {/* <EmblaCarousel slides={SLIDES}/> */}
               </div>
 
               <div className="mt-6 sm:mt-8 lg:mt-0">

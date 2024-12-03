@@ -11,6 +11,7 @@ import {
 import { useUserStore } from '@/store/user-store';
 import { Verify } from '@/types/api';
 import { useNavigate } from 'react-router-dom';
+import { formatErrors } from '@/lib/utils';
 
 export const VerifyOtpRoute = () => {
   const { addNotification } = useNotifications();
@@ -30,10 +31,12 @@ export const VerifyOtpRoute = () => {
 
         navigate(redirectTo);
       },
-      onError: () => {
+      onError: (error) => {
+        const formattedErrors = formatErrors(error);
         addNotification({
           type: 'error',
-          title: 'Verification failed. Please try again.',
+          title: `Validation Error`,
+          message: formattedErrors,
         });
       },
     },

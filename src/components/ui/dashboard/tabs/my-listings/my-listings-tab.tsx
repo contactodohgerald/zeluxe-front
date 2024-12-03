@@ -67,10 +67,14 @@ export const MyListingsTabCard = ({ listings }: MyListingsTabCardProps) => {
           <div className="flex flex-col sm:flex-row md:items-center">
             <div className="mr-[1.4rem]">
               <img
-                //  src={listing?.images[0]?.url}
-                src={Image3}
+                src={listing?.images[0]?.url || Image3}
                 className="h-[10.3rem] w-[13.85rem] rounded-[1.41rem] object-cover"
-                // alt={`${item.images} Images`}
+                alt={'Listing Images'}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.onerror = null;
+                  target.src = Image3;
+                }}
               />
               <p className="font-raleway text-[1.02rem] font-[400] leading-[2.2rem] -tracking-[0.02em] text-[#0000007A]">
                 Listing will expire in {calculateDaysFromNow(listing?.duration)}

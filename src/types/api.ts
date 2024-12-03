@@ -185,6 +185,69 @@ export type ListingResponse = {
   data: Listing;
 };
 
+export type RentalReview = Entity<{
+  id: string;
+  user_id: string;
+  reviewable_id: string;
+  description: string;
+  status: string;
+  deleted_at?: null;
+  created_at: string;
+  updated_at: string;
+  user: {
+    id: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone: string;
+    status: string;
+    role_id: string;
+    username: string;
+    reffered_id?: null;
+    gender: string;
+    avatar?: null;
+    email_verified_at: string;
+    login_otp?: null;
+    is_verified: boolean;
+    deleted_at?: null;
+    created_at: string;
+    updated_at: string;
+  };
+  listing: {
+    id: string;
+    owner_id: string;
+    category_id: string;
+    address_id: string;
+    name: string;
+    slug: string;
+    cycle: string;
+    price: string;
+    description: string;
+    listing_type: string;
+    status: string;
+    availability_status: string;
+    duration: string;
+    deleted_at?: null;
+    created_at: string;
+  };
+  owner: Owner;
+  category: Category;
+  address: Address;
+  reviews: [
+    {
+      id: string;
+      user_id: string;
+      reviewable_id: string;
+      description: string;
+      status: string;
+      deleted_at?: null;
+      created_at: string;
+      updated_at: string;
+    },
+  ];
+  ratings: [];
+}>;
+
 export type Address = Entity<{
   id: string;
   user_id: string;
@@ -217,7 +280,7 @@ export type Owner = Entity<{
   avatar?: null;
   email_verified_at: string;
   login_otp?: null;
-  is_verified: number;
+  is_verified: boolean;
   deleted_at?: null;
   created_at: string;
   updated_at: string;

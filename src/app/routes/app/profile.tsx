@@ -4,6 +4,7 @@ import { ContentLayout } from '@/components/layouts';
 import { PencilIcon } from '@/components/ui/svgs';
 import { Card } from 'antd';
 import { ProfileTabs } from '@/components/ui/dashboard/tabs';
+import { useUser } from '@/lib/auth';
 
 const listingItemResults = [
   {
@@ -23,7 +24,7 @@ const listingItemResults = [
   },
 ];
 export const ProfileRoute = () => {
-  // const user = useUser();
+  const user = useUser();
 
   // if (!user.data) return null;
 
@@ -50,10 +51,10 @@ export const ProfileRoute = () => {
         </div>
         <div className="mt-[0.97rem] text-center">
           <h4 className="font-lato text-[1.36rem] font-bold leading-[1.63rem] tracking-[0.03em] text-primary">
-            Femi Ademola
+            {user?.data?.first_name} {user?.data?.last_name}
           </h4>
           <p className="font-lato text-[0.97rem] font-semibold leading-[1.2rem] tracking-[0.03em] text-primary">
-            ademolaoluwafemi342@gmail.com
+            {user?.data?.email}
           </p>
         </div>
         <div className="mt-3 flex gap-2">
