@@ -56,6 +56,10 @@ export const paths = {
       path: '/app/my-listing',
       getHref: () => '/app/my-listing',
     },
+    listing: {
+      path: 'my-listing/:listingId',
+      getHref: (listingId: string) => `/app/my-listing/${listingId}`,
+    },
     rentals: {
       path: '/app/rentals',
       getHref: () => '/app/rentals',

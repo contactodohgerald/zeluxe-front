@@ -8,11 +8,16 @@ import { Active, Closed, Drafts, Rejected, Reviewing } from '@/types/api';
 import { calculateDaysFromNow, formatErrors } from '@/lib/utils';
 import { usePublishListing } from '@/features/listings/api/publish-listing';
 import { useNotifications } from '@/components/ui/notifications';
+import { useDeleteListing } from '@/features/listings/api/delete-listing';
+import { useCloseListing } from '@/features/listings/api/close-listing';
+import { paths } from '@/config/paths';
+import { Link } from 'react-router-dom';
 
 type MyListingsTabCardProps = {
   listings: Active[] | Drafts[] | Reviewing[] | Rejected[] | Closed[];
 };
 export const MyListingsTabCard = ({ listings }: MyListingsTabCardProps) => {
+  const { addNotification } = useNotifications();
   const publish = usePublishListing({
     mutationConfig: {
       onSuccess: () => {
@@ -31,10 +36,54 @@ export const MyListingsTabCard = ({ listings }: MyListingsTabCardProps) => {
       },
     },
   });
-  const { addNotification } = useNotifications();
+
+  const deleteListing = useDeleteListing({
+    mutationConfig: {
+      onSuccess: () => {
+        addNotification({
+          type: 'success',
+          title: 'success',
+          message: 'Listing Deleted successfully',
+        });
+      },
+      onError: (error) => {
+        const formattedErrors = formatErrors(error);
+        addNotification({
+          type: 'error',
+          title: `Validation Error`,
+          message: formattedErrors,
+        });
+      },
+    },
+  });
+  const closeListing = useCloseListing({
+    mutationConfig: {
+      onSuccess: () => {
+        addNotification({
+          type: 'success',
+          title: 'success',
+          message: 'Listing Closed successfully',
+        });
+      },
+      onError: (error) => {
+        const formattedErrors = formatErrors(error);
+        addNotification({
+          type: 'error',
+          title: `Validation Error`,
+          message: formattedErrors,
+        });
+      },
+    },
+  });
 
   const handlePlublishListing = (id: string) => {
     publish.mutate({ listingId: id });
+  };
+  const handleDeleteListing = (id: string) => {
+    deleteListing.mutate({ listingId: id });
+  };
+  const handleCloseListing = (id: string) => {
+    closeListing.mutate({ listingId: id });
   };
 
   if (!listings || listings.length === 0) {
@@ -48,7 +97,7 @@ export const MyListingsTabCard = ({ listings }: MyListingsTabCardProps) => {
             <div className="mr-[1.4rem]">
               <img
                 src={listing?.images[0]?.url || Image3}
-                className="h-[10.3rem] w-[13.85rem] rounded-[1.41rem] object-cover"
+                className="h-[10.3rem] max-w-[13.85rem] rounded-[1.41rem] object-cover"
                 alt={'Listing Images'}
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
@@ -65,7 +114,7 @@ export const MyListingsTabCard = ({ listings }: MyListingsTabCardProps) => {
                 {listing.name}
               </h4>
               <p className="mb-[0.63rem] font-montserrat text-[1.1rem] font-semibold leading-[1.32rem] tracking-[0.03em] text-primary">
-                ₦{listing?.price}
+                ₦{Number(listing?.price)}
               </p>
               <Button className="mb-[0.58rem] rounded-[0.63rem] bg-primary p-[0.6rem] font-raleway text-[0.63rem] font-medium leading-[0.74rem] tracking-[0.03em] text-white backdrop-blur-[10.09px] backdrop-filter">
                 {listing?.address?.nearest_landmark},{' '}
@@ -80,23 +129,34 @@ export const MyListingsTabCard = ({ listings }: MyListingsTabCardProps) => {
             </div>
             <div className="flex flex-col">
               <div className="mb-[0.6rem]">
-                <Button className="flex items-center text-danger-5">
+                <Button
+                  onClick={() => handleDeleteListing(listing.id)}
+                  className="flex items-center text-danger-5"
+                >
                   <IcBaselineDelete />
                   <span className="ml-1 font-raleway text-[0.73rem] font-[400] leading-[0.85rem] tracking-[0.03em]">
                     Delete
                   </span>
                 </Button>
               </div>
-              <div className="mb-[0.6rem]">
-                <Button className="flex items-center text-warning">
-                  <EditIcon />
-                  <span className="ml-1 font-raleway text-[0.73rem] font-[400] leading-[0.85rem] tracking-[0.03em]">
-                    Edit
-                  </span>
-                </Button>
-              </div>
+              {listing.status !== 'active' ? (
+                <div className="mb-[0.6rem]">
+                  <Link
+                    to={paths.app.listing.getHref(listing?.id)}
+                    className="flex items-center text-warning"
+                  >
+                    <EditIcon />
+                    <span className="ml-1 font-raleway text-[0.73rem] font-[400] leading-[0.85rem] tracking-[0.03em]">
+                      Edit
+                    </span>
+                  </Link>
+                </div>
+              ) : null}
               <div>
-                <Button className="flex items-center">
+                <Button
+                  onClick={() => handleCloseListing(listing.id)}
+                  className="flex items-center"
+                >
                   <CarbonCloseFilledIcon />
                   <span className="ml-1 font-raleway text-[0.73rem] font-[400] leading-[0.85rem] tracking-[0.03em]">
                     Close

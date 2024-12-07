@@ -9,7 +9,7 @@ import {
 } from '@/features/uploads/api/create-uploads';
 import { useEffect, useState } from 'react';
 import { useNotifications } from '@/components/ui/notifications';
-import { formatErrors } from '@/lib/utils';
+import { formatErrors, onError } from '@/lib/utils';
 import { useListings } from '@/features/listings/api/get-listings';
 import { useRentalReviews } from '@/features/reviews/api/get-reviews';
 import { useRentals } from '@/features/guest/api/get-rentals';
@@ -26,9 +26,6 @@ export const ProfileList = () => {
   const listings = listingQuery?.data?.data;
   const reviews = reviewQuery?.data?.data;
   const rentals = rentalQuery?.data?.data;
-  console.log('listings', listings);
-  console.log('reviews', reviews);
-  console.log('rentals', rentals);
   const reviewsCount = reviews?.length;
   const listingsCount = listings?.active.length;
   const listingItemResults = [
@@ -102,7 +99,8 @@ export const ProfileList = () => {
               <img
                 src={uploadedImages || ProfileImg}
                 className="h-[9.7rem] w-[9.7rem] rounded-full object-cover"
-                alt=""
+                alt="Profile Image"
+                onError={(e) => onError(e, ProfileImg)}
               />
               <div className="absolute right-0 top-[6.8rem]">
                 <PencilIcon />

@@ -146,6 +146,7 @@ export const AddAddressForm = ({ IsOpen, setIsOpen }: ModalFormProps) => {
 
                 <div className="flex items-center rounded-b border-t border-gray-200 p-4 dark:border-gray-600 md:p-5">
                   <Button
+                    isLoading={createAddressMutation.isPending}
                     type="submit"
                     className="rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-success focus:outline-none focus:ring-4 focus:ring-primary dark:focus:ring-primary"
                   >

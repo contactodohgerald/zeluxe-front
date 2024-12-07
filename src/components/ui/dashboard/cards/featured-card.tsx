@@ -37,7 +37,7 @@ export const FeaturedCard = ({ rental }: { rental: Rental }) => {
           </div>
           <div className="mt-[1.8rem]">
             <h4 className="font-montserrat text-[0.985rem] font-semibold leading-[1.2rem] tracking-[3%] text-black">
-              {currencyNGN} {rental.price}
+              {currencyNGN} {Number(rental.price)}
               <span className="font-montserrat text-[0.5rem] font-medium leading-[0.8rem] tracking-[3%]">
                 / {rental.cycle}
               </span>

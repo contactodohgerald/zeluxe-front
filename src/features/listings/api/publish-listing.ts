@@ -20,7 +20,7 @@ export const usePublishListing = ({
   return useMutation({
     onSuccess: (...args) => {
       queryClient.refetchQueries({
-        queryKey: ['publish-listing'],
+        queryKey: ['listings'],
       });
       onSuccess?.(...args);
     },

@@ -18,7 +18,7 @@ export const RentalReviewsList = () => {
 
   if (!rentalReviews || rentalReviews.length === 0) {
     return (
-      <Card>
+      <Card className="flex justify-center">
         <p>You have no reviews Yet</p>
       </Card>
     );

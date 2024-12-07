@@ -20,7 +20,7 @@ export const useCloseListing = ({
   return useMutation({
     onSuccess: (...args) => {
       queryClient.refetchQueries({
-        queryKey: ['close-listing'],
+        queryKey: ['listings'],
       });
       onSuccess?.(...args);
     },

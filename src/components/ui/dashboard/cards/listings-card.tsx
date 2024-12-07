@@ -38,16 +38,18 @@ export const ListingsCard = ({ listing }: ListingCardListProps) => {
             target.src = CardImg;
           }}
         />
-        <div className="absolute left-[2.07rem] top-[8.55rem] h-[1.67rem] w-[7.1rem] rounded-[0.54rem] bg-primary flex justify-center py-[0.34rem] text-white backdrop-blur-[8.605196952819824px] backdrop-filter">
-          <p className="font-montserrat  text-start text-[14.35px] font-semibold leading-[17.49px] -tracking-[0.03em] text-[#F5F4F8]">
+        <div className="absolute left-[3.07rem] top-[9.55rem] flex h-[1.67rem] w-[7.1rem] justify-center rounded-[0.54rem] bg-primary py-[0.34rem] text-white backdrop-blur-[8.605196952819824px] backdrop-filter">
+          <p className="text-start font-montserrat text-[14.35px] font-semibold leading-[17.49px] -tracking-[0.03em] text-[#F5F4F8]">
             {currencyNGN}
             {Number(listing.price)}
           </p>
         </div>
       </div>
       <div className="px-[0.7rem]">
-        <div className="mt-[0.75rem] md:mb-[0.75rem]">
-          <h4 className="text-nowrap font-raleway text-[0.89rem] font-bold leading-[1.4rem] tracking-[0.03em] text-black">
+        <div className="mt-[0.75rem] max-w-[10rem] md:mb-[0.75rem]">
+          <h4
+            className={`font-raleway text-[0.89rem] ${listing?.name.length > 10 ? 'overflow-hidden text-ellipsis' : ' '} text-nowrap font-bold leading-[1.4rem] tracking-[0.03em] text-black`}
+          >
             {listing.name}
           </h4>
         </div>
@@ -67,7 +69,7 @@ export const ListingsCard = ({ listing }: ListingCardListProps) => {
             />
             <p className="font-raleway text-[0.6rem] font-[400] leading-[0.7rem]">
               {/* {location} */}
-              {listing.address.location}
+              {listing.address.nearest_landmark}
             </p>
           </div>
         </div>
@@ -79,7 +81,7 @@ export const ListingsCard = ({ listing }: ListingCardListProps) => {
 export const ListingsRowCard = ({ listing }: ListingCardListProps) => {
   const [show, setShow] = useState(false);
   return (
-    <div className="mb-6 h-[12rem] w-full rounded-[1.87rem] bg-light p-0 shadow-card">
+    <div className="mb-6 h-[12rem] w-full rounded-[1.87rem] bg-light p-0">
       <div className="flex gap-x-4">
         <div className="relative h-[12rem] w-[50%] shrink-0 rounded-l-[1.1rem]">
           <Button
@@ -89,7 +91,7 @@ export const ListingsRowCard = ({ listing }: ListingCardListProps) => {
             <HeartIcon className={`${show ? 'text-white' : 'text-primary'}`} />
           </Button>
           <img
-            src={listing.images[0].url}
+            src={listing?.images[0]?.url}
             className="h-full w-full rounded-l-[1.1rem] object-cover"
             alt="Listing Image"
             onError={(e) => onError(e, CardImg)}
@@ -102,7 +104,7 @@ export const ListingsRowCard = ({ listing }: ListingCardListProps) => {
         <div className="">
           <div className="mb-[0.75rem] mt-[0.75rem]">
             <h4 className="font-raleway text-[0.89rem] font-bold leading-[1.4rem] tracking-[3%] text-black">
-              {listing.name}
+              {listing?.name}
             </h4>
           </div>
           {/* <div className=""> */}
@@ -119,7 +121,7 @@ export const ListingsRowCard = ({ listing }: ListingCardListProps) => {
               className="h-[10.76px] w-[10.76px]"
             />
             <p className="font-raleway text-[0.6rem] font-[400] leading-[0.7rem]">
-              {listing.address.location}
+              {listing?.address.nearest_landmark} {listing?.address?.city}
             </p>
           </div>
           {/* </div> */}
@@ -131,12 +133,15 @@ export const ListingsRowCard = ({ listing }: ListingCardListProps) => {
 
 export const RentalsRowCard = ({ rental }: { rental: Rental }) => {
   return (
-    <Card key={rental.id} className="mb-[1.63rem] w-full bg-[#D9D9D92B]">
+    <Card
+      key={rental.id}
+      className="mb-[1.63rem] w-full max-w-6xl bg-[#D9D9D92B]"
+    >
       <div
         className="flex flex-col sm:flex-row md:items-center"
         key={rental.id}
       >
-        <div className="mr-[1.4rem]">
+        <div className="mr-[1.4rem] shrink-0">
           <img
             src={rental?.images[0]?.url}
             className="h-[10.3rem] w-[13.85rem] rounded-[1.41rem] object-cover"
@@ -144,18 +149,20 @@ export const RentalsRowCard = ({ rental }: { rental: Rental }) => {
             onError={(e) => onError(e, Image1)}
           />
         </div>
-        <div className="flex-grow">
-          <h4 className="mb-[0.63rem] text-nowrap font-raleway text-[1.5rem] font-bold leading-[1.8rem] tracking-[0.03em] text-secondary">
+        <div className="flex flex-col items-start">
+          <h4
+            className={`mb-[0.63rem] mt-2 max-w-[18rem] text-start md:mt-0 lg:text-nowrap ${rental?.name?.length > 31 ? 'overflow-hidden text-ellipsis' : ''} font-raleway text-[1.5rem] font-bold leading-[1.8rem] tracking-[0.03em] text-secondary`}
+          >
             {rental?.name}
           </h4>
           <p className="mb-[0.63rem] font-montserrat text-[1.1rem] font-semibold leading-[1.32rem] tracking-[0.03em] text-primary">
-            ₦{rental?.price}
+            ₦{Number(rental?.price)}
             <span className="font-montserrat text-[0.5rem] font-medium leading-[0.8rem] tracking-[0.03em] text-secondary">
               /Per Annum
             </span>
           </p>
           <Button className="mb-[0.58rem] rounded-[1.2rem] bg-primary p-[0.6rem] font-raleway text-[0.63rem] font-medium leading-[0.74rem] tracking-[0.03em] text-white backdrop-blur-[10.09px] backdrop-filter">
-            {rental?.address?.location}, {rental?.address?.city}
+            {rental?.address?.nearest_landmark}, {rental?.address?.city}
           </Button>
           <div className="mb-[0.63rem] flex items-center">
             <p className="font-raleway text-[0.55rem] font-bold leading-[0.65rem] tracking-[0.03em] text-black">
@@ -175,7 +182,7 @@ export const RentalsRowCard = ({ rental }: { rental: Rental }) => {
             More Details
           </Link>
         </div>
-        <div className="mt-3 flex flex-col justify-end md:mt-32">
+        <div className="mt-3 flex flex-col items-end justify-end md:mt-32">
           <div className="mb-[0.6rem]">
             <p className="text-nowrap font-raleway text-[0.73rem] font-[400] leading-[0.63rem] tracking-[0.03em] text-secondary">
               {rental?.owner?.first_name} {rental?.owner?.last_name}

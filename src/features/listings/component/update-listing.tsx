@@ -1,8 +1,4 @@
 import { useNotifications } from '@/components/ui/notifications';
-import {
-  createListingInputSchema,
-  useCreateListing,
-} from '../api/create-listing';
 import { Form, Input, Textarea } from '@/components/ui/form';
 import { faAdd } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -23,29 +19,40 @@ import {
   createUploadsInputSchema,
   useCreateUpload,
 } from '@/features/uploads/api/create-uploads';
+import { useListing } from '../api/get-listing';
+import {
+  updateListingInputSchema,
+  useUpdateListing,
+} from '../api/update-listing';
+import { paths } from '@/config/paths';
+import { useNavigate } from 'react-router-dom';
+import { FieldError } from 'react-hook-form';
 import { useCounters } from '@/hooks/useCounters';
-import { Spinner } from '@/components/ui/spinner';
 
-export const CreateListing = () => {
+export const UpdateListing = ({ listingId }: { listingId: string }) => {
   const { addNotification } = useNotifications();
   const [IsOpen, setIsOpen] = useState(false);
   const [IsOpenAddress, setIsOpenAddress] = useState(false);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
   const uploadFile = useCreateUpload();
+  const listingQuery = useListing({ listingId });
+  const navigate = useNavigate();
   const { counters, addCounter, updateCounter, deleteCounter } = useCounters();
   const categorQuery = useCategories({});
   const addressQuery = useAddress({});
   const categories = categorQuery?.data?.data;
   const address = addressQuery?.data?.data;
 
-  const createListingMutation = useCreateListing({
+  const updateListingMutation = useUpdateListing({
     mutationConfig: {
       onSuccess: () => {
         addNotification({
           type: 'success',
-          title: 'Listing created',
+          title: 'success',
+          message: 'Listing Updated Successfully',
         });
+        navigate(paths.app.myListings.getHref());
       },
       onError: (error) => {
         const formattedErrors = formatErrors(error);
@@ -62,15 +69,6 @@ export const CreateListing = () => {
     const filesToUpload = fileList
       .filter((file) => !file.url)
       .map((file) => file.originFileObj as File);
-
-    if (!filesToUpload.length) {
-      addNotification({
-        type: 'error',
-        title: 'Error',
-        message: 'No files to upload',
-      });
-      return;
-    }
 
     const validData = createUploadsInputSchema.parse({
       document: filesToUpload,
@@ -115,9 +113,8 @@ export const CreateListing = () => {
     }
   }, [setUploadedImages]);
 
-  if (createListingMutation.isPending) {
-    return <Spinner size="lg" />;
-  }
+  const listing = listingQuery?.data?.data;
+  console.log('category_id', listing?.category_id);
 
   return (
     <>
@@ -134,10 +131,22 @@ export const CreateListing = () => {
             listing_images: uploadedImages,
           };
           console.log('listing', uploadedImages);
-          createListingMutation.mutate({ data: listingData });
+          updateListingMutation.mutate({ data: listingData, listingId });
         }}
         className="flex flex-col"
-        schema={createListingInputSchema}
+        options={{
+          defaultValues: {
+            name: listing?.name ?? '',
+            category_id: listing?.category_id ?? '',
+            listing_type: listing?.listing_type ?? '',
+            cycle: listing?.cycle ?? '',
+            price: listing?.price ?? '',
+            address_id: listing?.address_id ?? '',
+            description: listing?.description ?? '',
+            listing_features: listing?.listing_features || [],
+          },
+        }}
+        schema={updateListingInputSchema}
       >
         {({ register, formState }) => (
           <>
@@ -146,27 +155,28 @@ export const CreateListing = () => {
               type="text"
               label="Name/Title of Listing"
               placeholder=""
-              error={formState.errors['name']}
+              error={formState.errors['name'] as FieldError}
               registration={register('name')}
             />
             <Select
               label="Listing Category"
               className="block h-[3.2rem] w-full rounded-md bg-light px-3 py-3 outline-none focus:outline-none md:w-[70%]"
-              error={formState.errors['category_id']}
+              error={formState.errors['category_id'] as FieldError}
               registration={register('category_id')}
+              defaultValue={listing?.category?.name || ''}
               options={
-                categorQuery.isLoading || !categories
-                  ? []
-                  : categories.map((category) => ({
+                categories
+                  ? categories.map((category) => ({
                       label: category?.name,
                       value: category?.id,
                     }))
+                  : []
               }
             />
             <Select
               className="block h-[3.2rem] w-full rounded-md bg-light px-3 py-3 outline-none focus:outline-none md:w-[70%]"
               label="Listing Type"
-              error={formState.errors['listing_type']}
+              error={formState.errors['listing_type'] as FieldError}
               registration={register('listing_type')}
               options={listingTypes.map((listing) => ({
                 label: listing.label,
@@ -177,7 +187,7 @@ export const CreateListing = () => {
               <Select
                 className="block h-[3.2rem] w-full rounded-md bg-light px-3 py-3 outline-none focus:outline-none"
                 label="Listing Cycle"
-                error={formState.errors['cycle']}
+                error={formState.errors['cycle'] as FieldError}
                 registration={register('cycle')}
                 options={cycleItems.map((cycle) => ({
                   label: cycle.label,
@@ -189,7 +199,7 @@ export const CreateListing = () => {
                 type="number"
                 label={`Price (${currencyNGN})`}
                 placeholder="Enter Price"
-                error={formState.errors['price']}
+                error={formState.errors['price'] as FieldError}
                 registration={register('price')}
               />
             </div>
@@ -198,7 +208,7 @@ export const CreateListing = () => {
               <Select
                 label="Listing Address"
                 className="block h-[3.2rem] w-full rounded-md bg-light px-3 py-3 outline-none focus:outline-none"
-                error={formState.errors['address_id']}
+                error={formState.errors['address_id'] as FieldError}
                 registration={register('address_id')}
                 options={
                   addressQuery.isLoading || !address
@@ -219,7 +229,7 @@ export const CreateListing = () => {
               <Textarea
                 label="Listing Description"
                 className="bg-light"
-                error={formState.errors['description']}
+                error={formState.errors['description'] as FieldError}
                 registration={register('description')}
               />
             </div>
@@ -261,10 +271,10 @@ export const CreateListing = () => {
             </div>
             <div className="">
               <Button
-                isLoading={createListingMutation.isPending}
+                isLoading={updateListingMutation.isPending}
                 className="h-[3.4rem] rounded-[0.67rem] bg-primary px-[1.5rem] font-lato text-[1.8rem] font-bold capitalize leading-[2.1rem] tracking-[0.03em] text-white disabled:opacity-0"
               >
-                Submit
+                Update
               </Button>
             </div>
           </>
