@@ -49,10 +49,7 @@ export const Tabs = () => {
 
         {/* "More" Dropdown for extra categories */}
         <Tab
-          className={
-            `mr-4 h-[2.5rem] lg:mt-4 relative rounded-md outline-none bg-light text-black  align-middle  w-[50px]`
-          }
-          
+          className={`relative mr-4 h-[2.5rem] w-[50px] rounded-md bg-light align-middle text-black outline-none lg:mt-4`}
         >
           <FontAwesomeIcon
             icon={'fa fa-ellipsis-v' as IconProp}
@@ -67,7 +64,7 @@ export const Tabs = () => {
                   onDropdownVisibleChange={() => setDropdownOpen(!dropdowOpen)}
                   title="More"
                   defaultValue={'More'}
-                  className="w-[100px] h-[2.5rem] absolute top-0 left-[52px] border-0 border-none bg-light text-secondary outline-none focus:outline-none"
+                  className="absolute left-[52px] top-0 h-[2.5rem] w-[100px] border-0 border-none bg-light text-secondary outline-none focus:outline-none"
                   options={extraCategories.map((category) => ({
                     value: category.id,
                     label: category.name,

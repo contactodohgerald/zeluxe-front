@@ -90,7 +90,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           path: paths.app.addListings.path,
           lazy: async () => {
             const { AddListingRoute } = await import(
-              './routes/app/add-listing'
+              './routes/app/listings/add-listing'
             );
             return {
               Component: AddListingRoute,
@@ -101,9 +101,23 @@ export const createAppRouter = (_queryClient: QueryClient) =>
         {
           path: paths.app.myListings.path,
           lazy: async () => {
-            const { MyListingRoute } = await import('./routes/app/my-listing');
+            const { MyListingRoute } = await import(
+              './routes/app/listings/my-listing'
+            );
             return {
               Component: MyListingRoute,
+            };
+          },
+          ErrorBoundary: AppRootErrorBoundary,
+        },
+        {
+          path: paths.app.listing.path,
+          lazy: async () => {
+            const { ListingRoute } = await import(
+              './routes/app/listings/listing'
+            );
+            return {
+              Component: ListingRoute,
             };
           },
           ErrorBoundary: AppRootErrorBoundary,

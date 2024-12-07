@@ -7,11 +7,14 @@ import { TelephoneIcon } from '../../svgs/telephone-icon';
 import { Rental } from '@/types/api';
 
 export const RentalsCard = ({ rentals }: { rentals: Rental[] }) => {
-  console.log('rentals', rentals);
+  // console.log('rentals', rentals);
   return (
     <>
       {rentals?.map((rental) => (
-        <Card key={rental.id} className="mb-[1.63rem] w-full bg-[#D9D9D92B]">
+        <Card
+          key={rental.id}
+          className="mb-[1.63rem] box-border w-full bg-[#D9D9D92B]"
+        >
           <div
             className="flex flex-col sm:flex-row md:items-center"
             key={rental.id}
@@ -19,7 +22,7 @@ export const RentalsCard = ({ rentals }: { rentals: Rental[] }) => {
             <div className="mr-[1.4rem]">
               <img
                 src={rental?.images[0]?.url || Image1}
-                className="h-[10.3rem] w-[13.85rem] rounded-[1.41rem] object-cover"
+                className="h-[10.3rem] max-w-[13.85rem] rounded-[1.41rem] object-cover"
                 alt={`${rental.images} Images`}
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
@@ -29,17 +32,19 @@ export const RentalsCard = ({ rentals }: { rentals: Rental[] }) => {
               />
             </div>
             <div className="flex-grow">
-              <h4 className="mb-[0.63rem] text-nowrap font-raleway text-[1.5rem] font-bold leading-[1.8rem] tracking-[0.03em] text-secondary">
+              <h4
+                className={`mb-[0.63rem] ${rental?.name.length >= 15 ? 'overflow-hidden text-ellipsis' : ''} max-w-xs text-nowrap font-raleway text-[1.5rem] font-bold leading-[1.8rem] tracking-[0.03em] text-secondary`}
+              >
                 {rental?.name}
               </h4>
               <p className="mb-[0.63rem] font-montserrat text-[1.1rem] font-semibold leading-[1.32rem] tracking-[0.03em] text-primary">
-                ₦{rental?.price}
+                ₦{Number(rental?.price)}
                 <span className="font-montserrat text-[0.5rem] font-medium leading-[0.8rem] tracking-[0.03em] text-secondary">
                   /Per Annum
                 </span>
               </p>
               <Button className="mb-[0.58rem] rounded-[1.2rem] bg-primary p-[0.6rem] font-raleway text-[0.63rem] font-medium leading-[0.74rem] tracking-[0.03em] text-white backdrop-blur-[10.09px] backdrop-filter">
-                {rental?.address?.location}, {rental?.address?.city}
+                {rental?.address?.nearest_landmark}, {rental?.address?.city}
               </Button>
               <div className="mb-[0.63rem] flex items-center">
                 <p className="font-raleway text-[0.55rem] font-bold leading-[0.65rem] tracking-[0.03em] text-black">
@@ -59,7 +64,7 @@ export const RentalsCard = ({ rentals }: { rentals: Rental[] }) => {
                 More Details
               </Link>
             </div>
-            <div className="mt-3 flex flex-col justify-end md:mt-32">
+            <div className="mt-3 flex flex-col md:mt-32">
               <div className="mb-[0.6rem]">
                 <p className="text-nowrap font-raleway text-[0.73rem] font-[400] leading-[0.63rem] tracking-[0.03em] text-secondary">
                   {rental?.owner?.first_name} {rental?.owner?.last_name}
