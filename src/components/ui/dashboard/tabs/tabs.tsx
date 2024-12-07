@@ -31,7 +31,7 @@ export const Tabs = () => {
             selectedCategory.toLowerCase(),
         );
 
-  console.log('filteredRentals', filteredRentals);
+  // console.log('filteredRentals', filteredRentals);
   return (
     <TabGroup>
       <TabList className="grid grid-cols-3 gap-y-2 lg:grid-cols-4">
