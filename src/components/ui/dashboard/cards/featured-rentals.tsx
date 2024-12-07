@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import { FeaturedCard } from './featured-card';
 import { paths } from '@/config/paths';
+import { Rental } from '@/types/api';
 
-export const FeaturedRentals = () => {
+export const FeaturedRentals = ({ rentals }: { rentals: Rental[] }) => {
   return (
     <div>
       <div className="mb-[1.3rem] flex flex-wrap justify-between">
@@ -17,10 +18,9 @@ export const FeaturedRentals = () => {
         </Link>
       </div>
       <div className="grid grid-cols-1 gap-x-[0.6rem] gap-y-[1.5rem] sm:grid-cols-2">
-        <FeaturedCard />
-        <FeaturedCard />
-        <FeaturedCard />
-        <FeaturedCard />
+        {rentals?.map((rental) => (
+          <FeaturedCard key={rental.id} rental={rental} />
+        ))}
       </div>
     </div>
   );

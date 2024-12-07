@@ -10,8 +10,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { bookingLinks, cityLinks, currencyNGN } from '@/utils/constants';
 import { useRentals } from '@/features/guest/api/get-rentals';
-import { getTokenFromCookie } from '@/lib/utils';
-// import Home9 from '@/assets/images/featured_properties/home9.jpg';
+import { getTokenFromCookie, onError } from '@/lib/utils';
+import Home9 from '@/assets/images/featured_properties/home9.jpg';
 
 export const LandingRoute = () => {
   const navigate = useNavigate();
@@ -122,19 +122,17 @@ export const LandingRoute = () => {
                 </Select>
               </div>
             </div>
-            <div className="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {rentals?.data?.data?.map((rental) => (
                 <div
                   key={rental?.id}
                   className="card card-shadow overflow-hidden bg-white pb-2.5 text-start"
                 >
                   <img
-                    // src={rental?.images[0]?.url || Home9}
-                    src={
-                      'https://api.zeluxe.ng/uploads/1ac8ffc06e72c0fe7d5af2b841d417cc1732820273.jpg'
-                    }
+                    src={rental?.images[0]?.url}
                     alt={`Home`}
                     className="h-[240px] w-full object-cover"
+                    onError={(e) => onError(e, Home9)}
                   />
                   <div className="p-4">
                     <Link to={`/${rental?.id}`} className="hover:text-primary">
@@ -148,7 +146,7 @@ export const LandingRoute = () => {
                     <p className="mb-2.5 text-sm text-gray-500">
                       {rental?.listing_type}
                     </p>
-                    <p className="font-semibold text-green-5">{`${currencyNGN} ${rental?.price}`}</p>
+                    <p className="font-semibold text-green-5">{`${currencyNGN} ${Number(rental?.price)}`}</p>
                   </div>
                 </div>
               ))}

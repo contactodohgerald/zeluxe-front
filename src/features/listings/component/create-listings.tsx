@@ -55,7 +55,6 @@ export const CreateListing = () => {
           type: 'success',
           title: 'Listing created',
         });
-        
       },
       onError: (error) => {
         const formattedErrors = formatErrors(error);
@@ -149,7 +148,6 @@ export const CreateListing = () => {
       setUploadedImages(JSON.parse(storedImages));
     }
   }, []);
-
 
   return (
     <>

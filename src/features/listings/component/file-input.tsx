@@ -1,10 +1,8 @@
-
-import { SetStateAction} from 'react';
+import { SetStateAction } from 'react';
 import { Image, Upload } from 'antd';
 import React, { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import type { GetProp, UploadFile, UploadProps } from 'antd';
-
 
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 

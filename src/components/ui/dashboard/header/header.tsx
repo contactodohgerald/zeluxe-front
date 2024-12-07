@@ -4,7 +4,7 @@ import { PopOver } from '../../popover';
 import { SetStateAction } from 'react';
 import { HamburgerIcon } from '../../svgs/hamburger-icon';
 import { CloseIconLg } from '../../svgs/close-icon-lg';
-import {  useUser } from '@/lib/auth';
+import { useUser } from '@/lib/auth';
 
 type SidebarProps = {
   show: boolean;

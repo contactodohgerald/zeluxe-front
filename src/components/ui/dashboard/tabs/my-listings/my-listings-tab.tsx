@@ -1,62 +1,42 @@
 import { Card } from 'antd';
-// import Image1 from '../../../../../assets/images/card/list-1.jpeg';
-// import Image2 from '../../../../../assets/images/card/lists-2.jpeg';
 import Image3 from '../../../../../assets/images/card/lists-3.png';
-// import Image4 from '../../../../../assets/images/card/listings-4.png';
 import { Button } from '@headlessui/react';
 import { CarbonCloseFilledIcon } from '@/components/ui/svgs/close-icon';
 import { IcBaselineDelete } from '@/components/ui/svgs/delete-icon';
 import { EditIcon } from '@/components/ui/svgs/edit-icon';
 import { Active, Closed, Drafts, Rejected, Reviewing } from '@/types/api';
-import { calculateDaysFromNow } from '@/lib/utils';
-
-// export const myListCardItems = [
-//   {
-//     id: 1,
-//     images: Image4,
-//     title: 'Maison Fahrenheit ',
-//     price: '212,000,000',
-//     location: 'Lekki lagos',
-//     reviews: 28,
-//     contact: 4,
-//     expires: 'Listing will expire in 154 days',
-//   },
-//   {
-//     id: 2,
-//     images: Image2,
-//     title: 'Olive Gardens',
-//     price: '356,000,000',
-//     location: 'Lekki lagos',
-//     reviews: 12,
-//     contact: 2,
-//     expires: 'Listing will expire in 154 days',
-//   },
-//   {
-//     id: 3,
-//     images: Image3,
-//     title: 'Creed Apartment ',
-//     price: '212,000,000',
-//     location: 'Lekki lagos',
-//     reviews: 28,
-//     contact: 4,
-//     expires: 'Listing will expire in 154 days',
-//   },
-//   {
-//     id: 4,
-//     images: Image1,
-//     title: 'Creed Apartment ',
-//     price: '212,000,000',
-//     location: 'Lekki lagos',
-//     reviews: 28,
-//     contact: 4,
-//     expires: 'Listing will expire in 154 days',
-//   },
-// ];
+import { calculateDaysFromNow, formatErrors } from '@/lib/utils';
+import { usePublishListing } from '@/features/listings/api/publish-listing';
+import { useNotifications } from '@/components/ui/notifications';
 
 type MyListingsTabCardProps = {
   listings: Active[] | Drafts[] | Reviewing[] | Rejected[] | Closed[];
 };
 export const MyListingsTabCard = ({ listings }: MyListingsTabCardProps) => {
+  const publish = usePublishListing({
+    mutationConfig: {
+      onSuccess: () => {
+        addNotification({
+          type: 'success',
+          title: 'Listing published successfully',
+        });
+      },
+      onError: (error) => {
+        const formattedErrors = formatErrors(error);
+        addNotification({
+          type: 'error',
+          title: `Validation Error`,
+          message: formattedErrors,
+        });
+      },
+    },
+  });
+  const { addNotification } = useNotifications();
+
+  const handlePlublishListing = (id: string) => {
+    publish.mutate({ listingId: id });
+  };
+
   if (!listings || listings.length === 0) {
     return <p>No items to display in this category</p>;
   }
@@ -124,6 +104,18 @@ export const MyListingsTabCard = ({ listings }: MyListingsTabCardProps) => {
                 </Button>
               </div>
             </div>
+          </div>
+          <div className="text-right">
+            {listing.status === 'draft' ? (
+              <Button
+                onClick={() => handlePlublishListing(listing.id)}
+                className="rounded-md bg-success p-1 font-raleway font-bold text-white"
+              >
+                publish
+              </Button>
+            ) : (
+              ''
+            )}
           </div>
         </Card>
       ))}
