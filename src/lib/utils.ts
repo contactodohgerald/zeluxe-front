@@ -54,3 +54,11 @@ export const formatErrors = (error: any) => {
   }
   return 'An unexpected error occurred.';
 };
+
+export const onError = (
+  e: React.SyntheticEvent<HTMLImageElement>,
+  img: string,
+) => {
+  const target = e.target as HTMLImageElement;
+  target.src = img;
+};

@@ -1,16 +1,26 @@
 import { ContentLayout } from '@/components/layouts';
 import {
   ListingsCard,
-  listingCardItems,
+  // listingCardItems,
 } from '@/components/ui/dashboard/cards/listings-card';
 import { Form } from '@/components/ui/form';
 import { loginInputSchema, useUser } from '@/lib/auth';
 import { Tabs } from '@/components/ui/dashboard/tabs';
 import { FeaturedRentals } from '@/components/ui/dashboard/cards/featured-rentals';
 import { SearchIcon } from '@/components/ui/svgs/search-icon';
+import { useListings } from '@/features/listings/api/get-listings';
+import { useRentalReviews } from '@/features/reviews/api/get-reviews';
+import { useRentals } from '@/features/guest/api/get-rentals';
+import { Rental } from '@/types/api';
 
 export const DashboardRoute = () => {
   const user = useUser();
+  const listingQuery = useListings();
+  const reviewQuery = useRentalReviews();
+  const rentalQuery = useRentals();
+  const listings = listingQuery?.data?.data;
+  const reviews = reviewQuery?.data?.data;
+  const rentals = rentalQuery?.data?.data;
 
   return (
     <ContentLayout title="">
@@ -80,9 +90,9 @@ export const DashboardRoute = () => {
             </div>
             {/* Tab */}
             {/* Featured Rentals */}
-            <div className="mt-[1.63rem]">
-              <FeaturedRentals />
-            </div>
+            {/* <div className="mt-[1.63rem]">
+              <FeaturedRentals rentals={rentals as Rental[]} />
+            </div> */}
             {/* Featured Rentals */}
           </div>
           {/* <div className="mt-4 lg:mt-0 lg:pl-[13.94rem]"> */}
@@ -93,15 +103,8 @@ export const DashboardRoute = () => {
               </p>
             </div>
             <div className="mb:mt-0 mt-4 grid grid-cols-2 gap-x-[8.37px] gap-y-[11.96px] sm:grid-cols-3 lg:grid-cols-2">
-              {listingCardItems.map((item) => (
-                <ListingsCard
-                  key={item.id}
-                  title={item.title}
-                  location={item.location}
-                  image={item.image}
-                  rating={item.rating}
-                  price={item.price}
-                />
+              {listings?.active.map((listing) => (
+                <ListingsCard key={listing.id} listing={listing} />
               ))}
             </div>
           </div>

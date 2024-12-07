@@ -3,7 +3,7 @@ import { QueryConfig } from '@/lib/react-query';
 import { Listing } from '@/types/api';
 import { queryOptions, useQuery } from '@tanstack/react-query';
 
-export const getListings = (): Promise<{ data: Listing[] }> => {
+export const getListings = (): Promise<{ data: Listing }> => {
   return api.get('/listing');
 };
 

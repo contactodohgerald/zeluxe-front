@@ -18,13 +18,20 @@ export type User = Entity<{
   first_name: string;
   last_name: string;
   email: string;
-  phone?: string;
-  gender?: string;
-  role_id?: string;
-  username?: string;
-  updated_at?: string;
-  created_at?: string;
-  role: 'ADMIN' | 'USER';
+  phone: string;
+  status: string;
+  role_id: string;
+  username: string;
+  reffered_id?: null;
+  gender: string;
+  avatar?: null;
+  email_verified_at: string;
+  login_otp?: null;
+  is_verified: boolean;
+  deleted_at?: null;
+  created_at: string;
+  updated_at: string;
+  // role: 'ADMIN' | 'USER';
 }>;
 
 export type UserResponse = {

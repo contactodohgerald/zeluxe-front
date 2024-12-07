@@ -3,12 +3,14 @@ import axios, { InternalAxiosRequestConfig } from 'axios';
 import { paths } from '../config/paths';
 import { env } from '../config/env';
 import { useNotifications } from '../components/ui/notifications';
+import Cookies from 'js-cookie';
 
 function authRequestInterceptor(config: InternalAxiosRequestConfig) {
-  const token = document.cookie
-    .split(';')
-    .find((row) => row.startsWith('accessToken='))
-    ?.split('=')[1];
+  // const token = document.cookie
+  //   .split(';')
+  //   .find((row) => row.startsWith('accessToken='))
+  //   ?.split('=')[1];
+  const token = Cookies.get('accessToken');
   if (config.headers) {
     config.headers.Accept = 'application/json';
     if (token) {

@@ -1,11 +1,12 @@
 import { Head } from '@/components/seo';
 import { Footer } from '@/components/ui/footer';
 import { Header } from '@/components/ui/header';
-// import Home9 from '@/assets/images/featured_properties/home12.jpg';
+import Home9 from '@/assets/images/featured_properties/home12.jpg';
 import { useRental } from '@/features/guest/api/get-rental';
 import { useParams } from 'react-router-dom';
 import { Spinner } from '@/components/ui/spinner';
 import { currencyNGN } from '@/utils/constants';
+import { onError } from '@/lib/utils';
 // import useEmblaCarousel from 'embla-carousel-react';
 // import EmblaCarousel from '@/components/ui/embla-carousel/embla-carousel';
 // const SLIDE_COUNT = 10;
@@ -24,7 +25,6 @@ export const LandingDetailRoute = () => {
   }
 
   const rental = rentalQuery?.data?.data;
-  // console.log(rental);
 
   if (!rental) return null;
   return (
@@ -39,8 +39,9 @@ export const LandingDetailRoute = () => {
                 {/* <img className="w-full h-full" src={Home9} alt="" /> */}
                 <img
                   className="h-full w-full"
-                  src={`https://api.zeluxe.ng/uploads/1ac8ffc06e72c0fe7d5af2b841d417cc1732820273.jpg`}
+                  src={rental?.images[0]?.url}
                   alt=""
+                  onError={(e) => onError(e, Home9)}
                 />
                 {/* <EmblaCarousel slides={SLIDES}/> */}
               </div>
@@ -52,7 +53,7 @@ export const LandingDetailRoute = () => {
                 <div className="mt-4 sm:flex sm:items-center sm:gap-4">
                   <p className="text-2xl font-extrabold text-gray-900 dark:text-white sm:text-3xl">
                     {/* ₦30,000 / day */}
-                    {`${currencyNGN} ${rental?.price} / ${rental?.cycle}`}
+                    {`${currencyNGN} ${Number(rental?.price)} / ${rental?.cycle}`}
                   </p>
 
                   <div className="mt-2 flex items-center gap-2 sm:mt-0">

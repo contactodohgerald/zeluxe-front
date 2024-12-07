@@ -1,8 +1,8 @@
-import { Link, NavLink} from 'react-router-dom';
-import { paths } from '../../../../config/paths';
-import LogoImg from '../../../../assets/images/logo.png';
-import ProfileImg from '../../../../assets/images/dashboard_profile.jpeg';
-import { cn } from '../../../../utils/cn';
+import { Link, NavLink } from 'react-router-dom';
+import { paths } from '@/config/paths';
+import LogoImg from '@/assets/images/logo.png';
+import ProfileImg from '@/assets/images/dashboard_profile.jpeg';
+import { cn } from '@/utils/cn';
 import {
   DashBoardIcon,
   ListingsIcon,
@@ -14,7 +14,6 @@ import {
 import { LogoutIcon } from '../../svgs/logout-icon';
 import React from 'react';
 import { useUser } from '@/lib/auth';
-
 
 type SideNavigationItem = {
   id: number;
