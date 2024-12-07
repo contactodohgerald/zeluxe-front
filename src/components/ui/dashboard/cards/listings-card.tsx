@@ -18,7 +18,7 @@ export type ListingCardListProps = {
 };
 export const ListingsCard = ({ listing }: ListingCardListProps) => {
   const [show, setShow] = useState(false);
-  console.log('listingsCard', listing);
+  // console.log('listingsCard', listing);
   return (
     <div className="flex h-[17.3rem] flex-col items-start justify-start rounded-[1.87rem] bg-light pb-[1.2rem] pl-[0.6rem] pr-[0.6rem] pt-[0.6rem] shadow-card md:w-[12rem]">
       <div className="relative h-[12rem] rounded-[1.1rem] md:w-[10.8rem]">
@@ -39,7 +39,7 @@ export const ListingsCard = ({ listing }: ListingCardListProps) => {
           }}
         />
         <div className="absolute left-[2.07rem] top-[8.55rem] h-[1.67rem] w-[7.1rem] rounded-[0.54rem] bg-primary flex justify-center py-[0.34rem] text-white backdrop-blur-[8.605196952819824px] backdrop-filter">
-          <p className="font-montserrat mx-auto text-center text-[12.91px] font-semibold leading-[15.73px] -tracking-[0.03em] text-[#F5F4F8]">
+          <p className="font-montserrat  text-start text-[14.35px] font-semibold leading-[17.49px] -tracking-[0.03em] text-[#F5F4F8]">
             {currencyNGN}
             {Number(listing.price)}
           </p>

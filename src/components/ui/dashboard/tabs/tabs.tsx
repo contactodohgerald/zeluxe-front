@@ -17,7 +17,7 @@ export const Tabs = () => {
   const categories = categoryQuery?.data?.data || [];
   const [selectedCategory, setSelectedCategory] = useState('All');
   const allCategories = categories;
-  const mainCategories = allCategories.slice(0, 3);
+  const mainCategories = allCategories.slice(0, 4);
   const extraCategories = allCategories.slice(5);
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
@@ -52,6 +52,7 @@ export const Tabs = () => {
           className={
             `mr-4 h-[2.5rem] lg:mt-4 relative rounded-md outline-none bg-light text-black  align-middle  w-[50px]`
           }
+          
         >
           <FontAwesomeIcon
             icon={'fa fa-ellipsis-v' as IconProp}
