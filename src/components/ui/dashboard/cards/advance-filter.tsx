@@ -1,38 +1,13 @@
 import { Card } from 'antd';
 import { Form, Input } from '@/components/ui/form';
-import {
-  filterRentalInputSchema,
-  useFilterRental,
-} from '@/features/guest/api/filter-rentals';
-import { useNotifications } from '../../notifications';
-import { formatErrors } from '@/lib/utils';
+import { filterRentalInputSchema } from '@/features/guest/api/filter-rentals';
 import { Button } from '../../button';
 import { Spinner } from '../../spinner';
-
-export const AdvanceFilter = () => {
-  const { addNotification } = useNotifications();
-  const filterRentalMutation = useFilterRental({
-    mutationConfig: {
-      onSuccess(response) {
-        addNotification({
-          type: 'success',
-          title: 'success',
-          message: 'My rentals retrieved',
-        });
-        // console.log('data',response?.data)
-        // console.log('length',response?.data?.length)
-      },
-      onError(error) {
-        const formatError = formatErrors(error);
-        addNotification({
-          type: 'error',
-          title: 'Failure',
-          message: formatError,
-        });
-      },
-    },
-  });
-
+export const AdvanceFilter = ({
+  filterRentalMutation,
+}: {
+  filterRentalMutation: any;
+}) => {
   if (filterRentalMutation.isPaused) {
     return (
       <div className="flex h-48 w-full items-center justify-center">
@@ -112,7 +87,7 @@ export const AdvanceFilter = () => {
             <Button
               type="submit"
               isLoading={filterRentalMutation.isPending}
-              className="block h-[2.68rem] w-full rounded-[0.4rem] bg-primary py-2 font-lato text-[0.96rem] font-bold leading-[1.2rem] tracking-[0.03em] text-white outline-none focus:outline-none data-[active]:bg-primary data-[hover]:bg-primary"
+              className="flex w-full rounded-[0.4rem] bg-primary py-[0.67rem] font-lato text-[0.96rem] font-bold leading-[1.2rem] tracking-[0.03em] text-white outline-none focus:outline-none data-[active]:bg-primary data-[hover]:bg-primary"
             >
               Search
             </Button>
