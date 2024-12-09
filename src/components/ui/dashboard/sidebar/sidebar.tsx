@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { paths } from '@/config/paths';
 import LogoImg from '@/assets/images/logo.png';
 import ProfileImg from '@/assets/images/dashboard_profile.jpeg';
@@ -13,7 +13,8 @@ import {
 } from '../../svgs';
 import { LogoutIcon } from '../../svgs/logout-icon';
 import React from 'react';
-import { useUser } from '@/lib/auth';
+import { useLogout, useUser } from '@/lib/auth';
+import { useNotifications } from '../../notifications';
 
 type SideNavigationItem = {
   id: number;
@@ -75,20 +76,20 @@ type SidebarProps = {
 };
 
 export const Sidebar = ({ show }: SidebarProps) => {
-  // const { addNotification } = useNotifications();
-  // const navigate = useNavigate();
-  // const logout = useLogout({
-  //   onSuccess() {
-  //     addNotification({
-  //       type: 'success',
-  //       title: 'success',
-  //       message: 'Logout Successfully',
-  //     });
-  //     navigate(paths.auth.login.getHref(), {
-  //       replace: true,
-  //     });
-  //   },
-  // });
+  const { addNotification } = useNotifications();
+  const navigate = useNavigate();
+  const logout = useLogout({
+    onSuccess() {
+      addNotification({
+        type: 'success',
+        title: 'success',
+        message: 'Logout Successfully',
+      });
+      navigate(paths.auth.login.getHref(), {
+        replace: true,
+      });
+    },
+  });
   const user = useUser();
   const bottomNavItems = [
     {
@@ -101,7 +102,7 @@ export const Sidebar = ({ show }: SidebarProps) => {
       id: 8,
       name: 'Log out',
       icon: LogoutIcon,
-      to: paths.app.logout.getHref(),
+      to: '#',
     },
   ];
 
@@ -121,7 +122,6 @@ export const Sidebar = ({ show }: SidebarProps) => {
           <ul>
             {mainNavItems.map((item) => (
               <NavLink
-                // onClick={()=> logout.mutate({})}
                 end
                 key={item.name}
                 to={item.to}
@@ -149,20 +149,14 @@ export const Sidebar = ({ show }: SidebarProps) => {
           </ul>
         </div>
         <ul className="">
-          {bottomNavItems.map((item) => (
-            <NavLink
-              end
-              key={item.name}
-              to={item.to}
-              className={({ isActive }) =>
-                cn(
-                  'mb-[0.5rem] flex h-[2.7rem] w-[8rem] items-center text-nowrap px-[0.6rem] font-raleway text-[0.644rem] font-[400] leading-[0.76rem] text-secondary',
-                  isActive ? 'rounded-[1.5rem] bg-primary text-white' : '',
-                )
-              }
-            >
-              {({ isActive }) => (
-                <>
+          {bottomNavItems.map((item) => {
+            if (item.name === 'Log out') {
+              return (
+                <button
+                  key={item.name}
+                  onClick={()=>logout.mutate()}
+                  className="mb-[0.5rem] flex h-[2.7rem] w-[8rem] items-center text-nowrap rounded-[1.5rem] px-[0.6rem] font-raleway text-[0.644rem] font-[400] leading-[0.76rem] text-secondary"
+                >
                   {typeof item.icon === 'string' ? (
                     <img
                       src={item.icon}
@@ -170,18 +164,47 @@ export const Sidebar = ({ show }: SidebarProps) => {
                       className="h-[2.13rem] w-[2.13rem] shrink-0 rounded-full object-center"
                     />
                   ) : (
-                    <item.icon
-                      className={cn(
-                        'size-4 shrink-0',
-                        isActive ? 'text-white' : 'text-secondary',
-                      )}
-                    />
+                    <item.icon className="size-4 shrink-0 text-secondary" />
                   )}
                   <span className="ml-2">{item.name}</span>
-                </>
-              )}
-            </NavLink>
-          ))}
+                </button>
+              );
+            }
+
+            return (
+              <NavLink
+                end
+                key={item.name}
+                to={item.to}
+                className={({ isActive }) =>
+                  cn(
+                    'mb-[0.5rem] flex h-[2.7rem] w-[8rem] items-center text-nowrap px-[0.6rem] font-raleway text-[0.644rem] font-[400] leading-[0.76rem] text-secondary',
+                    isActive ? 'rounded-[1.5rem] bg-primary text-white' : '',
+                  )
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    {typeof item.icon === 'string' ? (
+                      <img
+                        src={item.icon}
+                        alt={`${item.icon} icon`}
+                        className="h-[2.13rem] w-[2.13rem] shrink-0 rounded-full object-center"
+                      />
+                    ) : (
+                      <item.icon
+                        className={cn(
+                          'size-4 shrink-0',
+                          isActive ? 'text-white' : 'text-secondary',
+                        )}
+                      />
+                    )}
+                    <span className="ml-2">{item.name}</span>
+                  </>
+                )}
+              </NavLink>
+            );
+          })}
         </ul>
       </nav>
     </aside>

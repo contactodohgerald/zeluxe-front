@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
 
 export type FilterType = {
+  data: any;
   location: string;
   category: string;
   min_price: string;
@@ -16,7 +17,7 @@ export const filterRentalInputSchema = z.object({
   category: z.string().optional(),
   min_price: z.string().optional(),
   max_price: z.string().optional(),
-  keyword: z.string(),
+  keyword: z.string().min(3, 'keyword filed is required'),
   bedrooms: z.string().optional(),
 });
 
