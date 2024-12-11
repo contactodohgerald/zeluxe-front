@@ -32,7 +32,6 @@ export const useSendVerification = ({
   return useMutation({
     mutationFn: verifyOtp,
     onSuccess: (...args) => {
-      console.log('Mutation success:', args);
       onSuccess?.(...args);
     },
     onError: (error) => {

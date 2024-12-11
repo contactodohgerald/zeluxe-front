@@ -16,7 +16,7 @@ export const ListingView = ({ listingId }: { listingId: string }) => {
 
   const listing = listingQuery?.data?.data;
 
-  if (!listing) {
+  if (!listing || listing?.length === 0) {
     return (
       <Card>
         <p>No Listing Available</p>

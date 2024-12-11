@@ -133,7 +133,7 @@ export const CreateListing = () => {
             listing_features,
             listing_images: uploadedImages,
           };
-          console.log('listing', uploadedImages);
+          // console.log('listing', uploadedImages);
           createListingMutation.mutate({ data: listingData });
         }}
         className="flex flex-col"

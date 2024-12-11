@@ -17,7 +17,7 @@ export const filterRentalInputSchema = z.object({
   category: z.string().optional(),
   min_price: z.string().optional(),
   max_price: z.string().optional(),
-  keyword: z.string().min(3, 'keyword filed is required'),
+  keyword: z.string().min(3, 'keyword field is required'),
   bedrooms: z.string().optional(),
 });
 

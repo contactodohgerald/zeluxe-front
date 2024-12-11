@@ -8,18 +8,30 @@ import { Link } from 'react-router-dom';
 import { Select } from '@headlessui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { bookingLinks, cityLinks, currencyNGN } from '@/utils/constants';
+import { bookingLinks, currencyNGN } from '@/utils/constants';
 import { useRentals } from '@/features/guest/api/get-rentals';
 import { getTokenFromCookie, onError } from '@/lib/utils';
 import Home9 from '@/assets/images/featured_properties/home9.jpg';
+import { useStates } from '@/features/states/api/get-states';
+import { Spinner } from '@/components/ui/spinner';
 
 export const LandingRoute = () => {
   const navigate = useNavigate();
   const token = getTokenFromCookie();
   const [activeIndex, setActiveIndex] = useState(0);
   const rentals = useRentals({});
+  const statesQuery = useStates()
+  const states = statesQuery?.data?.data
 
   // console.log(rentals?.data?.data);
+
+    if (statesQuery.isLoading) {
+    return (
+      <div className="flex items-center justify-center w-full h-48">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
 
   useEffect(() => {
     token
@@ -36,11 +48,11 @@ export const LandingRoute = () => {
       <Head description="Welcome to Zeluxe Listings Home Page" />
       <Header />
       <main>
-        <div className="hero-area bg-1 overly text-center">
+        <div className="text-center hero-area bg-1 overly">
           <div className="container mx-auto">
             <div className="row">
-              <div className="col-md-12 relative">
-                <div className="content-block mx-2 md:mx-0">
+              <div className="relative col-md-12">
+                <div className="mx-2 content-block md:mx-0">
                   <h1 className="text-[35px] font-bold">
                     Find Your Perfect Stay.
                   </h1>
@@ -50,8 +62,8 @@ export const LandingRoute = () => {
                     the convenience and comfort of our apartments worldwide.
                   </p>
                   {/* <div className="flex justify-center py-24 mt-4 space-x-4"> */}
-                  <div className="short-popular-category-list text-center">
-                    <ul className="inline-flex space-x-4 pl-0">
+                  <div className="text-center short-popular-category-list">
+                    <ul className="inline-flex pl-0 space-x-4">
                       {bookingLinks.map((icon, idx) => (
                         <Link
                           key={idx}
@@ -68,9 +80,9 @@ export const LandingRoute = () => {
                     </ul>
                   </div>
                 </div>
-                <div className="advance-search mx-8 md:mx-0">
+                <div className="mx-8 advance-search md:mx-0">
                   <div className="container mx-auto">
-                    <form className="grid grid-cols-1 items-center gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    <form className="grid items-center grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                       {['What are you looking for', 'Category', 'Location'].map(
                         (placeholder, idx) => (
                           <input
@@ -81,7 +93,7 @@ export const LandingRoute = () => {
                           />
                         ),
                       )}
-                      <div className="col-md-6 items-center">
+                      <div className="items-center col-md-6">
                         <button
                           type="submit"
                           className="btn active h-[calc(1.5rem + 0.75rem + 2px)] my-[0.5rem] block w-full rounded-[0.25rem] border-[#1c7430] bg-[#1e7e34] py-[0.375rem] text-[1rem] text-white hover:text-white"
@@ -100,29 +112,29 @@ export const LandingRoute = () => {
         <section className="px-[10px] py-[100px] text-center">
           <h2 className="mb-4 text-[32px] text-black-6">Featured Apartments</h2>
           <div className="container mx-auto">
-            <div className="flex flex-wrap border-b pb-4">
-              {cityLinks.map((city, idx) => (
+            <div className="flex flex-wrap pb-4 border-b">
+              {states?.slice(0,11).map((state, idx) => (
                 <Link
-                  key={city}
-                  to={city.toLowerCase()}
+                  key={state?.id}
+                  to={''}
                   className={`${activeIndex === idx ? 'text-green-5 underline' : 'text-black-6'} p-4`}
                   onClick={() => setActiveIndex(idx)}
                 >
-                  {city}
+                  {state?.name}
                 </Link>
               ))}
               <div className="flex items-center text-gray-700">
-                <Select className="explore cursor-pointer appearance-none rounded-[0.25rem] border-none bg-[#6c757d] px-[1.75rem] py-[0.375rem] text-white outline-none hover:border-[#545b62] hover:bg-[#5a6268] focus:outline-none">
+                <Select className="explore cursor-pointer appearance-none max-w-[162px] rounded-[0.25rem] border-none bg-[#6c757d] px-[1.75rem] py-[0.375rem] text-white outline-none hover:border-[#545b62] hover:bg-[#5a6268] focus:outline-none">
                   <option>Explore More</option>
-                  {cityLinks.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
+                  {states?.slice(11).map((option) => (
+                    <option key={option.id} value={option.id}>
+                      {option.name}
                     </option>
                   ))}
                 </Select>
               </div>
             </div>
-            <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-3">
               {rentals?.data?.data?.map((rental) => (
                 <div
                   key={rental?.id}

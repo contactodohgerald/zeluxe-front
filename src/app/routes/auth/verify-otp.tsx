@@ -47,7 +47,7 @@ export const VerifyOtpRoute = () => {
     const otpArray = otp.split('');
     otpArray[index] = value;
     setOtp(otpArray.join(''));
-    console.log(value);
+    // console.log(value);
   };
 
   const handleSubmit = () => {
@@ -119,7 +119,7 @@ export const VerifyOtpRoute = () => {
                         </Button>
                       </div>
 
-                      {/* <div className="flex flex-row items-center justify-center space-x-1 text-center text-sm font-medium text-gray-500">
+                      {/* <div className="flex flex-row items-center justify-center space-x-1 text-sm font-medium text-center text-gray-500">
                           <p>Didn't recieve code?</p>{' '}
                           <a
                             className="flex flex-row items-center text-blue-600"

@@ -39,17 +39,17 @@ export const ProfileTabs = ({ listings, rentals }: ProfileProps) => {
 
   const renderColumnCards = () =>
     listings?.active?.map((listing) => (
-      <ListingsCard key={listing.id} listing={listing} />
+      <ListingsCard key={listing?.id} listing={listing} />
     )) || 'no Active Listing Available';
 
   const renderRowCards = () =>
     listings?.active.map((listing) => (
-      <ListingsRowCard key={listing.id} listing={listing} />
+      <ListingsRowCard key={listing?.id} listing={listing} />
     )) || 'no Active Listing Available';
 
   const renderRentalRowCards = () =>
     rentals?.map((rental) => (
-      <RentalsRowCard key={rental.id} rental={rental} />
+      <RentalsRowCard key={rental?.id} rental={rental} />
     )) || 'no Rentals Available';
 
   const renderEmptyState = (message: string) => {
@@ -89,7 +89,10 @@ export const ProfileTabs = ({ listings, rentals }: ProfileProps) => {
       <TabList className="">
         <Card className="flex h-[4.99rem] w-full items-center justify-center rounded-[9.91rem] bg-light lg:w-[45rem]">
           {tabBtnItems.map((item) => (
-            <Tab key={item.id} className={({ selected }) => tabClass(selected)}>
+            <Tab
+              key={item?.id}
+              className={({ selected }) => tabClass(selected)}
+            >
               {item?.name}
             </Tab>
           ))}

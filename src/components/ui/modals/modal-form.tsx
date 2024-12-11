@@ -39,7 +39,7 @@ export const ModalForm = ({
   const handleSubmit: SubmitHandler<formValues> = (values: object) => {
     onAddCounter(values);
     setIsOpen(false);
-    console.log(values);
+    // console.log(values);
   };
 
   if (!IsOpen) return null;

@@ -114,7 +114,7 @@ export const UpdateListing = ({ listingId }: { listingId: string }) => {
   }, [setUploadedImages]);
 
   const listing = listingQuery?.data?.data;
-  console.log('category_id', listing?.category_id);
+  // console.log('category_id', listing?.category_id);
 
   return (
     <>
@@ -130,7 +130,7 @@ export const UpdateListing = ({ listingId }: { listingId: string }) => {
             listing_features,
             listing_images: uploadedImages,
           };
-          console.log('listing', uploadedImages);
+          // console.log('listing', uploadedImages);
           updateListingMutation.mutate({ data: listingData, listingId });
         }}
         className="flex flex-col"

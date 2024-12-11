@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { VerifiedIcon } from '../../svgs/verified-icon';
 import { TelephoneIcon } from '../../svgs/telephone-icon';
 import { onError } from '@/lib/utils';
+import { paths } from '@/config/paths';
 
 export type ListingCardListProps = {
   listing: Active;
@@ -97,7 +98,8 @@ export const ListingsRowCard = ({ listing }: ListingCardListProps) => {
             onError={(e) => onError(e, CardImg)}
           />
           <div className="absolute left-[2.2rem] top-[8.55rem] rounded-[0.54rem] bg-primary px-[0.54rem] py-[0.34rem] text-white backdrop-blur-[8.605196952819824px] backdrop-filter">
-            {listing.price}
+            {currencyNGN}
+            {Number(listing.price)}
           </div>
         </div>
 
@@ -176,7 +178,7 @@ export const RentalsRowCard = ({ rental }: { rental: Rental }) => {
           </div>
 
           <Link
-            to={`/${rental?.slug}`}
+            to={paths.app.rental.getHref(rental?.id)}
             className="flex cursor-pointer items-center font-raleway text-[0.4rem] font-[400] leading-[0.46rem] tracking-[0.03em] text-primary underline hover:text-primary hover:underline"
           >
             More Details

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { VerifiedIcon } from '../../svgs/verified-icon';
 import { TelephoneIcon } from '../../svgs/telephone-icon';
 import { Rental } from '@/types/api';
+import { paths } from '@/config/paths';
 
 export const RentalsCard = ({ rentals }: { rentals: Rental[] }) => {
   // console.log('rentals', rentals);
@@ -58,7 +59,7 @@ export const RentalsCard = ({ rentals }: { rentals: Rental[] }) => {
               </div>
 
               <Link
-                to={`/${rental?.slug}`}
+                to={paths.app.rental.getHref(rental?.id)}
                 className="flex cursor-pointer items-center font-raleway text-[0.4rem] font-[400] leading-[0.46rem] tracking-[0.03em] text-primary underline hover:text-primary hover:underline"
               >
                 More Details

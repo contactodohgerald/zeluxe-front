@@ -154,7 +154,7 @@ export const Sidebar = ({ show }: SidebarProps) => {
               return (
                 <button
                   key={item.name}
-                  onClick={()=>logout.mutate()}
+                  onClick={() => logout.mutate()}
                   className="mb-[0.5rem] flex h-[2.7rem] w-[8rem] items-center text-nowrap rounded-[1.5rem] px-[0.6rem] font-raleway text-[0.644rem] font-[400] leading-[0.76rem] text-secondary"
                 >
                   {typeof item.icon === 'string' ? (

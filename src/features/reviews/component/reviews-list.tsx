@@ -4,25 +4,28 @@ import { Card } from 'antd';
 import { ReviewsCard } from '@/components/ui/dashboard/cards';
 
 export const RentalReviewsList = () => {
-  const rentalReviewsQuery = useRentalReviews({});
+  const rentalReviewsQuery = useRentalReviews();
+  const rentalReviews = rentalReviewsQuery?.data?.data;
 
   if (rentalReviewsQuery.isLoading) {
     return (
       <div className="flex h-48 w-full items-center justify-center">
-        <Spinner size="lg" />
+        <Spinner size="lg" className="text-primary" />
       </div>
     );
   }
 
-  const rentalReviews = rentalReviewsQuery?.data?.data;
-
   if (!rentalReviews || rentalReviews.length === 0) {
     return (
-      <Card className="flex justify-center">
+      <Card>
         <p>You have no reviews Yet</p>
       </Card>
     );
   }
 
-  return <ReviewsCard rentalReviews={rentalReviews} />;
+  return (
+    <>
+      <ReviewsCard rentalReviews={rentalReviews} />
+    </>
+  );
 };

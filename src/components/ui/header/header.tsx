@@ -29,9 +29,9 @@ export const Header = () => {
         <div className="container mx-auto px-4 py-2">
           <div className="flex items-center justify-between">
             <nav className="navigation relative flex w-full flex-wrap items-center justify-between px-4 py-[0.5rem]">
-              <a className="flex-shrink-0" href={paths.home.getHref()}>
+              <Link className="flex-shrink-0" to={paths.home.getHref()}>
                 <img src={Logo} alt="zeluxe homes" className="h-10" />
-              </a>
+              </Link>
               <button
                 onClick={() => setShow(!show)}
                 type="button"
@@ -81,10 +81,13 @@ export const Header = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link add-button text-white" href="#">
+                    <Link
+                      className="nav-link add-button text-white"
+                      to={paths.app.addListings.getHref()}
+                    >
                       <FontAwesomeIcon icon={PlusIcon as IconProp} />{' '}
                       <span className="ml-2">Add Listing</span>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -120,10 +123,13 @@ export const Header = () => {
             </Link>
           </li>
           <li className="">
-            <a className="nav-link add-button w-[200px] text-white" href="#">
+            <Link
+              className="nav-link add-button w-[200px] text-white"
+              to={paths.app.addListings.getHref()}
+            >
               <FontAwesomeIcon icon={PlusIcon as IconProp} />{' '}
               <span className="ml-2">Add Listing</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
