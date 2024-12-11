@@ -24,6 +24,15 @@ export const createAppRouter = (_queryClient: QueryClient) =>
       },
     },
     {
+      path: paths.search.path,
+      lazy: async () => {
+        const { SearchListingsRoute } = await import(
+          './routes/landing/search-listings'
+        );
+        return { Component: SearchListingsRoute };
+      },
+    },
+    {
       path: paths.about.path,
       lazy: async () => {
         const { AboutRoute } = await import('./routes/landing/about');

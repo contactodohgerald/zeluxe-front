@@ -9,7 +9,7 @@ import userAvatar from '@/assets/images/user_avatar.jpg';
 export const ReviewsCard = ({
   rentalReviews,
 }: {
-  rentalReviews: RentalReview[]; 
+  rentalReviews: RentalReview[];
 }) => {
   // console.log('rentalReviews', rentalReviews);
   return (
