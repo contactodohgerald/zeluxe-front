@@ -11,7 +11,7 @@ export const RentalRoute = () => {
 
   if (rentalQuery.isLoading) {
     return (
-      <div className="flex items-center justify-center w-full h-48">
+      <div className="flex h-48 w-full items-center justify-center">
         <Spinner size="lg" />
       </div>
     );
