@@ -1,7 +1,5 @@
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { Head } from '@/components/seo';
-import { paths } from '@/config/paths';
-import { useEffect, useState } from 'react';
 import { Header } from '@/components/ui/header';
 import { Footer } from '@/components/ui/footer';
 import { Link } from 'react-router-dom';
@@ -10,14 +8,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { bookingLinks, currencyNGN } from '@/utils/constants';
 import { useRentals } from '@/features/guest/api/get-rentals';
-import { getTokenFromCookie, onError } from '@/lib/utils';
+import { onError } from '@/lib/utils';
 import Home9 from '@/assets/images/featured_properties/home9.jpg';
 import { useStates } from '@/features/states/api/get-states';
 import { Spinner } from '@/components/ui/spinner';
 
 export const LandingRoute = () => {
-  const navigate = useNavigate();
-  const token = getTokenFromCookie();
   const [activeIndex, setActiveIndex] = useState(0);
   const rentals = useRentals({});
   const statesQuery = useStates()
@@ -33,11 +29,6 @@ export const LandingRoute = () => {
     );
   }
 
-  useEffect(() => {
-    token
-      ? navigate(paths.app.dashboard.getHref())
-      : navigate(paths.home.getHref());
-  }, [token]);
 
   if (!rentals || rentals.data?.data?.length === 0) {
     return <p>No items to display in this category</p>;
