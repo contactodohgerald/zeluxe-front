@@ -211,7 +211,7 @@ export const CreateListing = () => {
               />
               <FontAwesomeIcon
                 icon={faAdd}
-                className="absolute cursor-pointer left-28 top-1 text-primary"
+                className="absolute left-28 top-1 cursor-pointer text-primary"
                 onClick={() => setIsOpenAddress(true)}
               />
             </div>

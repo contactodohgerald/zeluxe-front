@@ -1,28 +1,25 @@
 import { Head } from '@/components/seo';
 import { Footer } from '@/components/ui/footer';
 import { Header } from '@/components/ui/header';
-import Home9 from '@/assets/images/featured_properties/home12.jpg';
 import { useRental } from '@/features/guest/api/get-rental';
 import { useParams } from 'react-router-dom';
 import { Spinner } from '@/components/ui/spinner';
 import { currencyNGN } from '@/utils/constants';
-import { onError } from '@/lib/utils';
-// import useEmblaCarousel from 'embla-carousel-react';
-// import EmblaCarousel from '@/components/ui/embla-carousel/embla-carousel';
-// const SLIDE_COUNT = 10;
-// const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
+import ImageCarousel from '@/features/guest/component/image-carousel';
+
 export const LandingDetailRoute = () => {
-  // const [emblaRef] = useEmblaCarousel();
   const { rentalId } = useParams<{ rentalId: string }>();
   const rentalQuery = useRental({ rentalId } as any);
 
+
   if (rentalQuery.isLoading) {
     return (
-      <div className="flex h-48 w-full items-center justify-center">
+      <div className="flex items-center justify-center w-full h-48">
         <Spinner size="lg" />
       </div>
     );
   }
+
 
   const rental = rentalQuery?.data?.data;
 
@@ -33,17 +30,10 @@ export const LandingDetailRoute = () => {
       <Header />
       <main>
         <section className="py-8 antialiased md:py-16">
-          <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
+          <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
             <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
               <div className="max-w-md shrink-0 sm:mx-auto lg:max-w-lg">
-                {/* <img className="w-full h-full" src={Home9} alt="" /> */}
-                <img
-                  className="h-full w-full"
-                  src={rental?.images[0]?.url}
-                  alt=""
-                  onError={(e) => onError(e, Home9)}
-                />
-                {/* <EmblaCarousel slides={SLIDES}/> */}
+                <ImageCarousel images={rental?.images}  className="max-w-md shrink-0 sm:mx-auto lg:max-w-lg"/>
               </div>
 
               <div className="mt-6 sm:mt-8 lg:mt-0">
@@ -56,10 +46,10 @@ export const LandingDetailRoute = () => {
                     {`${currencyNGN} ${Number(rental?.price)} / ${rental?.cycle}`}
                   </p>
 
-                  <div className="mt-2 flex items-center gap-2 sm:mt-0">
+                  <div className="flex items-center gap-2 mt-2 sm:mt-0">
                     <div className="flex items-center gap-1">
                       <svg
-                        className="h-4 w-4 text-yellow-300"
+                        className="w-4 h-4 text-yellow-300"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -70,7 +60,7 @@ export const LandingDetailRoute = () => {
                         <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
                       </svg>
                       <svg
-                        className="h-4 w-4 text-yellow-300"
+                        className="w-4 h-4 text-yellow-300"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -81,7 +71,7 @@ export const LandingDetailRoute = () => {
                         <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
                       </svg>
                       <svg
-                        className="h-4 w-4 text-yellow-300"
+                        className="w-4 h-4 text-yellow-300"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -92,7 +82,7 @@ export const LandingDetailRoute = () => {
                         <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
                       </svg>
                       <svg
-                        className="h-4 w-4 text-yellow-300"
+                        className="w-4 h-4 text-yellow-300"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -103,7 +93,7 @@ export const LandingDetailRoute = () => {
                         <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
                       </svg>
                       <svg
-                        className="h-4 w-4 text-yellow-300"
+                        className="w-4 h-4 text-yellow-300"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"

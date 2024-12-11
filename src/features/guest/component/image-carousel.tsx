@@ -3,12 +3,14 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { Image } from '@/types/api';
 import { onError } from '@/lib/utils';
 import Img1 from '@/assets/images/card/lists-2.jpeg';
+import { cn } from '@/utils/cn';
 
 type Props = {
-  images: Image[]; // Array of image URLs
+  images: Image[]; 
+  className?:string
 };
 
-const ImageCarousel: React.FC<Props> = ({ images }) => {
+const ImageCarousel: React.FC<Props> = ({ images,className='' }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel();
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -43,53 +45,63 @@ const ImageCarousel: React.FC<Props> = ({ images }) => {
       {/* Large Image */}
       <div className="relative mx-auto mt-5">
         <button
-          className="absolute left-[20px] top-[38%] z-[2] -translate-y-1/2 rounded-full border px-[15px] py-[5px] text-[32px] text-white"
+          className="absolute left-[20px] top-[38%] z-[2] -translate-y-1/2 rounded-full border px-2 text-[32px] text-white"
           onClick={onPrev}
         >
           ←
         </button>
-        <div className="embla w-full" ref={emblaRef} style={{ width: '100%' }}>
-          <div className="embla__container h-auto rounded-xl py-2">
+        <div className="w-full embla" ref={emblaRef} style={{ width: '100%' }}>
+          <div className="h-auto py-2 embla__container rounded-xl">
             {images.map((src, index) => (
               <div className="embla__slide" key={src?.id}>
                 <img
                   src={src?.url}
                   onError={(e) => onError(e, Img1)}
                   alt={`Slide ${index}`}
-                  className={`mx-auto h-1/2 w-full rounded object-cover ${
+                  className={`${cn(className,'mx-auto h-full w-full rounded-lg object-cover sm:h-[400px]')} ${
                     currentIndex === index ? 'active' : ''
                   }`}
+                />
+                {/* overlay */}
+                <div className="absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-lg bg-[rgba(0_0_0/0.26)]"></div>
+                {/* overlay */}
+                {/* count */}
+                <div className="absolute bottom-0 left-0 right-0 z-[3] w-16 -translate-y-1/2 translate-x-1/2 rounded-lg bg-gray-800">
+                  <p className="text-lg font-medium text-center text-white font-raleway">
+                    {index + 1}/{images.length}
+                  </p>
+                </div>
+                {/* count */}
+              </div>
+            ))}
+          </div>
+          {/* Thumbnail Section */}
+          <div className="flex flex-wrap gap-4 mx-auto mt-2 cursor-pointer">
+            {images.map((src, index) => (
+              <div
+              key={`${src?.attachable_id}-${index+1}`}
+                className={`items-cemter flex h-20 w-[90px] justify-center ${currentIndex === index ? 'rounded-lg border-2 border-primary' : ''} cursor-pointer`}
+              >
+                <img
+                  
+                  onError={(e) => onError(e, Img1)}
+                  src={src?.url}
+                  alt={`Thumbnail ${index}`}
+                  className={`className="object-cover w-full rounded-lg ${currentIndex === index ? 'active' : ''}`}
+                  onClick={() => scrollTo(index)}
                 />
               </div>
             ))}
           </div>
+          {/* End Of Thumbnail */}
         </div>
+
         <button
-          className="absolute right-[20px] top-[38%] z-[2] -translate-y-1/2 rounded-full border px-[15px] py-[5px] text-[32px] text-white"
+          className="absolute right-[20px] top-[38%] z-[2] -translate-y-1/2 rounded-full border px-2 text-[32px] text-white"
           onClick={onNext}
         >
           →
         </button>
-        {/* overlay */}
-        <div className="absolute bottom-0 left-0 top-0 h-1/2 w-full rounded bg-[rgba(0_0_0/0.26)]"></div>
-      </div>
-
-      {/* Thumbnail Section */}
-      <div className="mx-auto mt-4 flex flex-wrap justify-center gap-4">
-        {images.map((src, index) => (
-          <div
-            className={`items-cemter flex h-20 w-[90px] justify-center ${currentIndex === index ? 'border-2 border-primary' : ''} cursor-pointer`}
-          >
-            <img
-              key={src?.id}
-              onError={(e) => onError(e, Img1)}
-              src={src?.url}
-              alt={`Thumbnail ${index}`}
-              className={`className="object-cover w-full ${currentIndex === index ? 'active' : ''}`}
-              onClick={() => scrollTo(index)}
-            />
-          </div>
-        ))}
       </div>
     </div>
   );

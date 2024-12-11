@@ -2,14 +2,14 @@ import { Card } from 'antd';
 // import Reviews1Img from '../../../../assets/images/card/reviews_1.jpeg';
 import { Link } from 'react-router-dom';
 import { RentalReview } from '@/types/api';
-import { calculateDaysFromNow } from '@/lib/utils';
+import { formatRelativeDate } from '@/lib/utils';
 import { paths } from '@/config/paths';
 import userAvatar from '@/assets/images/user_avatar.jpg';
 
 export const ReviewsCard = ({
   rentalReviews,
 }: {
-  rentalReviews: RentalReview[];
+  rentalReviews: RentalReview[]; 
 }) => {
   // console.log('rentalReviews', rentalReviews);
   return (
@@ -39,7 +39,7 @@ export const ReviewsCard = ({
                         {review?.user?.last_name}
                       </h4>
                       <p className="font-raleway text-[0.5rem] font-[300] leading-[1.01rem] tracking-[0.03em]">
-                        {calculateDaysFromNow(review?.created_at)}
+                        {formatRelativeDate(review?.created_at)}
                       </p>
                     </div>
                   </div>

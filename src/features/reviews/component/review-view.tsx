@@ -14,7 +14,7 @@ export const ReviewView = ({ reviewId }: { reviewId: string }) => {
   // console.log('review', review);
 
   if (reviewQuery.isLoading) {
-    <div className="flex items-center justify-center w-full h-48">
+    <div className="flex h-48 w-full items-center justify-center">
       <Spinner size="lg" />
     </div>;
   }
@@ -30,7 +30,7 @@ export const ReviewView = ({ reviewId }: { reviewId: string }) => {
   return (
     <>
       <section className="relative pt-4">
-        <div className="w-full px-4 mx-auto max-w-7xl md:px-5 lg:px-6">
+        <div className="mx-auto w-full max-w-7xl px-4 md:px-5 lg:px-6">
           <div className="">
             <div className="flex items-center">
               <div className="h-[2.93rem] w-[2.93rem] shrink-0 rounded-full">
@@ -52,10 +52,10 @@ export const ReviewView = ({ reviewId }: { reviewId: string }) => {
             <h4 className="font-raleway text-[1.01rem] font-bold leading-[1.2rem] tracking-[0.03em]">
               Other Reviews
             </h4>
-            <div className="grid grid-cols-12 mb-11">
-              <div className="flex items-center col-span-12 xl:col-span-4">
-                <div className="flex flex-col w-full mx-auto box gap-y-4 max-xl:max-w-3xl">
-                  <div className="flex items-center w-full">
+            <div className="mb-11 grid grid-cols-12">
+              <div className="col-span-12 flex items-center xl:col-span-4">
+                <div className="box mx-auto flex w-full flex-col gap-y-4 max-xl:max-w-3xl">
+                  <div className="flex w-full items-center">
                     <p className="mr-[2px] py-[1px] text-lg font-medium text-black">
                       5
                     </p>
@@ -85,7 +85,7 @@ export const ReviewView = ({ reviewId }: { reviewId: string }) => {
                       30
                     </p>
                   </div>
-                  <div className="flex items-center w-full">
+                  <div className="flex w-full items-center">
                     <p className="mr-[2px] py-[1px] text-lg font-medium text-black">
                       4
                     </p>
@@ -208,14 +208,14 @@ export const ReviewView = ({ reviewId }: { reviewId: string }) => {
                 </div>
               </div>
               <div className="col-span-12 min-h-[230px] w-full max-xl:mt-8 xl:col-span-8 xl:pl-8">
-                <div className="grid w-full h-full grid-cols-12 px-8 bg-gray-100 rounded-3xl max-xl:mx-auto max-xl:max-w-3xl max-lg:py-8">
-                  <div className="flex items-center col-span-12 md:col-span-8">
-                    <div className="flex flex-col items-center w-full h-full max-lg:justify-center sm:flex-row">
+                <div className="grid h-full w-full grid-cols-12 rounded-3xl bg-gray-100 px-8 max-xl:mx-auto max-xl:max-w-3xl max-lg:py-8">
+                  <div className="col-span-12 flex items-center md:col-span-8">
+                    <div className="flex h-full w-full flex-col items-center max-lg:justify-center sm:flex-row">
                       <div className="flex flex-col items-center justify-center border-gray-200 sm:border-r sm:pr-3">
-                        <h2 className="mb-4 text-5xl font-bold text-center text-black font-manrope">
+                        <h2 className="font-manrope mb-4 text-center text-5xl font-bold text-black">
                           4.3
                         </h2>
-                        <div className="flex items-center gap-3 mb-4">
+                        <div className="mb-4 flex items-center gap-3">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="36"
@@ -318,10 +318,10 @@ export const ReviewView = ({ reviewId }: { reviewId: string }) => {
                       </div>
 
                       <div className="flex flex-col items-center justify-center border-gray-200 sm:border-l sm:pl-3">
-                        <h2 className="mb-4 text-5xl font-bold text-center text-black font-manrope">
+                        <h2 className="font-manrope mb-4 text-center text-5xl font-bold text-black">
                           4.8
                         </h2>
-                        <div className="flex items-center gap-3 mb-4">
+                        <div className="mb-4 flex items-center gap-3">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="36"
@@ -425,11 +425,11 @@ export const ReviewView = ({ reviewId }: { reviewId: string }) => {
                     </div>
                   </div>
                   <div className="col-span-12 max-lg:mt-8 md:col-span-4 md:pl-8">
-                    <div className="flex flex-col items-center justify-center w-full h-full">
-                      <button className="w-full px-6 py-4 mb-6 text-lg font-semibold text-center text-white transition-all duration-500 rounded-full shadow-sm whitespace-nowrap bg-success shadow-transparent hover:bg-success hover:shadow-green-400">
+                    <div className="flex h-full w-full flex-col items-center justify-center">
+                      <button className="mb-6 w-full whitespace-nowrap rounded-full bg-success px-6 py-4 text-center text-lg font-semibold text-white shadow-sm shadow-transparent transition-all duration-500 hover:bg-success hover:shadow-green-400">
                         Write A Review
                       </button>
-                      <button className="w-full px-6 py-4 text-lg font-semibold text-center transition-all duration-500 bg-white rounded-full shadow-sm whitespace-nowrap text-success shadow-transparent hover:bg-green-100 hover:shadow-green-200">
+                      <button className="w-full whitespace-nowrap rounded-full bg-white px-6 py-4 text-center text-lg font-semibold text-success shadow-sm shadow-transparent transition-all duration-500 hover:bg-green-100 hover:shadow-green-200">
                         See All Reviews
                       </button>
                     </div>
@@ -437,13 +437,13 @@ export const ReviewView = ({ reviewId }: { reviewId: string }) => {
                 </div>
               </div>
             </div>
-            <div className="pb-8 border-b border-gray-200 max-xl:mx-auto max-xl:max-w-3xl">
-              <h4 className="mb-6 text-3xl font-semibold leading-10 text-black font-manrope">
+            <div className="border-b border-gray-200 pb-8 max-xl:mx-auto max-xl:max-w-3xl">
+              <h4 className="font-manrope mb-6 text-3xl font-semibold leading-10 text-black">
                 Most helpful positive review
               </h4>
               {review?.other_reviews?.map((rev: RentalReview) => (
                 <React.Fragment key={rev?.id}>
-                  <div className="flex flex-col justify-between mb-4 sm:flex-row sm:items-center">
+                  <div className="mb-4 flex flex-col justify-between sm:flex-row sm:items-center">
                     <div className="flex items-center gap-3">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -487,7 +487,7 @@ export const ReviewView = ({ reviewId }: { reviewId: string }) => {
               <form>
                 <div className="flex">
                   <div className="relative">
-                    <div className="absolute top-0 px-2 py-2 -left-0">
+                    <div className="absolute -left-0 top-0 px-2 py-2">
                       <p className="text-lg font-normal leading-8 text-gray-500">
                         Sort by:
                       </p>
@@ -522,7 +522,7 @@ export const ReviewView = ({ reviewId }: { reviewId: string }) => {
                     </div>
                     <div
                       id="dropdown"
-                      className="absolute right-0 z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow top-9 w-44 dark:bg-gray-700"
+                      className="absolute right-0 top-9 z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700"
                     >
                       <ul
                         className="py-2 text-sm text-gray-700 dark:text-gray-200"
