@@ -6,11 +6,11 @@ import Img1 from '@/assets/images/card/lists-2.jpeg';
 import { cn } from '@/utils/cn';
 
 type Props = {
-  images: Image[]; 
-  className?:string
+  images: Image[];
+  className?: string;
 };
 
-const ImageCarousel: React.FC<Props> = ({ images,className='' }) => {
+const ImageCarousel: React.FC<Props> = ({ images, className = '' }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel();
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -50,15 +50,15 @@ const ImageCarousel: React.FC<Props> = ({ images,className='' }) => {
         >
           ←
         </button>
-        <div className="w-full embla" ref={emblaRef} style={{ width: '100%' }}>
-          <div className="h-auto py-2 embla__container rounded-xl">
+        <div className="embla w-full" ref={emblaRef} style={{ width: '100%' }}>
+          <div className="embla__container h-auto rounded-xl py-2">
             {images.map((src, index) => (
               <div className="embla__slide" key={src?.id}>
                 <img
                   src={src?.url}
                   onError={(e) => onError(e, Img1)}
                   alt={`Slide ${index}`}
-                  className={`${cn(className,'mx-auto h-full w-full rounded-lg object-cover sm:h-[400px]')} ${
+                  className={`${cn(className, 'mx-auto h-full w-full rounded-lg object-cover sm:h-[400px]')} ${
                     currentIndex === index ? 'active' : ''
                   }`}
                 />
@@ -67,7 +67,7 @@ const ImageCarousel: React.FC<Props> = ({ images,className='' }) => {
                 {/* overlay */}
                 {/* count */}
                 <div className="absolute bottom-0 left-0 right-0 z-[3] w-16 -translate-y-1/2 translate-x-1/2 rounded-lg bg-gray-800">
-                  <p className="text-lg font-medium text-center text-white font-raleway">
+                  <p className="text-center font-raleway text-lg font-medium text-white">
                     {index + 1}/{images.length}
                   </p>
                 </div>
@@ -76,14 +76,13 @@ const ImageCarousel: React.FC<Props> = ({ images,className='' }) => {
             ))}
           </div>
           {/* Thumbnail Section */}
-          <div className="flex flex-wrap gap-4 mx-auto mt-2 cursor-pointer">
+          <div className="mx-auto mt-2 flex cursor-pointer flex-wrap gap-4">
             {images.map((src, index) => (
               <div
-              key={`${src?.attachable_id}-${index+1}`}
+                key={`${src?.attachable_id}-${index + 1}`}
                 className={`items-cemter flex h-20 w-[90px] justify-center ${currentIndex === index ? 'rounded-lg border-2 border-primary' : ''} cursor-pointer`}
               >
                 <img
-                  
                   onError={(e) => onError(e, Img1)}
                   src={src?.url}
                   alt={`Thumbnail ${index}`}

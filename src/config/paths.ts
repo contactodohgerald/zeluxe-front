@@ -7,6 +7,10 @@ export const paths = {
     path: '/:rentalId',
     getHref: (rentalId: string) => `/${rentalId}`,
   },
+  search: {
+    path: '/search/:slug',
+    getHref: (slug: string) => `/search/${slug}`,
+  },
   about: {
     path: '/about',
     getHref: () => '/about',
