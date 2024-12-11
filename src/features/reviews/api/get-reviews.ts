@@ -18,7 +18,9 @@ type UseReviewsOptions = {
   queryConfig?: QueryConfig<typeof getReviewsQueryOptions>;
 };
 
-export const useRentalReviews = ({ queryConfig }: UseReviewsOptions = {}) => {
+export const useRentalReviews = ({
+  queryConfig = {},
+}: UseReviewsOptions = {}) => {
   return useQuery({
     ...getReviewsQueryOptions(),
     ...queryConfig,

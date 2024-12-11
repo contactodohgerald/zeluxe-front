@@ -32,7 +32,7 @@ export type createUploadInput = z.infer<typeof createUploadsInputSchema>;
 export const createUpload = ({ data }: { data: createUploadInput }) => {
   const formData = new FormData();
   data.document.forEach((file) => {
-    console.log('file', file);
+    // console.log('file', file);
     formData.append(`document`, file);
   });
   return api.post('/storage', formData);

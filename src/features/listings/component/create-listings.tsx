@@ -133,7 +133,7 @@ export const CreateListing = () => {
             listing_features,
             listing_images: uploadedImages,
           };
-          console.log('listing', uploadedImages);
+          // console.log('listing', uploadedImages);
           createListingMutation.mutate({ data: listingData });
         }}
         className="flex flex-col"
@@ -211,7 +211,7 @@ export const CreateListing = () => {
               />
               <FontAwesomeIcon
                 icon={faAdd}
-                className="absolute left-28 top-1 cursor-pointer text-primary"
+                className="absolute cursor-pointer left-28 top-1 text-primary"
                 onClick={() => setIsOpenAddress(true)}
               />
             </div>

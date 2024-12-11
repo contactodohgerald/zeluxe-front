@@ -24,6 +24,20 @@ export const calculateDaysFromNow = (dateString: string) => {
   return `${daysDifference} days`;
 };
 
+export const formatDate = (dateInput: Date | string | number): string => {
+  const date = dateInput instanceof Date ? dateInput : new Date(dateInput);
+
+  if (isNaN(date.getTime())) {
+    throw new Error('invalid date input. Please provide a valid date.');
+  }
+
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+  }).format(date);
+};
+
 export const setCookie = (key: string, value: any, options = {}) => {
   Cookies.set(key, value, options);
 };

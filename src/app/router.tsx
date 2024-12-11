@@ -125,9 +125,33 @@ export const createAppRouter = (_queryClient: QueryClient) =>
         {
           path: paths.app.rentals.path,
           lazy: async () => {
-            const { RentalsRoute } = await import('./routes/app/rentals');
+            const { RentalsRoute } = await import(
+              './routes/app/rentals/rentals'
+            );
             return {
               Component: RentalsRoute,
+            };
+          },
+          ErrorBoundary: AppRootErrorBoundary,
+        },
+        {
+          path: paths.app.rental.path,
+          lazy: async () => {
+            const { RentalRoute } = await import('./routes/app/rentals/rental');
+            return {
+              Component: RentalRoute,
+            };
+          },
+          ErrorBoundary: AppRootErrorBoundary,
+        },
+        {
+          path: paths.app.search.path,
+          lazy: async () => {
+            const { SearchRentalsRoute } = await import(
+              './routes/app/rentals/search'
+            );
+            return {
+              Component: SearchRentalsRoute,
             };
           },
           ErrorBoundary: AppRootErrorBoundary,
@@ -140,6 +164,16 @@ export const createAppRouter = (_queryClient: QueryClient) =>
             );
             return {
               Component: ReviewsRoute,
+            };
+          },
+          ErrorBoundary: AppRootErrorBoundary,
+        },
+        {
+          path: paths.app.review.path,
+          lazy: async () => {
+            const { ReviewRoute } = await import('./routes/app/reviews/review');
+            return {
+              Component: ReviewRoute,
             };
           },
           ErrorBoundary: AppRootErrorBoundary,

@@ -21,7 +21,7 @@ export const GetRentalsList = () => {
           title: 'success',
           message: 'My rentals retrieved',
         });
-        console.log('data', response?.data as any);
+        // console.log('data', response?.data as any);
         const filtersData = response?.data as Rental[];
         setFilteredResult(response?.data);
         if (Array.isArray(filtersData)) {

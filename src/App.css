@@ -269,3 +269,51 @@ body {
   background-color: #f8f9fa;
   padding: 2rem 0;
 }
+
+.carousel-container {
+  text-align: center;
+}
+
+.embla {
+  width: 80%;
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  /* flex: 0 0 100%; */
+  text-align: center;
+}
+
+/* .large-image {
+  width: 100%;
+  height: auto;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+} */
+
+/* .thumbnail-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+} */
+/* 
+.thumbnail {
+  width: 80px;
+  height: auto;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 5px;
+} */
+
+/* .thumbnail.active {
+  border-color: #007bff;
+} */
+
+/* .thumbnail:hover {
+  border-color: #007bff;
+} */

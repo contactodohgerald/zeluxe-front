@@ -13,7 +13,7 @@ export const getRentalQueryOptions = (rentalId: string) => {
   });
 };
 
-type UseRentalOptions = {
+export type UseRentalOptions = {
   rentalId: string;
   queryConfig?: QueryConfig<typeof getRentalQueryOptions>;
 };

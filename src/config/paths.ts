@@ -64,17 +64,25 @@ export const paths = {
       path: '/app/rentals',
       getHref: () => '/app/rentals',
     },
+    rental: {
+      path: '/app/rentals/:rentalId',
+      getHref: (rentalId: string) => `/app/rentals/${rentalId}`,
+    },
     reviews: {
       path: '/app/reviews',
       getHref: () => '/app/reviews',
     },
     review: {
       path: '/app/reviews/:reviewId',
-      getHref: (id: string) => `/app/reviews/${id}`,
+      getHref: (reviewId: string) => `/app/reviews/${reviewId}`,
     },
     settings: {
       path: '/app/settings',
       getHref: () => '/app/settings',
+    },
+    search: {
+      path: '/app/search-results',
+      getHref: () => '/app/search-results',
     },
     profile: {
       path: '/app/profile',

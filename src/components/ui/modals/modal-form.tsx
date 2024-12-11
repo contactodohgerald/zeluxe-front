@@ -39,26 +39,26 @@ export const ModalForm = ({
   const handleSubmit: SubmitHandler<formValues> = (values: object) => {
     onAddCounter(values);
     setIsOpen(false);
-    console.log(values);
+    // console.log(values);
   };
 
   if (!IsOpen) return null;
   return (
-    <div className="relative max-h-full w-full max-w-2xl p-4">
+    <div className="relative w-full max-w-2xl max-h-full p-4">
       {/* <!-- Modal content --> */}
-      <div className="relative rounded-lg bg-white shadow">
+      <div className="relative bg-white rounded-lg shadow">
         {/* <!-- Modal header --> */}
-        <div className="flex items-center justify-between rounded-t border-b p-4 dark:border-gray-600 md:p-5">
+        <div className="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600 md:p-5">
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
             Add Listing Features
           </h3>
           <button
             onClick={() => setIsOpen(false)}
             type="button"
-            className="ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200"
+            className="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg ms-auto hover:bg-gray-200"
           >
             <svg
-              className="h-3 w-3"
+              className="w-3 h-3"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -76,7 +76,7 @@ export const ModalForm = ({
           </button>
         </div>
         {/* <!-- Modal body --> */}
-        <div className="space-y-4 p-4 md:p-5">
+        <div className="p-4 space-y-4 md:p-5">
           <Form
             onSubmit={(values) => handleSubmit(values)}
             schema={z.object({
@@ -104,7 +104,7 @@ export const ModalForm = ({
                   error={formState.errors['listingValue']}
                 />
 
-                <div className="flex items-center rounded-b border-t border-gray-200 p-4 dark:border-gray-600 md:p-5">
+                <div className="flex items-center p-4 border-t border-gray-200 rounded-b dark:border-gray-600 md:p-5">
                   <Button
                     type="submit"
                     className="rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-success focus:outline-none focus:ring-4 focus:ring-primary dark:focus:ring-primary"
