@@ -4,6 +4,7 @@ import { paths } from '../../../config/paths';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { useUserStore } from '@/store/user-store';
 
 const PlusIcon = 'fa fa-plus-circle';
 const linkItems = [
@@ -23,6 +24,7 @@ const linkItems = [
 export const Header = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [show, setShow] = useState(false);
+  const { isAuthenticated } = useUserStore();
   return (
     <>
       <header>
@@ -72,23 +74,27 @@ export const Header = () => {
                   </li>
                 </ul>
                 <ul className="flex flex-col lg:ml-auto lg:flex-row">
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link login-button"
-                      to={paths.auth.login.getHref()}
-                    >
-                      Portal Login
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link add-button text-white"
-                      to={paths.app.addListings.getHref()}
-                    >
-                      <FontAwesomeIcon icon={PlusIcon as IconProp} />{' '}
-                      <span className="ml-2">Add Listing</span>
-                    </Link>
-                  </li>
+                  {!isAuthenticated && (
+                    <li className="nav-item">
+                      <Link
+                        className="nav-link login-button"
+                        to={paths.auth.login.getHref()}
+                      >
+                        Portal Login
+                      </Link>
+                    </li>
+                  )}
+                  {isAuthenticated ? (
+                    <li className="nav-item">
+                      <Link
+                        className="nav-link add-button text-white"
+                        to={paths.app.addListings.getHref()}
+                      >
+                        <FontAwesomeIcon icon={PlusIcon as IconProp} />{' '}
+                        <span className="ml-2">Add Listing</span>
+                      </Link>
+                    </li>
+                  ) : null}
                 </ul>
               </div>
             </nav>
@@ -114,23 +120,27 @@ export const Header = () => {
           </li>
         </ul>
         <ul className="flex flex-col space-y-2 md:ml-auto md:flex-row">
-          <li className="">
-            <Link
-              className="nav-link login-button w-[200px]"
-              to={paths.auth.login.getHref()}
-            >
-              Portal Login
-            </Link>
-          </li>
-          <li className="">
-            <Link
-              className="nav-link add-button w-[200px] text-white"
-              to={paths.app.addListings.getHref()}
-            >
-              <FontAwesomeIcon icon={PlusIcon as IconProp} />{' '}
-              <span className="ml-2">Add Listing</span>
-            </Link>
-          </li>
+          {!isAuthenticated && (
+            <li className="">
+              <Link
+                className="nav-link login-button w-[200px]"
+                to={paths.auth.login.getHref()}
+              >
+                Portal Login
+              </Link>
+            </li>
+          )}
+          {isAuthenticated ? (
+            <li className="">
+              <Link
+                className="nav-link add-button w-[200px] text-white"
+                to={paths.app.addListings.getHref()}
+              >
+                <FontAwesomeIcon icon={PlusIcon as IconProp} />{' '}
+                <span className="ml-2">Add Listing</span>
+              </Link>
+            </li>
+          ) : null}
         </ul>
       </div>
       {/* Mobile Menu End */}

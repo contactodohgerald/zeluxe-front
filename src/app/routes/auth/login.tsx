@@ -3,12 +3,14 @@ import { AuthLayout } from '../../../components/layouts/auth-layout';
 import { LoginForm } from '@/features/auth/components/login-form';
 import { paths } from '@/config/paths';
 import { useNotifications } from '@/components/ui/notifications';
+import { useUserStore } from '@/store/user-store';
 
 export const LoginRoute = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get('redirectTo');
   const { addNotification } = useNotifications();
+  const { setIsAuthenticated } = useUserStore();
   return (
     <AuthLayout title="">
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -26,6 +28,7 @@ export const LoginRoute = () => {
                       replace: true,
                     },
                   );
+                  setIsAuthenticated(true);
                   addNotification({
                     type: 'success',
                     title: 'Login Successful',

@@ -13,12 +13,15 @@ import { useNavigate } from 'react-router-dom';
 import { useLogout } from '@/lib/auth';
 import { paths } from '@/config/paths';
 import { formatErrors } from '@/lib/utils';
+import { useUserStore } from '@/store/user-store';
 
 export const PopOver = ({ content }: { content: string }) => {
   const { addNotification } = useNotifications();
+  const { setIsAuthenticated } = useUserStore();
   const navigate = useNavigate();
   const logout = useLogout({
     onSuccess() {
+      setIsAuthenticated(false);
       addNotification({
         type: 'success',
         title: 'success',
