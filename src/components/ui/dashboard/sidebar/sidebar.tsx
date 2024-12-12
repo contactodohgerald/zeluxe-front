@@ -15,6 +15,7 @@ import { LogoutIcon } from '../../svgs/logout-icon';
 import React from 'react';
 import { useLogout, useUser } from '@/lib/auth';
 import { useNotifications } from '../../notifications';
+import { useUserStore } from '@/store/user-store';
 
 type SideNavigationItem = {
   id: number;
@@ -76,6 +77,7 @@ type SidebarProps = {
 };
 
 export const Sidebar = ({ show }: SidebarProps) => {
+  const { setIsAuthenticated } = useUserStore();
   const { addNotification } = useNotifications();
   const navigate = useNavigate();
   const logout = useLogout({
@@ -154,7 +156,10 @@ export const Sidebar = ({ show }: SidebarProps) => {
               return (
                 <button
                   key={item.name}
-                  onClick={() => logout.mutate()}
+                  onClick={() => {
+                    setIsAuthenticated(false);
+                    logout.mutate();
+                  }}
                   className="mb-[0.5rem] flex h-[2.7rem] w-[8rem] items-center text-nowrap rounded-[1.5rem] px-[0.6rem] font-raleway text-[0.644rem] font-[400] leading-[0.76rem] text-secondary"
                 >
                   {typeof item.icon === 'string' ? (

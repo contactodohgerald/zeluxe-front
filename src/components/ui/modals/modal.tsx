@@ -11,7 +11,7 @@ export const Modals = ({ children, IsOpen, setIsOpen }: ModalProps) => {
         shouldCloseOnOverlayClick
         onRequestClose={() => setIsOpen(false)}
         isOpen={IsOpen}
-        className="container mx-auto mt-8 flex w-full items-center justify-center border-none outline-none"
+        className="container z-10 mx-auto mt-8 flex w-full items-center justify-center border-none outline-none"
       >
         {children}
       </Modal>

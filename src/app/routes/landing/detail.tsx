@@ -6,10 +6,16 @@ import { useParams } from 'react-router-dom';
 import { Spinner } from '@/components/ui/spinner';
 import { currencyNGN } from '@/utils/constants';
 import ImageCarousel from '@/features/guest/component/image-carousel';
+import { Button } from '@/components/ui/button';
+import { Modals } from '@/components/ui/modals/modal';
+import { useState } from 'react';
+import { BookingForm } from '@/features/guest/component/form/booking-form';
 
 export const LandingDetailRoute = () => {
   const { rentalId } = useParams<{ rentalId: string }>();
   const rentalQuery = useRental({ rentalId } as any);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState('');
 
   if (rentalQuery.isLoading) {
     return (
@@ -19,7 +25,12 @@ export const LandingDetailRoute = () => {
     );
   }
 
+  const handleOpen = (rentalId: string) => {
+    setSelectedId(rentalId);
+    setIsOpen(true);
+  };
   const rental = rentalQuery?.data?.data;
+  // console.log(rental?.id);
 
   if (!rental) return null;
   return (
@@ -118,14 +129,13 @@ export const LandingDetailRoute = () => {
                 </div>
 
                 <div className="mt-6 sm:mt-8 sm:flex sm:items-center sm:gap-4">
-                  <a
-                    href="#"
-                    title=""
-                    className="focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mt-4 flex items-center justify-center rounded-lg bg-success px-5 py-2.5 text-sm font-medium text-white hover:bg-primary focus:outline-none focus:ring-4 sm:mt-0"
+                  <Button
+                    onClick={() => handleOpen(rental?.id || '')}
+                    className="mt-4 flex items-center justify-center rounded-lg bg-success px-5 py-2.5 text-sm font-medium text-white hover:bg-primary focus:outline-none sm:mt-0"
                     role="button"
                   >
                     Book This Apartment
-                  </a>
+                  </Button>
                 </div>
 
                 <hr className="my-6 border-gray-200 dark:border-gray-800 md:my-8" />
@@ -140,6 +150,11 @@ export const LandingDetailRoute = () => {
         </section>
       </main>
       <Footer />
+      <Modals IsOpen={isOpen} setIsOpen={setIsOpen}>
+        {/* <Card className="relative max-h-full w-full max-w-2xl p-4"> */}
+        <BookingForm setIsOpen={setIsOpen} rentalId={selectedId || ''} />
+        {/* </Card> */}
+      </Modals>
     </>
   );
 };

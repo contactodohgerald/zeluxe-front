@@ -12,9 +12,9 @@ export type rentalBookingType = {
 };
 
 export const createRentalBookingInputSchema = z.object({
-  rental_id: z.string(),
-  start_date: z.date(),
-  end_date: z.date(),
+  rental_id: z.string().default(''),
+  start_date: z.string(),
+  end_date: z.string(),
   notes: z.string().optional(),
 });
 

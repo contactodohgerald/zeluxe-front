@@ -45,7 +45,7 @@ const ImageCarousel: React.FC<Props> = ({ images, className = '' }) => {
       {/* Large Image */}
       <div className="relative mx-auto mt-5">
         <button
-          className="absolute left-[20px] top-[38%] z-[2] -translate-y-1/2 rounded-full border px-2 text-[32px] text-white"
+          className="absolute left-[20px] top-[38%] z-[1] -translate-y-1/2 rounded-full border px-2 text-[32px] text-white"
           onClick={onPrev}
         >
           ←
@@ -96,7 +96,7 @@ const ImageCarousel: React.FC<Props> = ({ images, className = '' }) => {
         </div>
 
         <button
-          className="absolute right-[20px] top-[38%] z-[2] -translate-y-1/2 rounded-full border px-2 text-[32px] text-white"
+          className="absolute right-[20px] top-[38%] z-[1] -translate-y-1/2 rounded-full border px-2 text-[32px] text-white"
           onClick={onNext}
         >
           →
