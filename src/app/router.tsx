@@ -132,11 +132,11 @@ export const createAppRouter = (_queryClient: QueryClient) =>
         {
           path: paths.app.adminListings.path,
           lazy: async () => {
-            const { MyListingRoute } = await import(
+            const { MyAdminListingRoute } = await import(
               './routes/app/admin/listings/my-listing'
             );
             return {
-              Component: MyListingRoute,
+              Component: MyAdminListingRoute,
             };
           },
           ErrorBoundary: AppRootErrorBoundary,

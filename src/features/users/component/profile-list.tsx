@@ -10,7 +10,7 @@ import {
 import { useEffect, useState } from 'react';
 import { useNotifications } from '@/components/ui/notifications';
 import { formatErrors, onError } from '@/lib/utils';
-import { useListings } from '@/features/listings/api/get-listings';
+import { useListings } from '@/features/listings/owners/api/get-listings';
 import { useRentalReviews } from '@/features/reviews/api/get-reviews';
 import { useRentals } from '@/features/guest/api/get-rentals';
 import { Listing, Rental } from '@/types/api';

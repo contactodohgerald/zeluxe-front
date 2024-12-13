@@ -69,12 +69,23 @@ export const Sidebar = ({ show }: SidebarProps) => {
       icon: ListingsIcon,
       to: paths.app.addListings.getHref(),
     },
-    {
-      id: 3,
-      name: 'My Listings',
-      icon: MyListingsIcon,
-      to: paths.app.myListings.getHref(),
-    },
+    ...(user?.data?.role?.name === 'admin'
+      ? [
+          {
+            id: 3,
+            name: 'My Listings',
+            icon: MyListingsIcon,
+            to: paths.app.adminListings.getHref(),
+          },
+        ]
+      : [
+        {
+          id: 3,
+          name: 'My Listings',
+          icon: MyListingsIcon,
+          to: paths.app.myListings.getHref(),
+        },
+      ]),
     {
       id: 4,
       name: 'Rentals',

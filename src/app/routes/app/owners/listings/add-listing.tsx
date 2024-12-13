@@ -1,6 +1,6 @@
 import { ContentLayout } from '@/components/layouts';
 import { CloseIconLg } from '@/components/ui/svgs/close-icon-lg';
-import { CreateListing } from '@/features/listings/component/create-listings';
+import { CreateListing } from '@/features/listings/owners/component/create-listings';
 
 import { Button } from '@headlessui/react';
 import { Card } from 'antd';

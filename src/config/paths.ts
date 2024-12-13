@@ -61,16 +61,16 @@ export const paths = {
       getHref: () => '/app/add-listing',
     },
     myListings: {
-      path: '/app/my-listing',
-      getHref: () => '/app/my-listing',
+      path: '/app/owners/my-listing',
+      getHref: () => '/app/owners/my-listing',
     },
     adminListings: {
-      path: '/app/admin/my-listing',
-      getHref: () => '/app/admin/my-listing',
+      path: '/app/admin/my-listings',
+      getHref: () => '/app/admin/my-listings',
     },
     listing: {
-      path: 'my-listing/:listingId',
-      getHref: (listingId: string) => `/app/my-listing/${listingId}`,
+      path: '/app/admin/listing/:listingId',
+      getHref: (listingId: string) => `/app/admin/listing/${listingId}`,
     },
     rentals: {
       path: '/app/rentals',
