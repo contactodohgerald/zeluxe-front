@@ -31,7 +31,13 @@ export type User = Entity<{
   deleted_at?: null;
   created_at: string;
   updated_at: string;
-  // role: 'ADMIN' | 'USER';
+  role: {
+    id: string;
+    name: string;
+    deleted_at?: null;
+    created_at: string;
+    updated_at: string;
+  };
 }>;
 
 export type UserResponse = {

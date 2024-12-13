@@ -4,12 +4,13 @@ import { Form } from '@/components/ui/form';
 import { loginInputSchema, useUser } from '@/lib/auth';
 import { Tabs } from '@/components/ui/dashboard/tabs';
 import { SearchIcon } from '@/components/ui/svgs/search-icon';
-import { useListings } from '@/features/listings/api/get-listings';
+import { useAdminListings } from '@/features/listings/admin/api/get-listings';
 
-export const DashboardRoute = () => {
+export const AdminDashboardRoute = () => {
   const user = useUser();
-  const listingQuery = useListings();
-  const listings = listingQuery?.data?.data;
+  const adminListingsQuery = useAdminListings()
+  const adminListings = adminListingsQuery?.data?.data
+  console.log('this is admin dashboard')
 
   return (
     <ContentLayout title="">
@@ -92,7 +93,7 @@ export const DashboardRoute = () => {
               </p>
             </div>
             <div className="mb:mt-0 mt-4 grid grid-cols-2 gap-x-[8.37px] gap-y-[11.96px] sm:grid-cols-3 lg:grid-cols-2">
-              {listings?.active.map((listing) => (
+              {adminListings?.active.map((listing) => (
                 <ListingsCard key={listing.id} listing={listing} />
               ))}
             </div>

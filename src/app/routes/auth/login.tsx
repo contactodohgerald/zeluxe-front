@@ -4,6 +4,7 @@ import { LoginForm } from '@/features/auth/components/login-form';
 import { paths } from '@/config/paths';
 import { useNotifications } from '@/components/ui/notifications';
 import { useUserStore } from '@/store/user-store';
+import { useUser } from '@/lib/auth';
 
 export const LoginRoute = () => {
   const navigate = useNavigate();
@@ -11,6 +12,8 @@ export const LoginRoute = () => {
   const redirectTo = searchParams.get('redirectTo');
   const { addNotification } = useNotifications();
   const { setIsAuthenticated } = useUserStore();
+  const user = useUser();
+  const role = user?.data?.role?.name
   return (
     <AuthLayout title="">
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -23,7 +26,11 @@ export const LoginRoute = () => {
               <LoginForm
                 onSuccess={() => {
                   navigate(
-                    `${redirectTo ? `${redirectTo}` : paths.app.dashboard.getHref()}`,
+                    `${redirectTo ? `${redirectTo}` : (role === 'owner'
+                      ? paths.app.ownerDashboard.getHref()
+                      : role === 'admin'
+                      ? paths.app.adminDashboard.getHref()
+                      : paths.home.getHref())}`,
                     {
                       replace: true,
                     },

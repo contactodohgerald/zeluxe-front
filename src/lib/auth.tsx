@@ -6,6 +6,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { paths } from '../config/paths';
 import { getTokenFromCookie, setCookie } from './utils';
 import Cookies from 'js-cookie';
+import { useEffect } from 'react';
 
 const getUser = async (): Promise<User | null> => {
   const user = localStorage.getItem('user');
@@ -67,10 +68,11 @@ const authConfig = {
   userFn: getUser,
   loginFn: async (data: LoginInput) => {
     const response = await loginWithEmailAndPassword(data);
-    const token = response?.data?.access_token;
-    if (token) {
-      setCookie('accessToken', response?.data?.access_token, { expires: 1 });
-      localStorage.setItem('user', JSON.stringify(response?.data?.user));
+    const { user, access_token } = response?.data;
+    if (access_token) {
+      setCookie('accessToken', access_token, { expires: 1 });
+      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('role', user?.role?.name);
     }
     return response?.data?.user;
   },
@@ -87,13 +89,29 @@ export const { useUser, useLogin, useLogout, useRegister, AuthLoader } =
 export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const token = getTokenFromCookie();
   const location = useLocation();
+  const role = localStorage.getItem('role');
 
-  if (!token) {
+  useEffect(() => {
+    // If no token or the token is expired, remove the expired token and redirect to login
+    if (!token) {
+      console.log('No valid token found or token expired.');
+      Cookies.remove('accessToken'); // Remove the expired or invalid token
+    }
+  }, [token]);
+
+  if (!token || !role) {
     console.log({
       pathname: location.pathname,
       redirectTo: paths.auth.login.getHref(location.pathname),
     });
-    return <Navigate to={paths.auth.login.getHref()} replace />;
+
+    // Clear expired token
+    Cookies.remove('accessToken');
+    return <Navigate to={paths.auth.login.getHref(location.pathname)} replace />;
+  }
+
+  if (role === 'renter') {
+    return <Navigate to={paths.home.getHref()} replace />;
   }
 
   return children;

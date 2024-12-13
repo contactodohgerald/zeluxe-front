@@ -48,9 +48,13 @@ export const paths = {
       path: '/app',
       getHref: () => '/app',
     },
-    dashboard: {
-      path: '',
-      getHref: () => '/app',
+    ownerDashboard: {
+      path: '/app/owners',
+      getHref: () => '/app/owners',
+    },
+    adminDashboard: {
+      path: '/app/admin',
+      getHref: () => '/app/admin',
     },
     addListings: {
       path: '/app/add-listing',
@@ -59,6 +63,10 @@ export const paths = {
     myListings: {
       path: '/app/my-listing',
       getHref: () => '/app/my-listing',
+    },
+    adminListings: {
+      path: '/app/admin/my-listing',
+      getHref: () => '/app/admin/my-listing',
     },
     listing: {
       path: 'my-listing/:listingId',
@@ -106,3 +114,9 @@ export const paths = {
     },
   },
 } as const;
+
+
+export const commonPaths = {
+
+}
+// madelynn14@example.com
