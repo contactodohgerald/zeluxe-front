@@ -1,7 +1,6 @@
 import { Spinner } from '@/components/ui/spinner';
 import { Card } from 'antd';
 import { useRentalBooking } from '../api/get-rental-booking';
-// import userAvatar from '@/assets/images/user_avatar.jpg';
 import { formatDate, formatErrors } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useConfirmRentalBooking } from '../api/confirm-rental-bookings';
