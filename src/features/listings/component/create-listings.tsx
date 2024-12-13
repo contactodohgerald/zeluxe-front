@@ -76,7 +76,7 @@ export const CreateListing = () => {
       document: filesToUpload,
     });
 
-    if (fileList.length > 0) {
+    if (fileList.length > 3) {
       uploadFile.mutate(
         { data: validData },
         {

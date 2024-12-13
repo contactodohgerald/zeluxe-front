@@ -59,12 +59,18 @@ const mainNavItems = [
   },
   {
     id: 5,
+    name: 'My Bookings',
+    icon: RentalsIcon,
+    to: paths.app.bookings.getHref(),
+  },
+  {
+    id: 6,
     name: 'Reviews',
     icon: ReviewsIcon,
     to: paths.app.reviews.getHref(),
   },
   {
-    id: 6,
+    id: 7,
     name: 'Settings',
     icon: SettingsIcon,
     to: paths.app.settings.getHref(),

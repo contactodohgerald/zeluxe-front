@@ -72,6 +72,14 @@ export const paths = {
       path: '/app/rentals/:rentalId',
       getHref: (rentalId: string) => `/app/rentals/${rentalId}`,
     },
+    bookings: {
+      path: '/app/bookings',
+      getHref: () => '/app/bookings',
+    },
+    booking: {
+      path: '/app/bookings/:bookingId',
+      getHref: (bookingId: string) => `/app/bookings/${bookingId}`,
+    },
     reviews: {
       path: '/app/reviews',
       getHref: () => '/app/reviews',

@@ -255,6 +255,68 @@ export type RentalReview = Entity<{
   ratings: [];
 }>;
 
+export type RentalBooking = Entity<{
+  id: string;
+  user_id: string;
+  rental_id: string;
+  start_date: string;
+  end_date: string;
+  amount: string;
+  booking_id: string;
+  status: string;
+  notes: string;
+  payment_received: number;
+  deleted_at?: null;
+  created_at: string;
+  updated_at: string;
+  user: User;
+  data: Rental;
+  rental: {
+    id: string;
+    owner_id: string;
+    category_id: string;
+    address_id: string;
+    name: string;
+    slug: string;
+    cycle: string;
+    price: string;
+    description: string;
+    status: string;
+    duration: string;
+    deleted_at?: null;
+    created_at: string;
+    updated_at: string;
+    owner: Owner;
+    category: Category;
+    address: Address;
+    state: State;
+    country: Country;
+  };
+  reviews: RentalBookingReview[];
+  ratings: Rating[];
+}>;
+
+export type Rating = Entity<{
+  id: string;
+  user_id: string;
+  ratable_id: string;
+  score: 5;
+  status: string;
+  deleted_at?: null;
+  created_at: string;
+  updated_at: string;
+}>;
+export type RentalBookingReview = Entity<{
+  id: string;
+  user_id: string;
+  reviewable_id: string;
+  description: string;
+  status: string;
+  deleted_at?: null;
+  created_at: string;
+  updated_at: string;
+}>;
+
 export type Address = Entity<{
   id: string;
   user_id: string;
@@ -344,7 +406,7 @@ export type Rental = Entity<{
   features: Feature[];
   images: Image[];
   reviews: [];
-  ratings: [];
+  ratings: Rating[];
 }>;
 
 export type RentalResponse = {
