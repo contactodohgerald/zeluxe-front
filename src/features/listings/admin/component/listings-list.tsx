@@ -14,7 +14,7 @@ export const ListingsList = () => {
     );
   }
 
-  const listings = listingsQuery?.data?.data;
+  const listings = listingsQuery?.data?.data
 
   if (!listings) {
     return (

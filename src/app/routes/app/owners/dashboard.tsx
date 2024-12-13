@@ -4,7 +4,7 @@ import { Form } from '@/components/ui/form';
 import { loginInputSchema, useUser } from '@/lib/auth';
 import { Tabs } from '@/components/ui/dashboard/tabs';
 import { SearchIcon } from '@/components/ui/svgs/search-icon';
-import { useListings } from '@/features/listings/api/get-listings';
+import { useListings } from '@/features/listings/owners/api/get-listings';
 
 export const DashboardRoute = () => {
   const user = useUser();

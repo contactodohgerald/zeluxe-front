@@ -1,47 +1,56 @@
 import * as React from 'react';
-import { Review, User } from '../types/api';
+import { Active, Drafts, User } from '../types/api';
 import { useUser } from './auth';
 
 export enum ROLES {
-  ADMIN = 'ADMIN',
-  USER = 'USER',
+  admin = 'admin',
+  owner = 'owner',
+  renter = 'renter',
 }
 
 type RoleTypes = keyof typeof ROLES;
 
 export const POLICIES = {
-  'review:delete': (user: User, review: Review) => {
-    if (user.role_id === 'ADMIN') {
-      return true;
-    }
-
-    if (user.role_id === 'USER' && review.author?.id === user.id) {
+  'listings:publish': (user:User, listing:Drafts) => {
+    //owners can publish their own listings
+    return user?.role?.name === ROLES.owner && listing?.owner_id === user?.id
+  },
+  'listings:approve': (user: User) => {
+    //Admins can approve any listing
+    return user?.role?.name === ROLES.admin;
+  },
+  'listings:reject':(user:User) => {
+    //only admins can reject listings
+    return user?.role?.name === ROLES.admin
+  },
+  'listings:edit' : (user:User, listing:Drafts | Active) => {
+    if(user?.role?.name === ROLES.owner && listing.owner_id === user.id) {
       return true;
     }
 
     return false;
-  },
+  }
 };
 
 export const useAuthorization = () => {
   const user = useUser();
 
-  if (!user.data) {
-    throw Error('User does not exist');
+  if (!user?.data) {
+    return { checkAccess:()=> false, roll:null}
   }
 
   const checkAccess = React.useCallback(
     ({ allowedRoles }: { allowedRoles: RoleTypes[] }) => {
-      if (allowedRoles && allowedRoles.length > 0 && user.data) {
-        return allowedRoles?.includes(user.data.role_id);
+      if(!allowedRoles || allowedRoles.length === 0) {
+        return false;
       }
-
-      return true;
+      
+      return allowedRoles?.includes(user?.data?.role?.name)
     },
-    [user.data],
+    [user?.data],
   );
 
-  return { checkAccess, role: user.data.role };
+  return { checkAccess, role: user?.data?.role?.name };
 };
 
 type AuthorizationProps = {

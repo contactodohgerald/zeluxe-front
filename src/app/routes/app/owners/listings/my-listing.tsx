@@ -1,6 +1,6 @@
 import { ContentLayout } from '@/components/layouts';
 import { FormSearch } from '@/components/ui/dashboard/search/form-search';
-import { ListingsList } from '@/features/listings/component/listings-list';
+import { ListingsList } from '@/features/listings/owners/component/listings-list';
 
 export const MyListingRoute = () => {
   return (
