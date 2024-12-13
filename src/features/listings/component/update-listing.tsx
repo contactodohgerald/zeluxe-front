@@ -6,7 +6,7 @@ import { useCategories } from '@/features/category/api/get-category';
 import { useAddress } from '@/features/address/api/get-address';
 import { Select } from '@/components/ui/form/select';
 import { useEffect, useState } from 'react';
-import { Counter } from '@/app/routes/app/listings/add-listing';
+import { Counter } from '@/app/routes/app/owners/listings/add-listing';
 import { Button } from '@/components/ui/button';
 import { Modals } from '@/components/ui/modals/modal';
 import { ModalForm } from '@/components/ui/modals/modal-form';

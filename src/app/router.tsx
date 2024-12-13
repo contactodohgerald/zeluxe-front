@@ -86,11 +86,21 @@ export const createAppRouter = (_queryClient: QueryClient) =>
       ErrorBoundary: AppRootErrorBoundary,
       children: [
         {
-          path: paths.app.dashboard.path,
+          path: paths.app.ownerDashboard.path,
           lazy: async () => {
-            const { DashboardRoute } = await import('./routes/app/dashboard');
+            const { DashboardRoute } = await import('./routes/app/owners/dashboard');
             return {
               Component: DashboardRoute,
+            };
+          },
+          ErrorBoundary: AppRootErrorBoundary,
+        },
+        {
+          path: paths.app.adminDashboard.path,
+          lazy: async () => {
+            const { AdminDashboardRoute } = await import('./routes/app/admin/dashboard');
+            return {
+              Component: AdminDashboardRoute,
             };
           },
           ErrorBoundary: AppRootErrorBoundary,
@@ -99,7 +109,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           path: paths.app.addListings.path,
           lazy: async () => {
             const { AddListingRoute } = await import(
-              './routes/app/listings/add-listing'
+              './routes/app/owners/listings/add-listing'
             );
             return {
               Component: AddListingRoute,
@@ -111,7 +121,19 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           path: paths.app.myListings.path,
           lazy: async () => {
             const { MyListingRoute } = await import(
-              './routes/app/listings/my-listing'
+              './routes/app/owners/listings/my-listing'
+            );
+            return {
+              Component: MyListingRoute,
+            };
+          },
+          ErrorBoundary: AppRootErrorBoundary,
+        },
+        {
+          path: paths.app.adminListings.path,
+          lazy: async () => {
+            const { MyListingRoute } = await import(
+              './routes/app/admin/listings/my-listing'
             );
             return {
               Component: MyListingRoute,
@@ -123,7 +145,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           path: paths.app.listing.path,
           lazy: async () => {
             const { ListingRoute } = await import(
-              './routes/app/listings/listing'
+              './routes/app/owners/listings/listing'
             );
             return {
               Component: ListingRoute,
@@ -135,7 +157,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           path: paths.app.rentals.path,
           lazy: async () => {
             const { RentalsRoute } = await import(
-              './routes/app/rentals/rentals'
+              './routes/app/owners/rentals/rentals'
             );
             return {
               Component: RentalsRoute,
@@ -146,7 +168,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
         {
           path: paths.app.rental.path,
           lazy: async () => {
-            const { RentalRoute } = await import('./routes/app/rentals/rental');
+            const { RentalRoute } = await import('./routes/app/owners/rentals/rental');
             return {
               Component: RentalRoute,
             };
@@ -157,7 +179,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           path: paths.app.bookings.path,
           lazy: async () => {
             const { BookingsRoute } = await import(
-              './routes/app/bookings/bookings'
+              './routes/app/owners/bookings/bookings'
             );
             return {
               Component: BookingsRoute,
@@ -169,7 +191,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           path: paths.app.booking.path,
           lazy: async () => {
             const { BookingRoute } = await import(
-              './routes/app/bookings/booking'
+              './routes/app/owners/bookings/booking'
             );
             return {
               Component: BookingRoute,
@@ -181,7 +203,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           path: paths.app.search.path,
           lazy: async () => {
             const { SearchRentalsRoute } = await import(
-              './routes/app/rentals/search'
+              './routes/app/owners/rentals/search'
             );
             return {
               Component: SearchRentalsRoute,
@@ -193,7 +215,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           path: paths.app.reviews.path,
           lazy: async () => {
             const { ReviewsRoute } = await import(
-              './routes/app/reviews/reviews'
+              './routes/app/owners/reviews/reviews'
             );
             return {
               Component: ReviewsRoute,
@@ -204,7 +226,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
         {
           path: paths.app.review.path,
           lazy: async () => {
-            const { ReviewRoute } = await import('./routes/app/reviews/review');
+            const { ReviewRoute } = await import('./routes/app/owners/reviews/review');
             return {
               Component: ReviewRoute,
             };

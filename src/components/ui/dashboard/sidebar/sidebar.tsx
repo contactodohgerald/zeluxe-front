@@ -25,57 +25,13 @@ type SideNavigationItem = {
 };
 const Logo = () => {
   return (
-    <Link className="" to={paths.app.dashboard.getHref()}>
+    <Link className="" to={paths.home.getHref()}>
       <img src={LogoImg} alt="Logo Image" />
     </Link>
   );
 };
 
-const mainNavItems = [
-  {
-    id: 1,
-    name: 'Dashboard',
-    // icon: LayoutDashboardIcon,
-    icon: DashBoardIcon,
-    to: paths.app.dashboard.getHref(),
-  },
-  {
-    id: 2,
-    name: 'Add Listings',
-    icon: ListingsIcon,
-    to: paths.app.addListings.getHref(),
-  },
-  {
-    id: 3,
-    name: 'My Listings',
-    icon: MyListingsIcon,
-    to: paths.app.myListings.getHref(),
-  },
-  {
-    id: 4,
-    name: 'Rentals',
-    icon: RentalsIcon,
-    to: paths.app.rentals.getHref(),
-  },
-  {
-    id: 5,
-    name: 'My Bookings',
-    icon: RentalsIcon,
-    to: paths.app.bookings.getHref(),
-  },
-  {
-    id: 6,
-    name: 'Reviews',
-    icon: ReviewsIcon,
-    to: paths.app.reviews.getHref(),
-  },
-  {
-    id: 7,
-    name: 'Settings',
-    icon: SettingsIcon,
-    to: paths.app.settings.getHref(),
-  },
-].filter(Boolean) as SideNavigationItem[];
+
 
 type SidebarProps = {
   show: boolean;
@@ -99,6 +55,55 @@ export const Sidebar = ({ show }: SidebarProps) => {
     },
   });
   const user = useUser();
+  const mainNavItems = [
+    {
+      id: 1,
+      name: 'Dashboard',
+      // icon: LayoutDashboardIcon,
+      icon: DashBoardIcon,
+      to: `${user?.data?.role?.name === 'owner' ? paths.app.ownerDashboard.getHref() : paths.app.adminDashboard.getHref()}`,
+    },
+    {
+      id: 2,
+      name: 'Add Listings',
+      icon: ListingsIcon,
+      to: paths.app.addListings.getHref(),
+    },
+    {
+      id: 3,
+      name: 'My Listings',
+      icon: MyListingsIcon,
+      to: paths.app.myListings.getHref(),
+    },
+    {
+      id: 4,
+      name: 'Rentals',
+      icon: RentalsIcon,
+      to: paths.app.rentals.getHref(),
+    },
+    {
+      id: 5,
+      name: 'My Bookings',
+      icon: RentalsIcon,
+      to: paths.app.bookings.getHref(),
+    },
+    {
+      id: 6,
+      name: 'Reviews',
+      icon: ReviewsIcon,
+      to: paths.app.reviews.getHref(),
+    },
+    ...(user?.data?.role?.name === 'admin'
+      ? [
+          {
+            id: 7,
+            name: 'Settings',
+            icon: SettingsIcon,
+            to: paths.app.settings.getHref(),
+          },
+        ]
+      : [])
+  ].filter(Boolean) as SideNavigationItem[];
   const bottomNavItems = [
     {
       id: 7,
