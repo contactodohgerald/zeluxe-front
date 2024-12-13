@@ -154,6 +154,30 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           ErrorBoundary: AppRootErrorBoundary,
         },
         {
+          path: paths.app.bookings.path,
+          lazy: async () => {
+            const { BookingsRoute } = await import(
+              './routes/app/bookings/bookings'
+            );
+            return {
+              Component: BookingsRoute,
+            };
+          },
+          ErrorBoundary: AppRootErrorBoundary,
+        },
+        {
+          path: paths.app.booking.path,
+          lazy: async () => {
+            const { BookingRoute } = await import(
+              './routes/app/bookings/booking'
+            );
+            return {
+              Component: BookingRoute,
+            };
+          },
+          ErrorBoundary: AppRootErrorBoundary,
+        },
+        {
           path: paths.app.search.path,
           lazy: async () => {
             const { SearchRentalsRoute } = await import(

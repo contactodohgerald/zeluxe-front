@@ -12,6 +12,7 @@ import { useStates } from '@/features/states/api/get-states';
 import { Spinner } from '@/components/ui/spinner';
 import { SearchListingForm } from '@/components/ui/search/search-listing-form';
 import { RentalsGridCard } from '@/components/ui/dashboard/cards/rentals-grid-card';
+import { Card } from 'antd';
 
 export const LandingRoute = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -38,7 +39,11 @@ export const LandingRoute = () => {
   }
 
   if (!rentals || rentals?.length === 0) {
-    return <p>No items to display in this category</p>;
+    return (
+      <div className="flex min-h-screen w-full items-center justify-center p-12">
+        <Card>No items to display in this category</Card>
+      </div>
+    );
   }
 
   return (
