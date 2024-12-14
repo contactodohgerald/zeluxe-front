@@ -88,7 +88,9 @@ export const createAppRouter = (_queryClient: QueryClient) =>
         {
           path: paths.app.ownerDashboard.path,
           lazy: async () => {
-            const { DashboardRoute } = await import('./routes/app/owners/dashboard');
+            const { DashboardRoute } = await import(
+              './routes/app/owners/dashboard'
+            );
             return {
               Component: DashboardRoute,
             };
@@ -98,7 +100,9 @@ export const createAppRouter = (_queryClient: QueryClient) =>
         {
           path: paths.app.adminDashboard.path,
           lazy: async () => {
-            const { AdminDashboardRoute } = await import('./routes/app/admin/dashboard');
+            const { AdminDashboardRoute } = await import(
+              './routes/app/admin/dashboard'
+            );
             return {
               Component: AdminDashboardRoute,
             };
@@ -168,7 +172,9 @@ export const createAppRouter = (_queryClient: QueryClient) =>
         {
           path: paths.app.rental.path,
           lazy: async () => {
-            const { RentalRoute } = await import('./routes/app/owners/rentals/rental');
+            const { RentalRoute } = await import(
+              './routes/app/owners/rentals/rental'
+            );
             return {
               Component: RentalRoute,
             };
@@ -226,7 +232,9 @@ export const createAppRouter = (_queryClient: QueryClient) =>
         {
           path: paths.app.review.path,
           lazy: async () => {
-            const { ReviewRoute } = await import('./routes/app/owners/reviews/review');
+            const { ReviewRoute } = await import(
+              './routes/app/owners/reviews/review'
+            );
             return {
               Component: ReviewRoute,
             };
@@ -236,7 +244,9 @@ export const createAppRouter = (_queryClient: QueryClient) =>
         {
           path: paths.app.settings.path,
           lazy: async () => {
-            const { SettingsRoute } = await import('./routes/app/settings');
+            const { SettingsRoute } = await import(
+              './routes/app/admin/settings'
+            );
             return {
               Component: SettingsRoute,
             };

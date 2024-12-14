@@ -10,7 +10,7 @@ export const DashboardRoute = () => {
   const user = useUser();
   const listingQuery = useListings();
   const listings = listingQuery?.data?.data;
-  console.log('This is owner dashboard')
+  console.log('This is owner dashboard');
 
   return (
     <ContentLayout title="">
@@ -94,8 +94,8 @@ export const DashboardRoute = () => {
             </div>
             <div className="mb:mt-0 mt-4 grid grid-cols-2 gap-x-[8.37px] gap-y-[11.96px] sm:grid-cols-3 lg:grid-cols-2">
               {listings?.active.map((listing) => (
-               <ListingsCard key={listing.id} listing={listing} />
-               ))}
+                <ListingsCard key={listing.id} listing={listing} />
+              ))}
             </div>
           </div>
         </div>

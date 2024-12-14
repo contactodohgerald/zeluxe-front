@@ -5,7 +5,7 @@ import { ListingsList } from '@/features/listings/admin/component/listings-list'
 export const MyAdminListingRoute = () => {
   return (
     <ContentLayout title="My Listings" component={<FormSearch />}>
-      <ListingsList /> 
+      <ListingsList />
     </ContentLayout>
   );
 };

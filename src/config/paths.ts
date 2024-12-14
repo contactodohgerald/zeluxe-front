@@ -97,8 +97,8 @@ export const paths = {
       getHref: (reviewId: string) => `/app/reviews/${reviewId}`,
     },
     settings: {
-      path: '/app/settings',
-      getHref: () => '/app/settings',
+      path: '/app/admin/settings',
+      getHref: () => '/app/admin/settings',
     },
     search: {
       path: '/app/search-results',
@@ -115,8 +115,5 @@ export const paths = {
   },
 } as const;
 
-
-export const commonPaths = {
-
-}
+export const commonPaths = {};
 // madelynn14@example.com

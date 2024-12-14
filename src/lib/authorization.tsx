@@ -11,41 +11,41 @@ export enum ROLES {
 type RoleTypes = keyof typeof ROLES;
 
 export const POLICIES = {
-  'listings:publish': (user:User, listing:Drafts) => {
+  'listings:publish': (user: User, listing: Drafts) => {
     //owners can publish their own listings
-    return user?.role?.name === ROLES.owner && listing?.owner_id === user?.id
+    return user?.role?.name === ROLES.owner && listing?.owner_id === user?.id;
   },
   'listings:approve': (user: User) => {
     //Admins can approve any listing
     return user?.role?.name === ROLES.admin;
   },
-  'listings:reject':(user:User) => {
+  'listings:reject': (user: User) => {
     //only admins can reject listings
-    return user?.role?.name === ROLES.admin
+    return user?.role?.name === ROLES.admin;
   },
-  'listings:edit' : (user:User, listing:Drafts | Active) => {
-    if(user?.role?.name === ROLES.owner && listing.owner_id === user.id) {
+  'listings:edit': (user: User, listing: Drafts | Active) => {
+    if (user?.role?.name === ROLES.owner && listing.owner_id === user.id) {
       return true;
     }
 
     return false;
-  }
+  },
 };
 
 export const useAuthorization = () => {
   const user = useUser();
 
   if (!user?.data) {
-    return { checkAccess:()=> false, roll:null}
+    return { checkAccess: () => false, roll: null };
   }
 
   const checkAccess = React.useCallback(
     ({ allowedRoles }: { allowedRoles: RoleTypes[] }) => {
-      if(!allowedRoles || allowedRoles.length === 0) {
+      if (!allowedRoles || allowedRoles.length === 0) {
         return false;
       }
-      
-      return allowedRoles?.includes(user?.data?.role?.name)
+
+      return allowedRoles?.includes(user?.data?.role?.name);
     },
     [user?.data],
   );

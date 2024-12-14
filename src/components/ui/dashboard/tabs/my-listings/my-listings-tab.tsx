@@ -96,7 +96,7 @@ export const MyListingsTabCard = ({ listings }: MyListingsTabCardProps) => {
       },
     },
   });
-  const rejectListing =  useRejectListing({
+  const rejectListing = useRejectListing({
     mutationConfig: {
       onSuccess: () => {
         addNotification({
@@ -163,7 +163,7 @@ export const MyListingsTabCard = ({ listings }: MyListingsTabCardProps) => {
               <p className="mb-[0.63rem] font-montserrat text-[1.1rem] font-semibold leading-[1.32rem] tracking-[0.03em] text-primary">
                 ₦{Number(listing?.price)}
               </p>
-              <Button className="mb-[0.58rem] bg-transparent shadow-none rounded-[0.63rem] bg-primary p-[0.6rem] font-raleway text-[0.63rem] font-medium leading-[0.74rem] tracking-[0.03em] text-white backdrop-blur-[10.09px] backdrop-filter">
+              <Button className="mb-[0.58rem] rounded-[0.63rem] bg-primary bg-transparent p-[0.6rem] font-raleway text-[0.63rem] font-medium leading-[0.74rem] tracking-[0.03em] text-white shadow-none backdrop-blur-[10.09px] backdrop-filter">
                 {listing?.address?.nearest_landmark},{' '}
                 {listing?.address.country.name}
               </Button>
@@ -178,7 +178,7 @@ export const MyListingsTabCard = ({ listings }: MyListingsTabCardProps) => {
               <div className="mb-[0.6rem]">
                 <Button
                   onClick={() => handleDeleteListing(listing.id)}
-                  className="flex bg-transparent shadow-none items-center text-danger-5"
+                  className="flex items-center bg-transparent text-danger-5 shadow-none"
                 >
                   <IcBaselineDelete />
                   <span className="ml-1 font-raleway text-[0.73rem] font-[400] leading-[0.85rem] tracking-[0.03em]">
@@ -192,7 +192,7 @@ export const MyListingsTabCard = ({ listings }: MyListingsTabCardProps) => {
                     to={paths.app.listing.getHref(listing?.id)}
                     className="flex items-center text-warning"
                   >
-                    <EditIcon className='md:ml-4'/>
+                    <EditIcon className="md:ml-4" />
                     <span className="ml-1 font-raleway text-[0.73rem] font-[400] leading-[0.85rem] tracking-[0.03em]">
                       Edit
                     </span>
@@ -202,7 +202,7 @@ export const MyListingsTabCard = ({ listings }: MyListingsTabCardProps) => {
               <div>
                 <Button
                   onClick={() => handleCloseListing(listing.id)}
-                  className="flex bg-transparent shadow-none text-secondary items-center"
+                  className="flex items-center bg-transparent text-secondary shadow-none"
                 >
                   <CarbonCloseFilledIcon />
                   <span className="ml-1 font-raleway text-[0.73rem] font-[400] leading-[0.85rem] tracking-[0.03em]">
@@ -226,36 +226,36 @@ export const MyListingsTabCard = ({ listings }: MyListingsTabCardProps) => {
             )}
           </div>
           <Authorization allowedRoles={[ROLES.admin]}>
-          <div className="text-right">
-            <div className="flex gap-x-3">
-              <div>
-                {listing.status === 'review' ? (
-                  <Button
-                    isLoading={approve.isPending}
-                    onClick={() => handleApproveListing(listing.id)}
-                    className="rounded-md bg-success p-1 font-raleway font-bold text-white"
-                  >
-                    Approve
-                  </Button>
-                ) : (
-                  ''
-                )}
-              </div>
-              <div>
-                {listing.status === 'review' ? (
-                  <Button
-                    isLoading={rejectListing.isPending}
-                    onClick={() => handleRejectListing(listing.id)}
-                    className="rounded-md bg-danger p-1 font-raleway font-bold text-white"
-                  >
-                    Reject
-                  </Button>
-                ) : (
-                  ''
-                )}
+            <div className="text-right">
+              <div className="flex gap-x-3">
+                <div>
+                  {listing.status === 'review' ? (
+                    <Button
+                      isLoading={approve.isPending}
+                      onClick={() => handleApproveListing(listing.id)}
+                      className="rounded-md bg-success p-1 font-raleway font-bold text-white"
+                    >
+                      Approve
+                    </Button>
+                  ) : (
+                    ''
+                  )}
+                </div>
+                <div>
+                  {listing.status === 'review' ? (
+                    <Button
+                      isLoading={rejectListing.isPending}
+                      onClick={() => handleRejectListing(listing.id)}
+                      className="rounded-md bg-danger p-1 font-raleway font-bold text-white"
+                    >
+                      Reject
+                    </Button>
+                  ) : (
+                    ''
+                  )}
+                </div>
               </div>
             </div>
-          </div>
           </Authorization>
         </Card>
       ))}

@@ -31,8 +31,6 @@ const Logo = () => {
   );
 };
 
-
-
 type SidebarProps = {
   show: boolean;
   // setShow: React.Dispatch<SetStateAction<boolean>>;
@@ -79,13 +77,13 @@ export const Sidebar = ({ show }: SidebarProps) => {
           },
         ]
       : [
-        {
-          id: 3,
-          name: 'My Listings',
-          icon: MyListingsIcon,
-          to: paths.app.myListings.getHref(),
-        },
-      ]),
+          {
+            id: 3,
+            name: 'My Listings',
+            icon: MyListingsIcon,
+            to: paths.app.myListings.getHref(),
+          },
+        ]),
     {
       id: 4,
       name: 'Rentals',
@@ -113,7 +111,7 @@ export const Sidebar = ({ show }: SidebarProps) => {
             to: paths.app.settings.getHref(),
           },
         ]
-      : [])
+      : []),
   ].filter(Boolean) as SideNavigationItem[];
   const bottomNavItems = [
     {

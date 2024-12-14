@@ -24,7 +24,7 @@ export const AuthLayout = ({ children, title }: LayoutProps) => {
     if (token) {
       try {
         const role = user?.data?.role?.name;
-        setRole(role); 
+        setRole(role);
       } catch (error) {
         console.error('Error decoding token or determining role:', error);
         navigate(paths.auth.login.getHref(), { replace: true });
@@ -39,8 +39,8 @@ export const AuthLayout = ({ children, title }: LayoutProps) => {
         (role === 'owner'
           ? paths.app.ownerDashboard.getHref()
           : role === 'admin'
-          ? paths.app.adminDashboard.getHref()
-          : paths.home.getHref());
+            ? paths.app.adminDashboard.getHref()
+            : paths.home.getHref());
 
       navigate(redirectTo, { replace: true });
     }
