@@ -247,12 +247,6 @@ export const SettingsList = () => {
                 </span>
               </div>
               <div className="flex w-full flex-col items-start gap-4">
-                {/* <Slider
-                  value={[]}
-                  range={true}
-                  onChange={(value: number[]) => {}}
-                  //   onValueCommit={(value: number[]) => {}}
-                /> */}
                 <Slider
                   className="w-10/12"
                   styles={{}}
@@ -278,22 +272,38 @@ export const SettingsList = () => {
             <div className="flex w-full flex-col items-start gap-2">
               <span className="w-full font-raleway text-xl">Background</span>
             </div>
-            <div className="flex w-full items-center gap-2 px-3 py-3">
-              {/* <RadioGroup
-                label=""
-                helpText=""
-                value=""
-                onValueChange={(value: string) => {}}
-              >
-                <RadioGroup.Option
-                  label="Auto-generate a background"
-                  value="4213942d"
+            <div className="flex w-full flex-col gap-2 px-3 py-3">
+              <div className="mb-4 flex items-center">
+                <input
+                  id="default-radio-1"
+                  type="radio"
+                  value=""
+                  name="default-radio"
+                  className="h-4 w-4 border-gray-300 bg-gray-100 text-primary"
                 />
-                <RadioGroup.Option
-                  label="Use an image as the background"
-                  value="e426c84e"
+                <label
+                  htmlFor="default-radio-1"
+                  className="ms-2 font-raleway text-sm font-medium"
+                >
+                  Auto-generate a background
+                </label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  checked
+                  id="default-radio-2"
+                  type="radio"
+                  value=""
+                  name="default-radio"
+                  className="h-4 w-4 border-gray-300 bg-gray-100 text-primary"
                 />
-              </RadioGroup> */}
+                <label
+                  htmlFor="default-radio-2"
+                  className="ms-2 font-raleway text-sm font-medium"
+                >
+                  Use an image as the background
+                </label>
+              </div>
             </div>
           </div>
         </div>
