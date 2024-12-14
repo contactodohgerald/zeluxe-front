@@ -18,7 +18,9 @@ type UseListingsOptions = {
   queryConfig?: QueryConfig<typeof getListingsQueryOptions>;
 };
 
-export const useAdminListings = ({ queryConfig = {} }: UseListingsOptions = {}) => {
+export const useAdminListings = ({
+  queryConfig = {},
+}: UseListingsOptions = {}) => {
   return useQuery({
     ...getListingsQueryOptions(),
     ...queryConfig,

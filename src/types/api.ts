@@ -483,6 +483,23 @@ export type CountryResponse = {
   data: Country[];
 };
 
+export type Setting = Entity<{
+  id: string;
+  site_name: string;
+  app_name: string;
+  site_email: string;
+  support_email: string;
+  site_logo: string;
+  app_logo: string;
+  site_phone: string;
+  address: string;
+  site_favicon: string;
+  app_icon: string;
+  deleted_at?: string;
+  created_at: string;
+  updated_at: string;
+}>;
+
 //account_activation,password_reset,others
 export type Verify = {
   email: string;

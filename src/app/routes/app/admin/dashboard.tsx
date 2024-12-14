@@ -8,9 +8,9 @@ import { useAdminListings } from '@/features/listings/admin/api/get-listings';
 
 export const AdminDashboardRoute = () => {
   const user = useUser();
-  const adminListingsQuery = useAdminListings()
-  const adminListings = adminListingsQuery?.data?.data
-  console.log('this is admin dashboard')
+  const adminListingsQuery = useAdminListings();
+  const adminListings = adminListingsQuery?.data?.data;
+  console.log('this is admin dashboard');
 
   return (
     <ContentLayout title="">

@@ -107,7 +107,9 @@ export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
     // Clear expired token
     Cookies.remove('accessToken');
-    return <Navigate to={paths.auth.login.getHref(location.pathname)} replace />;
+    return (
+      <Navigate to={paths.auth.login.getHref(location.pathname)} replace />
+    );
   }
 
   if (role === 'renter') {
