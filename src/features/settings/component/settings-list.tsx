@@ -35,12 +35,12 @@ export const SettingsList = () => {
         <div className="flex w-full shrink-0 grow basis-0 flex-col items-start gap-6 px-6 py-6">
           <div className="flex w-full flex-col items-start gap-2">
             <div className="flex w-full flex-col items-start gap-2">
-              <span className=" mb-4 w-full font-raleway text-xl">
+              <span className="mb-4 w-full font-raleway text-xl">
                 Manage Site Content
               </span>
             </div>
             <div className="flex w-full flex-col items-start">
-              <div className="mb-8 grid w-full grid-cols-2 gap-4 sm:grid-cols-3">
+              <div className="mb-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
                 <div className="relative w-full">
                   <Input
                     label="App Name"
@@ -49,34 +49,18 @@ export const SettingsList = () => {
                   />
                   <button
                     type="submit"
-                    className="absolute end-0 top-[25px] h-[57%] rounded-e-sm border  bg-white px-2.5 text-sm font-medium text-white hover:bg-grey-5 focus:outline-none focus:ring-4"
+                    className="absolute end-0 top-[25px] h-[57%] rounded-e-sm border bg-white px-2.5 text-sm font-medium text-white hover:bg-grey-5 focus:outline-none focus:ring-4"
                   >
                     <EditIcon className="rounded-e-2xl" />
                     <span className="sr-only">Edit</span>
                   </button>
                 </div>
                 <div className="relative w-full">
-                  <Input label="Site Email" value={settings?.site_email} className='bg-light' />
-                  <button
-                    type="submit"
-                    className="absolute end-0 top-[25px] h-[57%] rounded-e-sm border  bg-white px-2.5 text-sm font-medium text-white hover:bg-grey-5 focus:outline-none focus:ring-4"
-                  >
-                    <EditIcon className="rounded-e-2xl" />
-                    <span className="sr-only">Edit</span>
-                  </button>
-                </div>
-                <div className="relative w-full">
-                  <Input label="Address" value={settings?.address} className='bg-light'/>
-                  <button
-                    type="submit"
-                    className="absolute end-0 top-[25px] h-[57%] rounded-e-sm border  bg-white px-2.5 text-sm font-medium text-white hover:bg-grey-5 focus:outline-none focus:ring-4"
-                  >
-                    <EditIcon className="rounded-e-2xl" />
-                    <span className="sr-only">Edit</span>
-                  </button>
-                </div>
-                <div className="relative w-full">
-                  <Input label="Site Phone" value={settings?.site_phone} className='bg-light' />
+                  <Input
+                    label="Site Email"
+                    value={settings?.site_email}
+                    className="bg-light"
+                  />
                   <button
                     type="submit"
                     className="absolute end-0 top-[25px] h-[57%] rounded-e-sm border bg-white px-2.5 text-sm font-medium text-white hover:bg-grey-5 focus:outline-none focus:ring-4"
@@ -86,7 +70,11 @@ export const SettingsList = () => {
                   </button>
                 </div>
                 <div className="relative w-full">
-                  <Input label="App Icon" value={settings?.app_icon} className='bg-light'/>
+                  <Input
+                    label="Address"
+                    value={settings?.address}
+                    className="bg-light"
+                  />
                   <button
                     type="submit"
                     className="absolute end-0 top-[25px] h-[57%] rounded-e-sm border bg-white px-2.5 text-sm font-medium text-white hover:bg-grey-5 focus:outline-none focus:ring-4"
@@ -96,7 +84,39 @@ export const SettingsList = () => {
                   </button>
                 </div>
                 <div className="relative w-full">
-                  <Input label="App Logo" value={settings?.app_logo} className='bg-light'/>
+                  <Input
+                    label="Site Phone"
+                    value={settings?.site_phone}
+                    className="bg-light"
+                  />
+                  <button
+                    type="submit"
+                    className="absolute end-0 top-[25px] h-[57%] rounded-e-sm border bg-white px-2.5 text-sm font-medium text-white hover:bg-grey-5 focus:outline-none focus:ring-4"
+                  >
+                    <EditIcon className="rounded-e-2xl" />
+                    <span className="sr-only">Edit</span>
+                  </button>
+                </div>
+                <div className="relative w-full">
+                  <Input
+                    label="App Icon"
+                    value={settings?.app_icon}
+                    className="bg-light"
+                  />
+                  <button
+                    type="submit"
+                    className="absolute end-0 top-[25px] h-[57%] rounded-e-sm border bg-white px-2.5 text-sm font-medium text-white hover:bg-grey-5 focus:outline-none focus:ring-4"
+                  >
+                    <EditIcon className="rounded-e-2xl" />
+                    <span className="sr-only">Edit</span>
+                  </button>
+                </div>
+                <div className="relative w-full">
+                  <Input
+                    label="App Logo"
+                    value={settings?.app_logo}
+                    className="bg-light"
+                  />
                   <button
                     type="submit"
                     className="absolute end-0 top-[25px] h-[57%] rounded-e-sm border bg-white px-2.5 text-sm font-medium text-white hover:bg-grey-5 focus:outline-none focus:ring-4"
@@ -109,7 +129,7 @@ export const SettingsList = () => {
                   <Input
                     label="Support Email"
                     value={settings?.support_email}
-                    className='bg-light'
+                    className="bg-light"
                   />
                   <button
                     type="submit"
@@ -120,7 +140,11 @@ export const SettingsList = () => {
                   </button>
                 </div>
                 <div className="relative w-full">
-                  <Input label="Site Favicon" value={settings?.site_favicon} className='bg-light' />
+                  <Input
+                    label="Site Favicon"
+                    value={settings?.site_favicon}
+                    className="bg-light"
+                  />
                   <button
                     type="submit"
                     className="absolute end-0 top-[25px] h-[57%] rounded-e-sm border bg-white px-2.5 text-sm font-medium text-white hover:bg-grey-5 focus:outline-none focus:ring-4"
@@ -130,7 +154,11 @@ export const SettingsList = () => {
                   </button>
                 </div>
                 <div className="relative w-full">
-                  <Input label="Site Name" value={settings?.site_name} className='bg-light'/>
+                  <Input
+                    label="Site Name"
+                    value={settings?.site_name}
+                    className="bg-light"
+                  />
                   <button
                     type="submit"
                     className="absolute end-0 top-[25px] h-[57%] rounded-e-sm border bg-white px-2.5 text-sm font-medium text-white hover:bg-grey-5 focus:outline-none focus:ring-4"
@@ -167,9 +195,7 @@ export const SettingsList = () => {
           <div className="bg-neutral-border flex h-px w-full flex-none flex-col items-center gap-2" />
           <div className="flex w-full flex-col items-start gap-2">
             <div className="flex w-full flex-col items-start gap-2">
-              <span className="text-xl  text-default-font w-full">
-                Logo
-              </span>
+              <span className="text-default-font w-full text-xl">Logo</span>
             </div>
             <div className="flex w-full items-center gap-4 px-3 py-3">
               <Switch checked={enabled} onChange={setEnabled} />
@@ -181,7 +207,7 @@ export const SettingsList = () => {
               <div className="flex w-full items-center justify-center">
                 <label
                   htmlFor="dropzone-file"
-                  className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600 dark:hover:bg-gray-800"
+                  className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100"
                 >
                   <div className="flex flex-col items-center justify-center pb-6 pt-5">
                     <svg
@@ -216,7 +242,7 @@ export const SettingsList = () => {
                 <span className="text-default-font w-full font-raleway font-bold">
                   Logo size
                 </span>
-                <span className="text-caption font-raleway text-subtext-color">
+                <span className="text-caption text-subtext-color font-raleway">
                   Use the slider to choose your logo size.
                 </span>
               </div>
@@ -237,10 +263,10 @@ export const SettingsList = () => {
                   onChange={(value) => setVal(value)}
                 />
                 <div className="flex w-full items-center justify-between">
-                  <span className="text-caption font-raleway text-subtext-color">
+                  <span className="text-caption text-subtext-color font-raleway">
                     Small
                   </span>
-                  <span className="text-caption font-raleway text-subtext-color">
+                  <span className="text-caption text-subtext-color font-raleway">
                     Large
                   </span>
                 </div>
@@ -250,9 +276,7 @@ export const SettingsList = () => {
           <div className="bg-neutral-border flex h-px w-full flex-none flex-col items-center gap-2" />
           <div className="flex w-full flex-col items-start gap-2">
             <div className="flex w-full flex-col items-start gap-2">
-              <span className="text-xl  font-raleway w-full">
-                Background
-              </span>
+              <span className="w-full font-raleway text-xl">Background</span>
             </div>
             <div className="flex w-full items-center gap-2 px-3 py-3">
               {/* <RadioGroup
