@@ -7,11 +7,16 @@ import Gallery6 from '@/assets/images/about/gallery-6.jpg';
 import Home10 from '@/assets/images/featured_properties/home10.jpg';
 import Home9 from '@/assets/images/featured_properties/home9.jpg';
 import Home7 from '@/assets/images/featured_properties/home7.jpg';
+import {
+  faBreadSlice,
+  faBuilding,
+  faHotel,
+} from '@fortawesome/free-solid-svg-icons';
 export const currencyNGN = '₦';
 export const icons = {
-  booking: 'fa fa-calendar',
-  apartment: 'fa fa-building',
-  payment: 'fa fa-credit-card',
+  Apartment: faBuilding,
+  'Bed and Breakfast': faBreadSlice,
+  Bungalow: faHotel,
 };
 export const bookingLinks = ['Bookings', 'Apartments', 'Easy Payment'];
 

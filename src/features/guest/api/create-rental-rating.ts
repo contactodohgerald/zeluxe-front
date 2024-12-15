@@ -4,14 +4,14 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
 
 export type rentalRatingType = {
-  data: any;
+  // data: any;
   rental_id: string;
   score: number;
 };
 
 export const createRentalRatingInputSchema = z.object({
-  rental_id: z.string(),
-  score: z.number().int().positive(),
+  rental_id: z.string().optional(),
+  score: z.number().int().positive().optional(),
 });
 
 export type createRentalRatingInput = z.infer<

@@ -109,3 +109,17 @@ export const formatRelativeDate = (date: Date | string): string => {
     return `${years} year${years !== 1 ? 's' : ''} ago`;
   }
 };
+
+export const formatDateToMonthDay = (dateStr: string): string => {
+  const date = new Date(dateStr);
+
+  if (isNaN(date.getTime())) {
+    throw new Error('Invalid date string');
+  }
+
+  const options: Intl.DateTimeFormatOptions = {
+    month: 'short',
+    day: 'numeric',
+  };
+  return date.toLocaleDateString('en-US', options);
+};

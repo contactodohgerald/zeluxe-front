@@ -72,7 +72,7 @@ export const BookingForm = ({ rentalId, setIsOpen }: BookingFormProps) => {
           className=""
           schema={createRentalBookingInputSchema}
           onSubmit={(values) => {
-            console.log('submit', rentalId);
+            // console.log('submit', rentalId);
             const bookingData = {
               ...values,
               rental_id: rentalId,

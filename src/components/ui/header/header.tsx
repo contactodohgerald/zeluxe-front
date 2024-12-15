@@ -1,10 +1,12 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../../assets/images/logo.png';
 import { paths } from '../../../config/paths';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useUserStore } from '@/store/user-store';
+import { useLogout } from '@/lib/auth';
+import { useNotifications } from '../notifications';
 
 const PlusIcon = 'fa fa-plus-circle';
 const linkItems = [
@@ -24,7 +26,20 @@ const linkItems = [
 export const Header = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [show, setShow] = useState(false);
-  const { isAuthenticated } = useUserStore();
+  const { isAuthenticated, setIsAuthenticated } = useUserStore();
+  const { addNotification } = useNotifications();
+  const navigate = useNavigate();
+
+  const logout = useLogout({
+    onSuccess() {
+      addNotification({
+        type: 'success',
+        title: 'success',
+        message: 'Logout successfully',
+      });
+      navigate(paths.auth.login.getHref());
+    },
+  });
   return (
     <>
       <header>
@@ -74,7 +89,7 @@ export const Header = () => {
                   </li>
                 </ul>
                 <ul className="flex flex-col lg:ml-auto lg:flex-row">
-                  {!isAuthenticated && (
+                  {!isAuthenticated ? (
                     <li className="nav-item">
                       <Link
                         className="nav-link login-button"
@@ -83,18 +98,29 @@ export const Header = () => {
                         Portal Login
                       </Link>
                     </li>
-                  )}
-                  {isAuthenticated ? (
+                  ) : (
                     <li className="nav-item">
                       <Link
-                        className="nav-link add-button text-white"
-                        to={paths.app.addListings.getHref()}
+                        className="nav-link login-button"
+                        to={'#'}
+                        onClick={() => {
+                          setIsAuthenticated(false);
+                          logout.mutate();
+                        }}
                       >
-                        <FontAwesomeIcon icon={PlusIcon as IconProp} />{' '}
-                        <span className="ml-2">Add Listing</span>
+                        Logout
                       </Link>
                     </li>
-                  ) : null}
+                  )}
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link add-button text-white"
+                      to={paths.app.addListings.getHref()}
+                    >
+                      <FontAwesomeIcon icon={PlusIcon as IconProp} />{' '}
+                      <span className="ml-2">Add Listing</span>
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </nav>

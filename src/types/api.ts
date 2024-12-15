@@ -306,7 +306,7 @@ export type Rating = Entity<{
   id: string;
   user_id: string;
   ratable_id: string;
-  score: 5;
+  score: number;
   status: string;
   deleted_at?: null;
   created_at: string;

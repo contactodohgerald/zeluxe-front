@@ -5,32 +5,28 @@ import { Footer } from '@/components/ui/footer';
 import { Link } from 'react-router-dom';
 import { Select } from '@headlessui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { bookingLinks } from '@/utils/constants';
 import { useRentals } from '@/features/guest/api/get-rentals';
 import { useStates } from '@/features/states/api/get-states';
 import { Spinner } from '@/components/ui/spinner';
 import { SearchListingForm } from '@/components/ui/search/search-listing-form';
 import { RentalsGridCard } from '@/components/ui/dashboard/cards/rentals-grid-card';
 import { Card } from 'antd';
+import { Rental } from '@/types/api';
+import { useCategories } from '@/features/category/api/get-category';
+import { icons } from '@/utils/constants';
 
 export const LandingRoute = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedState, setSelectedState] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const rentalsQuery = useRentals({});
   const rentals = rentalsQuery?.data?.data;
   const statesQuery = useStates();
   const states = statesQuery?.data?.data;
+  const categoriesQuery = useCategories();
+  const categories = categoriesQuery?.data?.data;
 
-  // console.log(rentals?.data?.data);
-
-  if (statesQuery.isLoading) {
-    return (
-      <div className="flex h-48 w-full items-center justify-center">
-        <Spinner size="lg" />
-      </div>
-    );
-  }
-  if (rentalsQuery.isLoading) {
+  if (statesQuery.isLoading || rentalsQuery.isLoading) {
     return (
       <div className="flex h-48 w-full items-center justify-center">
         <Spinner size="lg" />
@@ -38,13 +34,43 @@ export const LandingRoute = () => {
     );
   }
 
-  if (!rentals || rentals?.length === 0) {
+  if (rentals?.length === 0) {
     return (
       <div className="flex min-h-screen w-full items-center justify-center p-12">
         <Card>No items to display in this category</Card>
       </div>
     );
   }
+  const handleStateSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedState(e.target.value);
+    setSelectedCategory(null);
+  };
+  const handleCategorySelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCategory(e.target.value);
+    setSelectedState(null);
+  };
+
+  const filterRentals = (
+    rentals: Rental[],
+    state: string | null,
+    category: string | null,
+  ) => {
+    let filtered = rentals;
+    if (state) {
+      filtered = filtered?.filter(
+        (rental) => rental?.address.state_id === state,
+      );
+    }
+    if (category) {
+      filtered = filtered?.filter((rental) => rental?.category_id === category);
+    }
+    return filtered;
+  };
+  const displayedRentals = filterRentals(
+    rentals as Rental[],
+    selectedState,
+    selectedCategory,
+  );
 
   return (
     <>
@@ -67,19 +93,33 @@ export const LandingRoute = () => {
                   {/* <div className="flex justify-center py-24 mt-4 space-x-4"> */}
                   <div className="short-popular-category-list text-center">
                     <ul className="inline-flex space-x-4 pl-0">
-                      {bookingLinks.map((icon, idx) => (
+                      {categories?.slice(0, 3)?.map((category, idx) => (
                         <Link
                           key={idx}
                           to="#"
+                          onClick={() => {
+                            setSelectedCategory(category?.id);
+                          }}
                           className="flex items-center space-x-1 border border-[#404040] px-2.5 py-[4px] text-[12px] font-[200] text-[#c1c1c1] hover:underline"
                         >
                           <FontAwesomeIcon
-                            //  icon={icons[icon as keyof typeof icons] as IconProp}
-                            icon={'fa fa-credit-card' as IconProp}
+                            icon={icons[category?.name as keyof typeof icons]}
+                            // icon={'fa fa-credit-card' as IconProp}
                           />
-                          <span>{icon}</span>
+                          <span>{category?.name}</span>
                         </Link>
                       ))}
+                      <Select
+                        onChange={handleCategorySelect}
+                        className="explore max-w-[162px] cursor-pointer appearance-none rounded-[0.25rem] border border-[#404040] bg-transparent py-[0.375rem] pl-[0.75rem] pr-[1.75rem] text-[#c1c1c1] outline-none hover:border-[#545b62] focus:outline-none"
+                      >
+                        <option>More Category</option>
+                        {categories?.slice(3)?.map((option) => (
+                          <option key={option.id} value={option.id}>
+                            {option.name}
+                          </option>
+                        ))}
+                      </Select>
                     </ul>
                   </div>
                 </div>
@@ -101,13 +141,20 @@ export const LandingRoute = () => {
                   key={state?.id}
                   to={''}
                   className={`${activeIndex === idx ? 'text-green-5 underline' : 'text-black-6'} p-4`}
-                  onClick={() => setActiveIndex(idx)}
+                  onClick={() => {
+                    setActiveIndex(idx);
+                    setSelectedState(state?.id);
+                    setSelectedCategory(null);
+                  }}
                 >
                   {state?.name}
                 </Link>
               ))}
               <div className="flex items-center text-gray-700">
-                <Select className="explore max-w-[162px] cursor-pointer appearance-none rounded-[0.25rem] border-none bg-[#6c757d] px-[1.75rem] py-[0.375rem] text-white outline-none hover:border-[#545b62] hover:bg-[#5a6268] focus:outline-none">
+                <Select
+                  onChange={handleStateSelect}
+                  className="explore max-w-[162px] cursor-pointer appearance-none rounded-[0.25rem] border-none bg-[#6c757d] px-[1.75rem] py-[0.375rem] text-white outline-none hover:border-[#545b62] hover:bg-[#5a6268] focus:outline-none"
+                >
                   <option>Explore More</option>
                   {states?.slice(11).map((option) => (
                     <option key={option.id} value={option.id}>
@@ -117,7 +164,11 @@ export const LandingRoute = () => {
                 </Select>
               </div>
             </div>
-            <RentalsGridCard rentals={rentals} />
+            {displayedRentals && displayedRentals?.length > 0 ? (
+              <RentalsGridCard rentals={displayedRentals} />
+            ) : (
+              <div>No rentals match the selected filters</div>
+            )}
           </div>
         </section>
       </main>
