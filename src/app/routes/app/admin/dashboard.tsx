@@ -58,28 +58,32 @@ export const AdminDashboardRoute = () => {
                 onSubmit={handleSearch}
                 className="flex items-center"
               >
-                {/* {({ register, formState }) => ( */}
-                {({ register, formState }) => (
+                {({ register, formState, watch }) => (
                   <>
                     <label htmlFor="voice-search" className="sr-only">
                       Search
                     </label>
                     <div className="relative w-full">
-                      <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                        <SearchIcon className="h-[1.1rem] w-[1.1rem] text-primary" />
+                      <div className="absolute inset-y-0 left-0 flex items-center pl-3">
+                        <SearchIcon
+                          aria-required="true"
+                          onClick={() =>
+                            handleSearch({ keyword: watch('keyword') })
+                          }
+                          className="h-[1.1rem] w-[1.1rem] cursor-pointer text-primary"
+                        />
                       </div>
                       <Input
-                        registration={register('keyword')}
-                        error={formState.errors['keyword']}
                         type="text"
-                        id="voice-search"
                         className="block w-full rounded-[0.32rem] border-[0.1px] border-none border-primary bg-light bg-transparent p-2.5 py-[0.92rem] pl-10 font-raleway text-sm text-secondary shadow-none outline-none outline-primary placeholder:text-[#B1B1B1] focus:border-primary focus:ring-primary"
                         placeholder="Search House, Apartment, etc"
-                        required
+                        registration={register('keyword')}
+                        error={formState.errors['keyword']}
                         style={{
                           backgroundColor: 'transparent',
                           border: '0 !important',
                         }}
+                        required
                       />
                       <div className="absolute inset-y-3 right-20 h-[30.77px] border-r border-[#A1A5C1]" />
                       <Button
