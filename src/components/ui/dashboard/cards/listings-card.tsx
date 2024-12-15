@@ -21,72 +21,74 @@ export const ListingsCard = ({ listing }: ListingCardListProps) => {
   const [show, setShow] = useState(false);
   // console.log('listingsCard', listing);
   return (
-    <div className="flex h-[17.3rem] flex-col items-start justify-start rounded-[1.87rem] bg-light pb-[1.2rem] pl-[0.6rem] pr-[0.6rem] pt-[0.6rem] shadow-card md:w-[12rem]">
-      <div className="relative h-[12rem] rounded-[1.1rem] md:w-[10.8rem]">
-        <Button
-          onClick={() => setShow(!show)}
-          className={`absolute right-[0.54rem] top-[0.54rem] ${show ? 'bg-primary' : 'bg-[#FFFFFFC7]'} flex h-[1.68rem] w-[1.68rem] items-center justify-center rounded-full`}
-        >
-          <HeartIcon className={`${show ? 'text-white' : 'text-primary'}`} />
-        </Button>
-        <img
-          src={listing.images[0].url || CardImg}
-          className="h-[12rem] w-[10.8rem] rounded-[1.1rem]"
-          alt="Listing Images"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.onerror = null;
-            target.src = CardImg;
-          }}
-        />
-        <div className="absolute left-[3.07rem] top-[9.55rem] flex h-[1.67rem] w-[7.1rem] justify-center rounded-[0.54rem] bg-primary py-[0.34rem] text-white backdrop-blur-[8.605196952819824px] backdrop-filter">
-          <p className="text-start font-montserrat text-[14.35px] font-semibold leading-[17.49px] -tracking-[0.03em] text-[#F5F4F8]">
-            {currencyNGN}
-            {Number(listing.price)}
-          </p>
-        </div>
-      </div>
-      <div className="px-[0.7rem]">
-        <div className="mt-[0.75rem] max-w-[10rem] md:mb-[0.75rem]">
-          <h4
-            className={`font-raleway text-[0.89rem] ${listing?.name.length > 10 ? 'overflow-hidden text-ellipsis' : ' '} text-nowrap font-bold leading-[1.4rem] tracking-[0.03em] text-black`}
+    <Link to={paths.app.myListings.getHref()}>
+      <div className="flex h-[17.3rem] flex-col items-start justify-start rounded-[1.87rem] bg-light pb-[1.2rem] pl-[0.6rem] pr-[0.6rem] pt-[0.6rem] shadow-card md:w-[12rem]">
+        <div className="relative h-[12rem] rounded-[1.1rem] md:w-[10.8rem]">
+          <Button
+            onClick={() => setShow(!show)}
+            className={`absolute right-[0.54rem] top-[0.54rem] ${show ? 'bg-primary' : 'bg-[#FFFFFFC7]'} flex h-[1.68rem] w-[1.68rem] items-center justify-center rounded-full`}
           >
-            {listing.name}
-          </h4>
-        </div>
-        <div className="flex flex-col md:flex-row md:items-center">
-          {listing?.ratings?.map((rating: Rating) => (
-            <div key={rating?.id} className="mr-[0.5rem] flex items-center">
-              {Array(rating?.score)
-                .fill(null)
-                .map((_, index) => (
-                  <img
-                    key={index}
-                    src={StarIcon}
-                    alt=""
-                    className="h-[10.76px] w-[10.76px]"
-                  />
-                ))}
-              <p className="ml-1 font-montserrat text-[0.6rem] font-[700] leading-[0.6rem] text-primary">
-                {rating?.score || 0}
-              </p>
-            </div>
-          ))}
-
-          <div className="flex items-center gap-x-1">
-            <img
-              src={LocationIcon}
-              alt=""
-              className="h-[10.76px] w-[10.76px]"
-            />
-            <p className="font-raleway text-[0.6rem] font-[400] leading-[0.7rem]">
-              {/* {location} */}
-              {listing.address.nearest_landmark}
+            <HeartIcon className={`${show ? 'text-white' : 'text-primary'}`} />
+          </Button>
+          <img
+            src={listing.images[0].url || CardImg}
+            className="h-[12rem] w-[10.8rem] rounded-[1.1rem]"
+            alt="Listing Images"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.onerror = null;
+              target.src = CardImg;
+            }}
+          />
+          <div className="absolute left-[3.07rem] top-[9.55rem] flex h-[1.67rem] w-[7.1rem] justify-center rounded-[0.54rem] bg-primary py-[0.34rem] text-white backdrop-blur-[8.605196952819824px] backdrop-filter">
+            <p className="text-start font-montserrat text-[14.35px] font-semibold leading-[17.49px] -tracking-[0.03em] text-[#F5F4F8]">
+              {currencyNGN}
+              {Number(listing.price)}
             </p>
           </div>
         </div>
+        <div className="px-[0.7rem]">
+          <div className="mt-[0.75rem] max-w-[10rem] md:mb-[0.75rem]">
+            <h4
+              className={`font-raleway text-[0.89rem] ${listing?.name.length > 10 ? 'overflow-hidden text-ellipsis' : ' '} text-nowrap font-bold leading-[1.4rem] tracking-[0.03em] text-black`}
+            >
+              {listing.name}
+            </h4>
+          </div>
+          <div className="flex flex-col md:flex-row md:items-center">
+            {listing?.ratings?.map((rating: Rating) => (
+              <div key={rating?.id} className="mr-[0.5rem] flex items-center">
+                {Array(rating?.score)
+                  .fill(null)
+                  .map((_, index) => (
+                    <img
+                      key={index}
+                      src={StarIcon}
+                      alt=""
+                      className="h-[10.76px] w-[10.76px]"
+                    />
+                  ))}
+                <p className="ml-1 font-montserrat text-[0.6rem] font-[700] leading-[0.6rem] text-primary">
+                  {rating?.score || 0}
+                </p>
+              </div>
+            ))}
+
+            <div className="flex items-center gap-x-1">
+              <img
+                src={LocationIcon}
+                alt=""
+                className="h-[10.76px] w-[10.76px]"
+              />
+              <p className="font-raleway text-[0.6rem] font-[400] leading-[0.7rem]">
+                {/* {location} */}
+                {listing.address.nearest_landmark}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

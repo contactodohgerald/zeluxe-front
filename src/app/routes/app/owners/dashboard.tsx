@@ -1,16 +1,43 @@
 import { ContentLayout } from '@/components/layouts';
 import { ListingsCard } from '@/components/ui/dashboard/cards/listings-card';
-import { Form } from '@/components/ui/form';
-import { loginInputSchema, useUser } from '@/lib/auth';
+import { Form, Input } from '@/components/ui/form';
+import { useUser } from '@/lib/auth';
 import { Tabs } from '@/components/ui/dashboard/tabs';
 import { SearchIcon } from '@/components/ui/svgs/search-icon';
 import { useListings } from '@/features/listings/owners/api/get-listings';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import {
+  searchRentalsInputSchema,
+  useSearchRental,
+} from '@/features/guest/api/search-rentals';
+import { paths } from '@/config/paths';
 
 export const DashboardRoute = () => {
   const user = useUser();
   const listingQuery = useListings();
   const listings = listingQuery?.data?.data;
-  console.log('This is owner dashboard');
+  const navigate = useNavigate();
+  const searchMutation = useSearchRental();
+  const [searchParams] = useSearchParams();
+  const redirectTo = searchParams.get('redirectTo');
+
+  const handleSearch = (values: { keyword: string }) => {
+    const searchData = { keyword: values.keyword };
+
+    searchMutation.mutate(
+      {
+        data: searchData,
+      },
+      {
+        onSuccess(response) {
+          navigate(
+            `${redirectTo ? `${redirectTo}` : paths.app.search.getHref()}`,
+            { state: { rentals: response?.data } },
+          );
+        },
+      },
+    );
+  };
 
   return (
     <ContentLayout title="">
@@ -26,28 +53,36 @@ export const DashboardRoute = () => {
 
             <div>
               <Form
-                onSubmit={() => {}}
-                schema={loginInputSchema}
+                schema={searchRentalsInputSchema}
+                onSubmit={handleSearch}
                 className="flex items-center"
               >
-                {/* {({ register, formState }) => ( */}
-                {({}) => (
+                {({ register, formState, watch }) => (
                   <>
                     <label htmlFor="voice-search" className="sr-only">
                       Search
                     </label>
                     <div className="relative w-full">
-                      <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                        <SearchIcon className="h-[1.1rem] w-[1.1rem] text-primary" />
+                      <div className="absolute inset-y-0 left-0 flex items-center pl-3">
+                        <SearchIcon
+                          onClick={() =>
+                            handleSearch({ keyword: watch('keyword') })
+                          }
+                          className="h-[1.1rem] w-[1.1rem] cursor-pointer text-primary"
+                        />
                       </div>
-                      <input
-                        //  error={formState.errors['email']}
-                        //  registration={register('email')}
+                      <Input
+                        registration={register('keyword')}
+                        error={formState.errors['keyword']}
                         type="text"
                         id="voice-search"
-                        className="block w-full rounded-[0.32rem] border-[0.84px] border-primary bg-light p-2.5 py-[0.92rem] pl-10 font-raleway text-sm text-secondary outline-primary placeholder:text-[#B1B1B1] focus:border-primary focus:ring-primary"
+                        className="block w-full rounded-[0.32rem] border-[0.1px] border-none border-primary bg-light bg-transparent p-2.5 py-[0.92rem] pl-10 font-raleway text-sm text-secondary shadow-none outline-none outline-primary placeholder:text-[#B1B1B1] focus:border-primary focus:ring-primary"
                         placeholder="Search House, Apartment, etc"
                         required
+                        style={{
+                          backgroundColor: 'transparent',
+                          border: '0 !important',
+                        }}
                       />
                       <div className="absolute inset-y-2 right-20 h-[30.77px] border-r border-[#A1A5C1]" />
                       <button
@@ -78,14 +113,7 @@ export const DashboardRoute = () => {
             <div className="mt-3">
               <Tabs />
             </div>
-            {/* Tab */}
-            {/* Featured Rentals */}
-            {/* <div className="mt-[1.63rem]">
-              <FeaturedRentals rentals={rentals as Rental[]} />
-            </div> */}
-            {/* Featured Rentals */}
           </div>
-          {/* <div className="mt-4 lg:mt-0 lg:pl-[13.94rem]"> */}
           <div className="mt-4 lg:mt-0 lg:pl-[5.94rem]">
             <div className="mb-[1.5rem]">
               <p className="font-lato text-[1.35rem] font-medium leading-[25.82px] tracking-[3%] text-primary">

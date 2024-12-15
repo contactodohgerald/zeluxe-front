@@ -10,7 +10,7 @@ export const DashboardLayout = ({
   useScrollToTop();
   const [show, setShow] = useState(false);
   return (
-    <div className="bg-green-gradient">
+    <div className="relative bg-green-gradient">
       <Sidebar show={show} />
       <div className="pl-3 pr-3 pt-[1.6rem] md:pl-[1.4rem] lg:pl-[14.4rem] lg:pr-[2.75rem]">
         {/* <div className="pl-3 lg:pl-[14.4rem] pt-[1.6rem] pr-3"> */}
@@ -21,7 +21,7 @@ export const DashboardLayout = ({
             {show && (
               <div
                 onClick={() => setShow(false)}
-                className="absolute bottom-0 left-0 right-0 top-0 h-full w-full bg-[rgba(0_0_0/0.3)]"
+                className="absolute inset-0 bg-[rgba(0_0_0/0.3)]"
               ></div>
             )}
           </main>
