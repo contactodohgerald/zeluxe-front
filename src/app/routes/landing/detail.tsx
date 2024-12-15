@@ -347,13 +347,16 @@ export const LandingDetailRoute = () => {
                                 </div>
                               ))}
                             </div>
-                            <Link
-                              to={'#'}
-                              onClick={() => setIsRatingOpen(true)}
-                              className="cursor-pointer font-montserrat underline"
-                            >
-                              Ratings
-                            </Link>
+                            {isAuthenticated &&
+                            user?.data?.id !== rental?.owner_id ? (
+                              <Link
+                                to={'#'}
+                                onClick={() => setIsRatingOpen(true)}
+                                className="cursor-pointer font-montserrat underline"
+                              >
+                                Ratings
+                              </Link>
+                            ) : null}
                           </div>
                           <div className="flex h-8 w-px flex-none flex-col items-center gap-2 bg-neutral-300" />
                           <div className="flex shrink-0 grow basis-0 flex-col items-center justify-center">
