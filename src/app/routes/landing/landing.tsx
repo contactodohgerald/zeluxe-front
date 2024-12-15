@@ -92,7 +92,7 @@ export const LandingRoute = () => {
                   </p>
                   {/* <div className="flex justify-center py-24 mt-4 space-x-4"> */}
                   <div className="short-popular-category-list text-center">
-                    <ul className="inline-flex space-x-4 pl-0">
+                    <ul className="inline-flex flex-wrap pl-3 sm:flex-nowrap sm:space-x-4 sm:pl-0">
                       {categories?.slice(0, 3)?.map((category, idx) => (
                         <Link
                           key={idx}
@@ -100,18 +100,18 @@ export const LandingRoute = () => {
                           onClick={() => {
                             setSelectedCategory(category?.id);
                           }}
-                          className="flex items-center space-x-1 border border-[#404040] px-2.5 py-[4px] text-[12px] font-[200] text-[#c1c1c1] hover:underline"
+                          className="mb-3 mr-2 flex items-center space-x-1 border border-[#404040] px-2.5 py-[4px] text-[12px] font-[200] text-[#c1c1c1] hover:underline sm:mr-0"
                         >
                           <FontAwesomeIcon
                             icon={icons[category?.name as keyof typeof icons]}
-                            // icon={'fa fa-credit-card' as IconProp}
+                            className="hidden"
                           />
                           <span>{category?.name}</span>
                         </Link>
                       ))}
                       <Select
                         onChange={handleCategorySelect}
-                        className="explore max-w-[162px] cursor-pointer appearance-none rounded-[0.25rem] border border-[#404040] bg-transparent py-[0.375rem] pl-[0.75rem] pr-[1.75rem] text-[#c1c1c1] outline-none hover:border-[#545b62] focus:outline-none"
+                        className="explore max-w-[120px] cursor-pointer appearance-none rounded-[0.25rem] border border-[#404040] bg-transparent py-[0.375rem] pl-[0.5rem] pr-[1.75rem] text-[12px] text-[#c1c1c1] outline-none hover:border-[#545b62] focus:outline-none sm:max-w-[162px] sm:pl-[0.75rem]"
                       >
                         <option>More Category</option>
                         {categories?.slice(3)?.map((option) => (

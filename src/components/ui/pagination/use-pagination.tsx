@@ -13,17 +13,17 @@ export const Pagination = ({
 }: PaginationProps) => {
   const totalPages = Math.ceil(totalEntries / pageSize);
 
-//   const handlePrev = () => {
-//     if (currentPage > 1) {
-//       onPageChange(currentPage - 1);
-//     }
-//   };
+  //   const handlePrev = () => {
+  //     if (currentPage > 1) {
+  //       onPageChange(currentPage - 1);
+  //     }
+  //   };
 
-//   const handleNext = () => {
-//     if (currentPage < totalPages) {
-//       onPageChange(currentPage + 1);
-//     }
-//   };
+  //   const handleNext = () => {
+  //     if (currentPage < totalPages) {
+  //       onPageChange(currentPage + 1);
+  //     }
+  //   };
 
   const pageNumbers = Array.from(
     { length: totalPages },
