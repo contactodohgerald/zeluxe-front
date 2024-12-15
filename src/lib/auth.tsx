@@ -95,7 +95,8 @@ export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     // If no token or the token is expired, remove the expired token and redirect to login
     if (!token) {
       console.log('No valid token found or token expired.');
-      Cookies.remove('accessToken'); // Remove the expired or invalid token
+      Cookies.remove('accessToken');
+      localStorage.clear();
     }
   }, [token]);
 
@@ -107,6 +108,7 @@ export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
     // Clear expired token
     Cookies.remove('accessToken');
+    localStorage.clear();
     return (
       <Navigate to={paths.auth.login.getHref(location.pathname)} replace />
     );

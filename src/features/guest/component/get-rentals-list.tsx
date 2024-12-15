@@ -7,11 +7,15 @@ import { useNotifications } from '@/components/ui/notifications';
 import { useState } from 'react';
 import { formatErrors } from '@/lib/utils';
 import { Rental } from '@/types/api';
+import { Pagination } from '@/components/ui/pagination/use-pagination';
 
 export const GetRentalsList = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
   const rentalQuery = useRentals();
   const [filteredResult, setFilteredResult] = useState<Rental[]>([]);
   const rentals = rentalQuery?.data?.data;
+
   const { addNotification } = useNotifications();
   const filterRentalMutation = useFilterRental({
     mutationConfig: {
@@ -53,9 +57,19 @@ export const GetRentalsList = () => {
     );
   }
 
+  const isFiltered = filteredResult.length > 0;
   const listings = rentalQuery?.data?.data;
+  const currentListings = isFiltered
+    ? filteredResult?.slice(
+        (currentPage - 1) * pageSize,
+        currentPage * pageSize,
+      )
+    : rentals?.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+  const totalEntries = isFiltered
+    ? filteredResult?.length
+    : rentals?.length || 0;
 
-  if (!listings || listings.length === 0) {
+  if (!listings && !isFiltered) {
     return (
       <Card>
         <p>You have no Rentals Yet</p>
@@ -70,18 +84,35 @@ export const GetRentalsList = () => {
     );
   }
 
+  if (totalEntries === 0) {
+    return (
+      <Card>
+        <p>You have no Rentals Yet</p>
+      </Card>
+    );
+  }
+
   if (filterRentalMutation.isPending) {
   }
 
   return (
     <>
+      <div className="mb-[15px] mt-5 w-full rounded-[3.92px] border border-light bg-[#F9F9F9] px-5 py-[11.25px]">
+        <Pagination
+          currentPage={currentPage}
+          totalEntries={totalEntries}
+          pageSize={pageSize}
+          onPageChange={setCurrentPage}
+        />
+      </div>
       <div className="flex flex-col gap-[1.3rem] lg:flex-row">
         <div>
-          {filteredResult.length > 0 ? (
+          {/* {isFiltered ? (
             <RentalsCard rentals={filteredResult} />
           ) : (
             <RentalsCard rentals={rentals as Rental[]} />
-          )}
+          )} */}
+          <RentalsCard rentals={currentListings as Rental[]} />
         </div>
         <div>
           <AdvanceFilter filterRentalMutation={filterRentalMutation} />

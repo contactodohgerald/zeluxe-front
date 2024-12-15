@@ -4,14 +4,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
 
 export type rentalReviewType = {
-  data: any;
   rental_id: string;
   comment: string;
 };
 
 export const createRentalReviewInputSchmema = z.object({
-  rental_id: z.string(),
-  comment: z.string().min(5, 'comment must be atleast 5 characters'),
+  rental_id: z.string().optional(),
+  comment: z.string().min(5, 'comment must be atleast 5 characters').optional(),
 });
 
 export type createRentalReviewInput = z.infer<
