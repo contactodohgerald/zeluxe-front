@@ -4,7 +4,7 @@ import StarIcon from '../../../../assets/images/card/small-star.svg';
 import { HeartIcon } from '../../svgs';
 import { Button } from '@headlessui/react';
 import { useState } from 'react';
-import { Active, Rental } from '@/types/api';
+import { Active, Rating, Rental } from '@/types/api';
 import { currencyNGN } from '@/utils/constants';
 import { Card } from 'antd';
 import Image1 from '../../../../assets/images/card/list-1.jpeg';
@@ -55,13 +55,24 @@ export const ListingsCard = ({ listing }: ListingCardListProps) => {
           </h4>
         </div>
         <div className="flex flex-col md:flex-row md:items-center">
-          <div className="mr-[0.5rem] flex items-center gap-x-1">
-            <img src={StarIcon} alt="" className="h-[10.76px] w-[10.76px]" />
-            <p className="font-montserrat text-[0.6rem] font-[700] leading-[0.6rem] text-primary">
-              {/* {rating} */}
-              {/* {listing.ratings} */} 4.8
-            </p>
-          </div>
+          {listing?.ratings?.map((rating: Rating) => (
+            <div key={rating?.id} className="mr-[0.5rem] flex items-center">
+              {Array(rating?.score)
+                .fill(null)
+                .map((_, index) => (
+                  <img
+                    key={index}
+                    src={StarIcon}
+                    alt=""
+                    className="h-[10.76px] w-[10.76px]"
+                  />
+                ))}
+              <p className="ml-1 font-montserrat text-[0.6rem] font-[700] leading-[0.6rem] text-primary">
+                {rating?.score || 0}
+              </p>
+            </div>
+          ))}
+
           <div className="flex items-center gap-x-1">
             <img
               src={LocationIcon}

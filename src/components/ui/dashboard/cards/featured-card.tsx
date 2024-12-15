@@ -1,10 +1,11 @@
-import { Rental } from '@/types/api';
+import { Rating, Rental } from '@/types/api';
 import RentalImg1 from '../../../../assets/images/card/listings-4.png';
 // import RentalImg2 from '../../../../assets/images/card/listings-5.png'
 import StarIcon from '../../../../assets/images/card/small-star.svg';
 import LocationIcon from '../../../../assets/images/location.svg';
 import { currencyNGN } from '@/utils/constants';
 import { onError } from '@/lib/utils';
+import React from 'react';
 export const FeaturedCard = ({ rental }: { rental: Rental }) => {
   return (
     <div className="flex h-[9.6rem] items-center rounded-[1.54rem] border-[0.99px] border-primary bg-light px-[0.5rem]">
@@ -22,12 +23,21 @@ export const FeaturedCard = ({ rental }: { rental: Rental }) => {
             {/* Treasure Court Apartments */}
             {rental.name}
           </h6>
-          <div className="flex items-center">
-            <img src={StarIcon} alt="" className="mr-1" />
-            <p className="font-montserrat text-[7.88px] font-bold leading-[7.88px] text-black">
-              4.9
-            </p>
-          </div>
+          {rental?.ratings?.map((rating: Rating) => (
+            <div key={rating?.id} className="mb-1 flex items-center">
+              {Array(rating?.score)
+                .fill(null)
+                .map((_, index) => (
+                  <React.Fragment key={index}>
+                    <img src={StarIcon} alt="" className="" />
+                  </React.Fragment>
+                ))}
+              <p className="ml-1 mt-[3px] font-montserrat text-[7.88px] font-bold leading-[7.88px] text-black">
+                {rating?.score || 0}
+              </p>
+            </div>
+          ))}
+
           <div className="flex items-center">
             <img src={LocationIcon} alt="" className="h-[8.87px] w-[8.87px]" />
             <p className="font-raleway text-[7.88px] font-[400] leading-[9.25px] text-black">
