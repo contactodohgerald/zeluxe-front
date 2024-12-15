@@ -104,7 +104,6 @@ export const LandingRoute = () => {
                         >
                           <FontAwesomeIcon
                             icon={icons[category?.name as keyof typeof icons]}
-                            className="hidden"
                           />
                           <span>{category?.name}</span>
                         </Link>
