@@ -146,7 +146,7 @@ export const Header = () => {
           </li>
         </ul>
         <ul className="flex flex-col space-y-2 md:ml-auto md:flex-row">
-          {!isAuthenticated && (
+          {/* {!isAuthenticated && (
             <li className="">
               <Link
                 className="nav-link login-button w-[200px]"
@@ -155,18 +155,39 @@ export const Header = () => {
                 Portal Login
               </Link>
             </li>
-          )}
-          {isAuthenticated ? (
-            <li className="">
+          )} */}
+          {!isAuthenticated ? (
+            <li className="mt-[6px]">
               <Link
-                className="nav-link add-button w-[200px] text-white"
-                to={paths.app.addListings.getHref()}
+                className="nav-link login-button w-[200px]"
+                to={paths.auth.login.getHref()}
               >
-                <FontAwesomeIcon icon={PlusIcon as IconProp} />{' '}
-                <span className="ml-2">Add Listing</span>
+                Portal Login
               </Link>
             </li>
-          ) : null}
+          ) : (
+            <li className="">
+              <Link
+                className="nav-link login-button w-[200px]"
+                to={'#'}
+                onClick={() => {
+                  setIsAuthenticated(false);
+                  logout.mutate();
+                }}
+              >
+                Logout
+              </Link>
+            </li>
+          )}
+          <li className="">
+            <Link
+              className="nav-link add-button w-[200px] text-white"
+              to={paths.app.addListings.getHref()}
+            >
+              <FontAwesomeIcon icon={PlusIcon as IconProp} />{' '}
+              <span className="ml-2">Add Listing</span>
+            </Link>
+          </li>
         </ul>
       </div>
       {/* Mobile Menu End */}

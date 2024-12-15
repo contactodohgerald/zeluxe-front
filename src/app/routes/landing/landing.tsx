@@ -111,7 +111,7 @@ export const LandingRoute = () => {
                       ))}
                       <Select
                         onChange={handleCategorySelect}
-                        className="explore mb-3 mr-2 flex items-center space-x-1 bg-transparent outline-none appearance-none focus:outline-none border border-[#404040] px-2.5 py-[4px] text-[12px] font-[200] text-[#c1c1c1] hover:underline sm:mr-0"
+                        className="explore mb-3 mr-2 flex appearance-none items-center space-x-1 border border-[#404040] bg-transparent px-2.5 py-[4px] text-[12px] font-[200] text-[#c1c1c1] outline-none hover:underline focus:outline-none sm:mr-0"
                       >
                         <option>More Category</option>
                         {categories?.slice(3)?.map((option) => (
