@@ -90,7 +90,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
         {/* Already have an account?{' '} */}
         Don't have an account?{' '}
         <Link
-          to={paths.auth.register.getHref(redirectTo)}
+          to={paths.auth.chooseAccount.getHref(redirectTo)}
           className="text-primary-600 dark:text-primary-500 font-medium hover:underline"
         >
           {/* Login here */}

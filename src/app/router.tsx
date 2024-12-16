@@ -47,10 +47,28 @@ export const createAppRouter = (_queryClient: QueryClient) =>
       },
     },
     {
-      path: paths.auth.register.path,
+      path: paths.auth.chooseAccount.path,
+      lazy: async () => {
+        const { ChooseAccountRoute } = await import(
+          './routes/auth/choose-account'
+        );
+        return { Component: ChooseAccountRoute };
+      },
+    },
+    {
+      path: paths.auth.renter.path,
       lazy: async () => {
         const { RegisterRoute } = await import('./routes/auth/register');
         return { Component: RegisterRoute };
+      },
+    },
+    {
+      path: paths.auth.owner.path,
+      lazy: async () => {
+        const { RegisterOwnerRoute } = await import(
+          './routes/auth/register-owner'
+        );
+        return { Component: RegisterOwnerRoute };
       },
     },
     {

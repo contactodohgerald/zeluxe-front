@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Form, Input } from '@/components/ui/form';
 import { useNotifications } from '@/components/ui/notifications';
 import { paths } from '@/config/paths';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   sendOtpInputSchema,
   useSendVerification,
@@ -20,6 +20,7 @@ export const VerifyOtpRoute = () => {
   const redirectTo = paths.auth.login.getHref();
   const email = useUserStore((state) => state.email);
   const [otp, setOtp] = useState('');
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const verifyRegistrationMutation = useSendVerification({
     mutationConfig: {
@@ -35,7 +36,7 @@ export const VerifyOtpRoute = () => {
         const formattedErrors = formatErrors(error);
         addNotification({
           type: 'error',
-          title: `Validation Error`,
+          title: error?.message,
           message: formattedErrors,
         });
       },
@@ -48,6 +49,9 @@ export const VerifyOtpRoute = () => {
     otpArray[index] = value;
     setOtp(otpArray.join(''));
     // console.log(value);
+    if (value && index < 4) {
+      inputRefs.current[index + 1]?.focus();
+    }
   };
 
   const handleSubmit = () => {
@@ -94,7 +98,8 @@ export const VerifyOtpRoute = () => {
                       {[...Array(5)].map((_, index) => (
                         <Input
                           key={index}
-                          className="flex h-16 w-16 items-center justify-center rounded-xl border border-gray-200 bg-white text-center text-lg outline-none ring-blue-700 focus:bg-gray-50 focus:ring-1"
+                          ref={(el) => (inputRefs.current[index] = el)}
+                          className="flex h-16 w-16 items-center justify-center rounded-xl border border-gray-200 bg-white text-center text-lg outline-none focus:border focus:border-primary focus:bg-gray-50 focus:ring-1"
                           type="text"
                           maxLength={1}
                           aria-label={`OTP digit ${index + 1}`}
