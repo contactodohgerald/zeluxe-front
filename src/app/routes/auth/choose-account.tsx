@@ -14,27 +14,27 @@ export const ChooseAccountRoute = () => {
             Choose an Account Type
           </h1>
           <Link to={paths.auth.owner.getHref()}>
-            <Card className="mb-6 w-[500px] p-8 text-center shadow-md hover:border hover:border-primary">
+            <Card className="mb-6 w-full md:w-[500px] p-8 text-center shadow-md hover:border hover:border-primary">
               <div className="flex items-center gap-4">
                 <FontAwesomeIcon
                   icon={faCashRegister}
-                  className="text-3xl text-primary"
+                  className="text-xl md:text-3xl text-primary"
                 />
-                <p className="text-xl font-semibold leading-3 tracking-normal">
+                <p className="text-xl font-semibold lg:leading-3 tracking-normal">
                   Register as a Property Owner
                 </p>
               </div>
             </Card>
           </Link>
           <Link to={paths.auth.renter.getHref()}>
-            <Card className="font-poppins mb-4 w-[500px] p-8 text-center shadow-md hover:border hover:border-primary">
+            <Card className="font-poppins mb-4 w-full md:w-[500px] p-8 text-center shadow-md hover:border hover:border-primary">
               <div className="flex items-center gap-4">
                 <FontAwesomeIcon
                   icon={faPerson}
-                  className="text-3xl text-primary"
+                  className="text-xl md:text-3xl text-primary"
                 />
                 <div>
-                  <p className="text-xl font-semibold leading-3 tracking-normal">
+                  <p className="text-xl font-semibold lg:leading-3 tracking-normal">
                     Register as an Individual
                   </p>
                   <p className="mt-1 font-medium text-grey-5">
