@@ -5,6 +5,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { paths } from '@/config/paths';
 import { useSettings } from '@/features/settings/api/get-settings';
 import { Spinner } from '../spinner';
+import { useUserStore } from '@/store/user-store';
 
 const icons = {
   home: 'fas fa-home',
@@ -71,6 +72,7 @@ const ContactInfo = ({
 export const Footer = () => {
   const settingQuery = useSettings();
   const settings = settingQuery?.data?.data;
+  const { isAuthenticated } = useUserStore();
 
   if (settingQuery.isLoading) {
     return (
@@ -96,8 +98,15 @@ export const Footer = () => {
             title="Products"
             links={[
               { label: 'Apartments', to: '#!' },
-              { label: 'Register', to: paths.auth.register.getHref() },
-              { label: 'Login', to: paths.auth.login.getHref() },
+              ...(isAuthenticated
+                ? []
+                : [
+                    {
+                      label: 'Register',
+                      to: paths.auth.chooseAccount.getHref(),
+                    },
+                    { label: 'Login', to: paths.auth.login.getHref() },
+                  ]),
             ]}
           />
           {/* Useful Links Section */}

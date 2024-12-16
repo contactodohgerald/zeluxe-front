@@ -21,6 +21,21 @@ export const paths = {
   },
 
   auth: {
+    chooseAccount: {
+      path: '/auth/choose-account',
+      getHref: (redirectTo?: string | null | undefined) =>
+        `/auth/choose-account${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ''}`,
+    },
+    owner: {
+      path: '/auth/owner/register',
+      getHref: (redirectTo?: string | null | undefined) =>
+        `/auth/owner/register${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ''}`,
+    },
+    renter: {
+      path: '/auth/renter/register',
+      getHref: (redirectTo?: string | null | undefined) =>
+        `/auth/renter/register${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ''}`,
+    },
     register: {
       path: '/auth/register',
       getHref: (redirectTo?: string | null | undefined) =>

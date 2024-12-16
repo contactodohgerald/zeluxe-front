@@ -6,8 +6,6 @@ import { useNotifications } from '@/components/ui/notifications';
 
 export const RegisterRoute = () => {
   const navigate = useNavigate();
-  // const [searchParams] = useSearchParams();
-  // const redirectTo = searchParams.get('redirectTo');
   const { addNotification } = useNotifications();
 
   return (

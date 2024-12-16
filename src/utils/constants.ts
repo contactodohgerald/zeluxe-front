@@ -212,6 +212,10 @@ export const listingTypes = [
   { label: 'sale', value: 'sale' },
   { label: 'lease', value: 'lease' },
 ];
+export const genderTypes = [
+  { label: 'male', value: 'male' },
+  { label: 'female', value: 'female' },
+];
 
 export const categoryItems = [
   'All',

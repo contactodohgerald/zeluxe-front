@@ -16,6 +16,7 @@ import React from 'react';
 import { useLogout, useUser } from '@/lib/auth';
 import { useNotifications } from '../../notifications';
 import { useUserStore } from '@/store/user-store';
+import { BookingSvg } from '../../svgs/booking';
 
 type SideNavigationItem = {
   id: number;
@@ -93,7 +94,7 @@ export const Sidebar = ({ show }: SidebarProps) => {
     {
       id: 5,
       name: 'My Bookings',
-      icon: RentalsIcon,
+      icon: BookingSvg,
       to: paths.app.bookings.getHref(),
     },
     {

@@ -24,12 +24,11 @@ const getUser = async (): Promise<User | null> => {
 const logout = async (): Promise<void> => {
   try {
     await api.post('/auth/logout');
-    // Clear authentication data
     Cookies.remove('accessToken');
     localStorage.removeItem('user');
   } catch (error) {
     console.error('Error during logout:', error);
-    throw error; // Allow `useLogout` to handle the error
+    throw error;
   }
 };
 
