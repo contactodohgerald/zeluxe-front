@@ -31,7 +31,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
                 const formattedErrors = formatErrors(error);
                 addNotification({
                   type: 'error',
-                  title: `Validation Error`,
+                  title: error?.message,
                   message: formattedErrors,
                 });
               },

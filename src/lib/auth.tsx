@@ -39,7 +39,11 @@ export const loginInputSchema = z.object({
 
 export type LoginInput = z.infer<typeof loginInputSchema>;
 const loginWithEmailAndPassword = (data: LoginInput): Promise<AuthResponse> => {
-  return api.post('/auth/login', data);
+  const loginData = {
+    ...data,
+    email: data.email.toLowerCase(),
+  };
+  return api.post('/auth/login', loginData);
 };
 
 export const registerInputSchema = z.object({
