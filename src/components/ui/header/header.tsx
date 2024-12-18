@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from '../../../assets/images/logo.png';
 import { paths } from '../../../config/paths';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +6,8 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useUserStore } from '@/store/user-store';
 import { useLogout } from '@/lib/auth';
 import { useNotifications } from '../notifications';
+import { useSettings } from '@/features/settings/api/get-settings';
+import { Spinner } from '../spinner';
 
 const PlusIcon = 'fa fa-plus-circle';
 const linkItems = [
@@ -29,6 +30,17 @@ export const Header = () => {
   const { isAuthenticated, setIsAuthenticated } = useUserStore();
   const { addNotification } = useNotifications();
   const navigate = useNavigate();
+  const settingQuery = useSettings();
+  const settings = settingQuery?.data?.data;
+  console.log(settings);
+
+  if (settingQuery.isLoading) {
+    return (
+      <div className="flex items-center justify-center w-full h-48">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
 
   const logout = useLogout({
     onSuccess() {
@@ -43,22 +55,26 @@ export const Header = () => {
   return (
     <>
       <header>
-        <div className="container mx-auto px-4 py-2">
+        <div className="container px-4 py-2 mx-auto">
           <div className="flex items-center justify-between">
             <nav className="navigation relative flex w-full flex-wrap items-center justify-between px-4 py-[0.5rem]">
               <Link className="flex-shrink-0" to={paths.home.getHref()}>
-                <img src={Logo} alt="zeluxe homes" className="h-10" />
+                <img
+                  src={settings?.site_logo}
+                  alt="Dnest homes"
+                  className="h-10"
+                />
               </Link>
               <button
                 onClick={() => setShow(!show)}
                 type="button"
-                className="inline-flex h-10 w-14 items-center justify-center rounded-lg border p-2 text-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 lg:hidden"
+                className="inline-flex items-center justify-center h-10 p-2 text-sm text-gray-500 border rounded-lg w-14 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 lg:hidden"
                 aria-controls="navbar-default"
                 aria-expanded="false"
               >
                 <span className="sr-only">Open main menu</span>
                 <svg
-                  className="h-5 w-5"
+                  className="w-5 h-5"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -114,7 +130,7 @@ export const Header = () => {
                   )}
                   <li className="nav-item">
                     <Link
-                      className="nav-link add-button text-white"
+                      className="text-white nav-link add-button"
                       to={paths.app.addListings.getHref()}
                     >
                       <FontAwesomeIcon icon={PlusIcon as IconProp} />{' '}

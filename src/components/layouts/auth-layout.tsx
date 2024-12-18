@@ -5,7 +5,6 @@ import { paths } from '@/config/paths';
 import { Head } from '../seo';
 import { Header } from '../ui/header';
 import { Footer } from '../ui/footer';
-import { getTokenFromCookie } from '@/lib/utils';
 import { useUser } from '@/lib/auth';
 
 type LayoutProps = {
@@ -14,37 +13,22 @@ type LayoutProps = {
 };
 export const AuthLayout = ({ children, title }: LayoutProps) => {
   const [searchParams] = useSearchParams();
-  // const token = getTokenFromCookie();
-  const [role, setRole] = React.useState<string | null>(null);
-  const token = getTokenFromCookie();
   const user = useUser();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (token) {
-      try {
-        const role = user?.data?.role?.name;
-        setRole(role);
-      } catch (error) {
-        console.error('Error decoding token or determining role:', error);
-        navigate(paths.auth.login.getHref(), { replace: true });
-      }
-    }
-  }, [token, navigate]);
-
-  useEffect(() => {
-    if (role) {
+    if (user?.data?.role?.name) {
       const redirectTo =
         searchParams.get('redirectTo') ||
-        (role === 'owner'
+        (user?.data?.role?.name === 'owner'
           ? paths.app.ownerDashboard.getHref()
-          : role === 'admin'
+          : user?.data?.role?.name === 'admin'
             ? paths.app.adminDashboard.getHref()
             : paths.home.getHref());
 
       navigate(redirectTo, { replace: true });
     }
-  }, [role, navigate, searchParams]);
+  }, [user, navigate, searchParams]);
 
   return (
     <>

@@ -63,7 +63,7 @@ export const BookingView = ({ bookingId }: { bookingId: string }) => {
   }
 
   const booking = bookingQuery?.data?.data;
-  console.log('booking', booking);
+  // console.log('booking', booking);
 
   if (!booking || booking?.length === 0) {
     return (

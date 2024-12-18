@@ -3,7 +3,7 @@ import React from 'react';
 export const BookingSvg = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
-      style={{width:'13px',height:'14px'}}
+      style={{ width: '13px', height: '14px' }}
       {...props}
       version="1.0"
       xmlns="http://www.w3.org/2000/svg"
