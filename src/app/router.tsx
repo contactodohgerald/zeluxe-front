@@ -6,6 +6,7 @@ import { paths } from '@/config/paths';
 import { useMemo } from 'react';
 import { AppRoot, AppRootErrorBoundary } from './routes/app/root';
 import { ProtectedRoute } from '@/lib/auth';
+import { ErrorBoundary } from './routes/error';
 
 export const createAppRouter = (_queryClient: QueryClient) =>
   createBrowserRouter([
@@ -15,6 +16,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
         const { LandingRoute } = await import('./routes/landing/landing');
         return { Component: LandingRoute };
       },
+      errorElement: <ErrorBoundary />,
     },
     {
       path: paths.homeDetail.path,
@@ -22,6 +24,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
         const { LandingDetailRoute } = await import('./routes/landing/detail');
         return { Component: LandingDetailRoute };
       },
+      errorElement: <ErrorBoundary />,
     },
     {
       path: paths.search.path,
@@ -44,6 +47,20 @@ export const createAppRouter = (_queryClient: QueryClient) =>
       lazy: async () => {
         const { ContactRoute } = await import('./routes/landing/contact-us');
         return { Component: ContactRoute };
+      },
+    },
+    {
+      path: paths.privacy.path,
+      lazy: async () => {
+        const { PrivacyRoute } = await import('./routes/landing/privacy');
+        return { Component: PrivacyRoute };
+      },
+    },
+    {
+      path: paths.terms.path,
+      lazy: async () => {
+        const { TermsRoute } = await import('./routes/landing/terms');
+        return { Component: TermsRoute };
       },
     },
     {

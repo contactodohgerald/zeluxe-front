@@ -19,6 +19,14 @@ export const paths = {
     path: '/contact-us',
     getHref: () => '/contact-us',
   },
+  privacy: {
+    path: '/privacy',
+    getHref: () => '/privacy',
+  },
+  terms: {
+    path: '/terms',
+    getHref: () => '/terms',
+  },
 
   auth: {
     chooseAccount: {

@@ -1,4 +1,3 @@
-import Logo from '../../../assets/images/logo.png';
 import { Link } from '../link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -6,27 +5,7 @@ import { paths } from '@/config/paths';
 import { useSettings } from '@/features/settings/api/get-settings';
 import { Spinner } from '../spinner';
 import { useUserStore } from '@/store/user-store';
-
-const icons = {
-  home: 'fas fa-home',
-  envelope: 'fas fa-envelope',
-  phone: 'fas fa-phone-alt',
-  facebook: 'fab fa-facebook',
-  twitter: 'fab fa-twitter',
-  google: 'fab fa-google',
-  instagram: 'fab fa-instagram',
-  linkedin: 'fab fa-linkedin',
-  github: 'fab fa-github',
-};
-
-const socialIcons = [
-  'facebook',
-  'twitter',
-  'google',
-  'instagram',
-  'linkedin',
-  'github',
-];
+import { footerIcons, socialicons } from '@/utils/constants';
 
 const FooterSection = ({
   title,
@@ -35,10 +14,10 @@ const FooterSection = ({
   title: string;
   links: { to: string; label: string }[];
 }) => (
-  <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 text-center">
+  <div className="mx-auto mb-4 text-center col-md-2 col-lg-2 col-xl-2">
     <h6 className="mb-4 uppercase text-[#008000]">{title}</h6>
     {links.map(({ label, to }: { label: string; to: string }) => (
-      <p key={label} className="mb-4 mt-0">
+      <p key={label} className="mt-0 mb-4">
         <Link to={to}>{label}</Link>
       </p>
     ))}
@@ -76,18 +55,22 @@ export const Footer = () => {
 
   if (settingQuery.isLoading) {
     return (
-      <div className="flex h-48 w-full items-center justify-center">
+      <div className="flex items-center justify-center w-full h-48">
         <Spinner size="lg" />
       </div>
     );
   }
   return (
-    <footer className="bg-body-tertiary custom-footer text-center text-muted lg:text-start">
+    <footer className="text-center bg-body-tertiary custom-footer text-muted lg:text-start">
       <div className="container mx-auto mt-2 px-[15px] text-center md:text-start">
-        <div className="-mx-3 mt-3 flex flex-wrap">
+        <div className="flex flex-wrap mt-3 -mx-3">
           {/* Logo and Description */}
-          <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 text-center">
-            <img src={Logo} alt="Logo" className="mx-auto mb-4 h-10" />
+          <div className="mx-auto mb-4 text-center col-md-3 col-lg-4 col-xl-3">
+            <img
+              src={settings?.site_logo}
+              alt="Logo"
+              className="h-10 mx-auto mb-4"
+            />
             <p className="text-grey-5">
               Our goal is to offer a home away from home experience, with the
               convenience of hotel-like services.
@@ -113,28 +96,28 @@ export const Footer = () => {
           <FooterSection
             title="Useful Links"
             links={[
-              { label: 'Terms', to: '/terms' },
-              { label: 'Privacy', to: '/privacy' },
+              { label: 'Terms', to: paths.terms.getHref() },
+              { label: 'Privacy', to: paths.privacy.getHref() },
             ]}
           />
           {/* Contact Section */}
-          <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-4 text-center">
+          <div className="mx-auto mb-4 text-center col-md-4 col-lg-3 col-xl-3">
             <h6 className="mb-4 uppercase" style={{ color: 'green' }}>
               Contact
             </h6>
             <ContactInfo
-              icon={icons.home}
+              icon={footerIcons.home}
               text={`${settings?.address}`}
               link={'#'}
             />
             <ContactInfo
-              icon={icons.envelope}
+              icon={footerIcons.envelope}
               // text="support@zeluxe.ng"
               text={`${settings?.site_email}`}
               link={`mailto:${settings?.support_email}`}
             />
             <ContactInfo
-              icon={icons.phone}
+              icon={footerIcons.phone}
               text={`${settings?.site_phone}`}
               link="#"
             />
@@ -142,17 +125,16 @@ export const Footer = () => {
         </div>
       </div>
       {/* Social Media Links */}
-      <div className="border-t border-gray-200 py-3">
-        <div className="flex justify-center space-x-4 p-2">
-          {socialIcons.map((icon) => (
+      <div className="py-3 border-t border-gray-200">
+        <div className="flex justify-center p-2 space-x-4">
+          {socialicons.map((icon) => (
             <Link
-              key={icon}
-              to="#"
+              target="_blank"
+              key={icon.name}
+              to={icon.link}
               className="text-gray-600 hover:text-gray-800"
             >
-              <FontAwesomeIcon
-                icon={icons[icon as keyof typeof icons] as IconProp}
-              />
+              <FontAwesomeIcon icon={icon.name as IconProp} />
             </Link>
           ))}
         </div>

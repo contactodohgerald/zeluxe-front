@@ -21,6 +21,7 @@ type MyListingsTabCardProps = {
 };
 export const MyListingsTabCard = ({ listings }: MyListingsTabCardProps) => {
   const { addNotification } = useNotifications();
+  console.log('listings', listings);
   const publish = usePublishListing({
     mutationConfig: {
       onSuccess: () => {

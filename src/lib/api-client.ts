@@ -6,10 +6,6 @@ import { useNotifications } from '../components/ui/notifications';
 import Cookies from 'js-cookie';
 
 function authRequestInterceptor(config: InternalAxiosRequestConfig) {
-  // const token = document.cookie
-  //   .split(';')
-  //   .find((row) => row.startsWith('accessToken='))
-  //   ?.split('=')[1];
   const token = Cookies.get('accessToken');
   if (config.headers) {
     config.headers.Accept = 'application/json';

@@ -219,6 +219,7 @@ export const CreateListing = () => {
               <Textarea
                 label="Listing Description"
                 className="bg-light"
+                rows={4}
                 error={formState.errors['description']}
                 registration={register('description')}
               />

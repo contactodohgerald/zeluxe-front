@@ -1,7 +1,7 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { paths } from '@/config/paths';
 import LogoImg from '@/assets/images/logo.png';
-import ProfileImg from '@/assets/images/dashboard_profile.jpeg';
+import AvatarImg from '@/assets/images/user_avatar.jpg';
 import { cn } from '@/utils/cn';
 import {
   DashBoardIcon,
@@ -118,7 +118,7 @@ export const Sidebar = ({ show }: SidebarProps) => {
     {
       id: 7,
       name: `${user?.data?.first_name}`,
-      icon: ProfileImg,
+      icon: AvatarImg,
       to: paths.app.profile.getHref(),
     },
     {

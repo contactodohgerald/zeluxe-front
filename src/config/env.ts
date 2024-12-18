@@ -8,7 +8,7 @@ const createEnv = () => {
       .refine((s) => s === 'true' || s === 'false')
       .transform((s) => s === 'true')
       .optional(),
-    APP_URL: z.string().optional().default('https://api.zeluxe.ng'),
+    APP_URL: z.string().optional().default('https://api.dnest.ng'),
     APP_MOCK_API_PORT: z.string().optional().default('8080'),
   });
   const envVars = Object.entries(import.meta.env).reduce<

@@ -247,3 +247,51 @@ export const categoryItems = [
   'Villa',
   'Yurt',
 ];
+
+export const footerIcons = {
+  home: 'fas fa-home',
+  envelope: 'fas fa-envelope',
+  phone: 'fas fa-phone-alt',
+  facebook: 'fab fa-facebook',
+  twitter: 'fab fa-twitter',
+  google: 'fab fa-google',
+  instagram: 'fab fa-instagram',
+  linkedin: 'fab fa-linkedin',
+  github: 'fab fa-github',
+};
+
+// export const socialIcons = [
+//   'facebook',
+//   'twitter',
+//   'google',
+//   'instagram',
+//   'linkedin',
+//   'github',
+// ];
+
+export const socialicons = [
+  {
+    name: 'fab fa-facebook',
+    link: 'https://www.facebook.com/share/1DuyQ8EvPt/?mibextid=wwXIfr',
+  },
+  {
+    name: 'fab fa-twitter',
+    link: 'https://twitter.com/zeltechng',
+  },
+  {
+    name: 'fab fa-google',
+    link: '#',
+  },
+  {
+    name: 'fab fa-instagram',
+    link: '#',
+  },
+  {
+    name: 'fab fa-linkedin',
+    link: '#',
+  },
+  {
+    name: 'fab fa-github',
+    link: '#',
+  },
+];

@@ -4,7 +4,7 @@ import {
   PopoverButton,
   PopoverPanel,
 } from '@headlessui/react';
-import ProfileImg from '../../../assets/images/dashboard_profile.jpeg';
+import AvatarImg from '@/assets/images/user_avatar.jpg';
 import AngleRightSvg from '../../../assets/svgs/dash_angle_right.svg';
 import { LogoutIcon } from '../svgs/logout-icon';
 import { Divider } from 'antd';
@@ -45,7 +45,7 @@ export const PopOver = ({ content }: { content: string }) => {
       <PopoverButton className="flex w-[16.94rem] items-center justify-evenly rounded-[2.1rem] pb-[0.75rem] pl-1 pr-[1.31rem] pt-[0.68rem] shadow-profile focus:outline-none">
         <div>
           <img
-            src={ProfileImg}
+            src={AvatarImg}
             className="h-[31px] w-[31px] rounded-full object-center"
             alt=""
           />
