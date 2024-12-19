@@ -106,7 +106,7 @@ export const ProfileTabs = ({ listings, rentals }: ProfileProps) => {
           <Grid4Icon className="" />
         </Button>
         <Link
-          to={paths.app.addListings.getHref()}
+          to={paths.app.owner.addListings.getHref()}
           className="flex h-10 w-10 items-center justify-center rounded-full bg-primary"
         >
           <FontAwesomeIcon icon={faAdd} className="text-white" />

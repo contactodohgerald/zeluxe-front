@@ -12,7 +12,7 @@ export const BookingsCards = ({ bookings }: { bookings: RentalBooking[] }) => {
           key={booking?.id}
         >
           <Link
-            to={paths.app.booking.getHref(booking?.id)}
+            to={paths.app.owner.booking.getHref(booking?.id)}
             className="relative inline-block w-full transform transition-transform duration-300 ease-in-out hover:text-primary"
           >
             <div className="rounded-lg">

@@ -13,15 +13,23 @@ import { VerifiedIcon } from '../../svgs/verified-icon';
 import { TelephoneIcon } from '../../svgs/telephone-icon';
 import { onError } from '@/lib/utils';
 import { paths } from '@/config/paths';
+import { useUser } from '@/lib/auth';
 
 export type ListingCardListProps = {
   listing: Active;
 };
 export const ListingsCard = ({ listing }: ListingCardListProps) => {
+  const user = useUser();
   const [show, setShow] = useState(false);
   // console.log('listingsCard', listing);
   return (
-    <Link to={paths.app.myListings.getHref()}>
+    <Link
+      to={
+        user?.data?.role?.name === 'admin'
+          ? paths.app.admin.listings.getHref()
+          : paths.app.owner.myListings.getHref()
+      }
+    >
       <div className="flex h-[17.3rem] flex-col items-start justify-start rounded-[1.87rem] bg-light pb-[1.2rem] pl-[0.6rem] pr-[0.6rem] pt-[0.6rem] shadow-card md:w-[12rem]">
         <div className="relative h-[12rem] rounded-[1.1rem] md:w-[10.8rem]">
           <Button
@@ -124,10 +132,23 @@ export const ListingsRowCard = ({ listing }: ListingCardListProps) => {
           </div>
           {/* <div className=""> */}
           <div className="mb-[0.7rem] flex items-center gap-x-1">
-            <img src={StarIcon} alt="" className="h-[10.76px] w-[10.76px]" />
-            <p className="font-montserrat text-[0.6rem] font-[700] leading-[0.6rem] text-primary">
-              {/* {listing.ratings} */} 4.2
-            </p>
+            {listing?.ratings?.map((rating: Rating) => (
+              <div key={rating?.id} className="flex items-center space-x-1">
+                {Array(rating?.score)
+                  .fill(null)
+                  .map((_, index) => (
+                    <img
+                      key={index}
+                      src={StarIcon}
+                      alt=""
+                      className="h-[10.76px] w-[10.76px]"
+                    />
+                  ))}
+                <p className="font-montserrat text-[0.6rem] font-[700] leading-[0.6rem] text-primary">
+                  {rating?.score || 0}
+                </p>
+              </div>
+            ))}
           </div>
           <div className="flex items-center gap-x-1">
             <img

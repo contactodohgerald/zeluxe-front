@@ -52,7 +52,7 @@ export const UpdateListing = ({ listingId }: { listingId: string }) => {
           title: 'success',
           message: 'Listing Updated Successfully',
         });
-        navigate(paths.app.myListings.getHref());
+        navigate(paths.app.owner.myListings.getHref());
       },
       onError: (error) => {
         const formattedErrors = formatErrors(error);

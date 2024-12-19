@@ -14,10 +14,10 @@ const FooterSection = ({
   title: string;
   links: { to: string; label: string }[];
 }) => (
-  <div className="mx-auto mb-4 text-center col-md-2 col-lg-2 col-xl-2">
+  <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 text-center">
     <h6 className="mb-4 uppercase text-[#008000]">{title}</h6>
     {links.map(({ label, to }: { label: string; to: string }) => (
-      <p key={label} className="mt-0 mb-4">
+      <p key={label} className="mb-4 mt-0">
         <Link to={to}>{label}</Link>
       </p>
     ))}
@@ -55,21 +55,21 @@ export const Footer = () => {
 
   if (settingQuery.isLoading) {
     return (
-      <div className="flex items-center justify-center w-full h-48">
+      <div className="flex h-48 w-full items-center justify-center">
         <Spinner size="lg" />
       </div>
     );
   }
   return (
-    <footer className="text-center bg-body-tertiary custom-footer text-muted lg:text-start">
+    <footer className="bg-body-tertiary custom-footer text-center text-muted lg:text-start">
       <div className="container mx-auto mt-2 px-[15px] text-center md:text-start">
-        <div className="flex flex-wrap mt-3 -mx-3">
+        <div className="-mx-3 mt-3 flex flex-wrap">
           {/* Logo and Description */}
-          <div className="mx-auto mb-4 text-center col-md-3 col-lg-4 col-xl-3">
+          <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 text-center">
             <img
               src={settings?.site_logo}
               alt="Logo"
-              className="h-10 mx-auto mb-4"
+              className="mx-auto mb-4 h-10"
             />
             <p className="text-grey-5">
               Our goal is to offer a home away from home experience, with the
@@ -101,7 +101,7 @@ export const Footer = () => {
             ]}
           />
           {/* Contact Section */}
-          <div className="mx-auto mb-4 text-center col-md-4 col-lg-3 col-xl-3">
+          <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-4 text-center">
             <h6 className="mb-4 uppercase" style={{ color: 'green' }}>
               Contact
             </h6>
@@ -125,8 +125,8 @@ export const Footer = () => {
         </div>
       </div>
       {/* Social Media Links */}
-      <div className="py-3 border-t border-gray-200">
-        <div className="flex justify-center p-2 space-x-4">
+      <div className="border-t border-gray-200 py-3">
+        <div className="flex justify-center space-x-4 p-2">
           {socialicons.map((icon) => (
             <Link
               target="_blank"

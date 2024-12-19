@@ -41,6 +41,7 @@ export const Sidebar = ({ show }: SidebarProps) => {
   const { setIsAuthenticated } = useUserStore();
   const { addNotification } = useNotifications();
   const navigate = useNavigate();
+  const user = useUser();
   const logout = useLogout({
     onSuccess() {
       addNotification({
@@ -53,28 +54,32 @@ export const Sidebar = ({ show }: SidebarProps) => {
       });
     },
   });
-  const user = useUser();
+
   const mainNavItems = [
     {
       id: 1,
       name: 'Dashboard',
       // icon: LayoutDashboardIcon,
       icon: DashBoardIcon,
-      to: `${user?.data?.role?.name === 'owner' ? paths.app.ownerDashboard.getHref() : paths.app.adminDashboard.getHref()}`,
+      to: `${user?.data?.role?.name === 'owner' ? paths.app.owner.dashboard.getHref() : paths.app.admin.dashboard.getHref()}`,
     },
-    {
-      id: 2,
-      name: 'Add Listings',
-      icon: ListingsIcon,
-      to: paths.app.addListings.getHref(),
-    },
+    ...(user?.data?.role?.name === 'owner'
+      ? [
+          {
+            id: 2,
+            name: 'Add Listings',
+            icon: ListingsIcon,
+            to: paths.app.owner.addListings.getHref(),
+          },
+        ]
+      : []),
     ...(user?.data?.role?.name === 'admin'
       ? [
           {
             id: 3,
             name: 'My Listings',
             icon: MyListingsIcon,
-            to: paths.app.adminListings.getHref(),
+            to: paths.app.admin.listings.getHref(),
           },
         ]
       : [
@@ -82,7 +87,7 @@ export const Sidebar = ({ show }: SidebarProps) => {
             id: 3,
             name: 'My Listings',
             icon: MyListingsIcon,
-            to: paths.app.myListings.getHref(),
+            to: paths.app.owner.myListings.getHref(),
           },
         ]),
     {
@@ -95,32 +100,57 @@ export const Sidebar = ({ show }: SidebarProps) => {
       id: 5,
       name: 'My Bookings',
       icon: BookingSvg,
-      to: paths.app.bookings.getHref(),
+      to:
+        user?.data?.role?.name === 'admin'
+          ? paths.app.admin.bookings.getHref()
+          : paths.app.owner.bookings.getHref(),
     },
-    {
-      id: 6,
-      name: 'Reviews',
-      icon: ReviewsIcon,
-      to: paths.app.reviews.getHref(),
-    },
+    ...(user?.data?.role?.name === 'admin'
+      ? [
+          {
+            id: 6,
+            name: 'Reviews',
+            icon: ReviewsIcon,
+            to: paths.app.admin.reviews.getHref(),
+          },
+        ]
+      : [
+          {
+            id: 6,
+            name: 'Reviews',
+            icon: ReviewsIcon,
+            to: paths.app.owner.reviews.getHref(),
+          },
+        ]),
     ...(user?.data?.role?.name === 'admin'
       ? [
           {
             id: 7,
             name: 'Settings',
             icon: SettingsIcon,
-            to: paths.app.settings.getHref(),
+            to: paths.app.admin.settings.getHref(),
           },
         ]
       : []),
   ].filter(Boolean) as SideNavigationItem[];
   const bottomNavItems = [
-    {
-      id: 7,
-      name: `${user?.data?.first_name}`,
-      icon: AvatarImg,
-      to: paths.app.profile.getHref(),
-    },
+    ...(user?.data?.role?.name === 'admin'
+      ? [
+          {
+            id: 7,
+            name: `${user?.data?.first_name}`,
+            icon: AvatarImg,
+            to: paths.app.admin.profile.getHref(),
+          },
+        ]
+      : [
+          {
+            id: 7,
+            name: `${user?.data?.first_name}`,
+            icon: AvatarImg,
+            to: paths.app.owner.profile.getHref(),
+          },
+        ]),
     {
       id: 8,
       name: 'Log out',

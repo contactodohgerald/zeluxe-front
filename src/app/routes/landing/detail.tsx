@@ -821,7 +821,7 @@ export const ListingReview = ({
           <p className="text-sm text-gray-500">{location}</p>
         </div>
         <div className="mb-2 text-sm text-gray-500">
-          <p>{date}</p>
+          <p className="font-bold text-secondary">{date}</p>
           <p>{desc}</p>
         </div>
         <p className="text-sm text-gray-700">{review}</p>

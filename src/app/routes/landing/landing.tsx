@@ -27,7 +27,7 @@ export const LandingRoute = () => {
 
   if (statesQuery.isLoading || rentalsQuery.isLoading) {
     return (
-      <div className="flex items-center justify-center w-full h-48">
+      <div className="flex h-48 w-full items-center justify-center">
         <Spinner size="lg" />
       </div>
     );
@@ -76,11 +76,11 @@ export const LandingRoute = () => {
       <Head description="Welcome to Zeluxe Listings Home Page" />
       <Header />
       <main>
-        <div className="text-center hero-area bg-1 overly">
+        <div className="hero-area bg-1 overly text-center">
           <div className="container mx-auto">
             <div className="row">
-              <div className="relative col-md-12">
-                <div className="mx-2 content-block md:mx-0">
+              <div className="col-md-12 relative">
+                <div className="content-block mx-2 md:mx-0">
                   <h1 className="text-[35px] font-bold">
                     Find Your Perfect Stay.
                   </h1>
@@ -90,7 +90,7 @@ export const LandingRoute = () => {
                     the convenience and comfort of our apartments worldwide.
                   </p>
                   {/* <div className="flex justify-center py-24 mt-4 space-x-4"> */}
-                  <div className="text-center short-popular-category-list">
+                  <div className="short-popular-category-list text-center">
                     <ul className="inline-flex flex-wrap pl-3 sm:flex-nowrap sm:space-x-4 sm:pl-0">
                       {categories?.slice(0, 3)?.map((category, idx) => (
                         <Link
@@ -121,7 +121,7 @@ export const LandingRoute = () => {
                     </ul>
                   </div>
                 </div>
-                <div className="mx-8 advance-search md:mx-0">
+                <div className="advance-search mx-8 md:mx-0">
                   <div className="container mx-auto">
                     <SearchListingForm />
                   </div>
@@ -133,7 +133,7 @@ export const LandingRoute = () => {
         <section className="px-[10px] py-[100px] text-center">
           <h2 className="mb-4 text-[32px] text-black-6">Featured Apartments</h2>
           <div className="container mx-auto">
-            <div className="flex flex-wrap pb-4 border-b">
+            <div className="flex flex-wrap border-b pb-4">
               {states?.slice(0, 11).map((state, idx) => (
                 <Link
                   key={state?.id}

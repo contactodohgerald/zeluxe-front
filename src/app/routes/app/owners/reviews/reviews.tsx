@@ -1,5 +1,5 @@
 import { ContentLayout } from '@/components/layouts';
-import { RentalReviewsList } from '@/features/reviews/component/reviews-list';
+import { RentalReviewsList } from '@/features/reviews/owners/component/reviews-list';
 
 export const ReviewsRoute = () => {
   return (

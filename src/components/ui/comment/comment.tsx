@@ -30,9 +30,9 @@ export const CommentForm = ({ rentalId }: { rentalId: string }) => {
   });
 
   return (
-    <section className="bg-white py-8 antialiased dark:bg-gray-900 lg:py-16">
-      <div className="mx-auto max-w-2xl px-4">
-        <div className="mb-6 flex items-center justify-between">
+    <section className="w-full bg-white py-8 antialiased dark:bg-gray-900 lg:py-16">
+      <div className="mx-auto max-w-2xl">
+        <div className="mb-6 flex items-center lg:justify-between">
           <h2 className="text-lg font-bold text-gray-900 dark:text-white lg:text-2xl">
             Post a Comment
           </h2>

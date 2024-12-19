@@ -7,7 +7,7 @@ import { useUserStore } from '@/store/user-store';
 import { useLogout } from '@/lib/auth';
 import { useNotifications } from '../notifications';
 import { useSettings } from '@/features/settings/api/get-settings';
-import { Spinner } from '../spinner';
+// import { Spinner } from '../spinner';
 
 const PlusIcon = 'fa fa-plus-circle';
 const linkItems = [
@@ -31,17 +31,6 @@ export const Header = () => {
   const { addNotification } = useNotifications();
   const navigate = useNavigate();
   const settingQuery = useSettings();
-  const settings = settingQuery?.data?.data;
-  console.log(settings);
-
-  if (settingQuery.isLoading) {
-    return (
-      <div className="flex items-center justify-center w-full h-48">
-        <Spinner size="lg" />
-      </div>
-    );
-  }
-
   const logout = useLogout({
     onSuccess() {
       addNotification({
@@ -52,10 +41,12 @@ export const Header = () => {
       navigate(paths.auth.login.getHref());
     },
   });
+
+  const settings = settingQuery?.data?.data;
   return (
     <>
       <header>
-        <div className="container px-4 py-2 mx-auto">
+        <div className="container mx-auto px-4 py-2">
           <div className="flex items-center justify-between">
             <nav className="navigation relative flex w-full flex-wrap items-center justify-between px-4 py-[0.5rem]">
               <Link className="flex-shrink-0" to={paths.home.getHref()}>
@@ -68,13 +59,13 @@ export const Header = () => {
               <button
                 onClick={() => setShow(!show)}
                 type="button"
-                className="inline-flex items-center justify-center h-10 p-2 text-sm text-gray-500 border rounded-lg w-14 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 lg:hidden"
+                className="inline-flex h-10 w-14 items-center justify-center rounded-lg border p-2 text-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 lg:hidden"
                 aria-controls="navbar-default"
                 aria-expanded="false"
               >
                 <span className="sr-only">Open main menu</span>
                 <svg
-                  className="w-5 h-5"
+                  className="h-5 w-5"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -130,8 +121,8 @@ export const Header = () => {
                   )}
                   <li className="nav-item">
                     <Link
-                      className="text-white nav-link add-button"
-                      to={paths.app.addListings.getHref()}
+                      className="nav-link add-button text-white"
+                      to={paths.app.owner.addListings.getHref()}
                     >
                       <FontAwesomeIcon icon={PlusIcon as IconProp} />{' '}
                       <span className="ml-2">Add Listing</span>
@@ -162,16 +153,6 @@ export const Header = () => {
           </li>
         </ul>
         <ul className="flex flex-col space-y-2 md:ml-auto md:flex-row">
-          {/* {!isAuthenticated && (
-            <li className="">
-              <Link
-                className="nav-link login-button w-[200px]"
-                to={paths.auth.login.getHref()}
-              >
-                Portal Login
-              </Link>
-            </li>
-          )} */}
           {!isAuthenticated ? (
             <li className="mt-[6px]">
               <Link
@@ -187,8 +168,8 @@ export const Header = () => {
                 className="nav-link login-button w-[200px]"
                 to={'#'}
                 onClick={() => {
-                  setIsAuthenticated(false);
                   logout.mutate();
+                  setIsAuthenticated(false);
                 }}
               >
                 Logout
@@ -198,7 +179,7 @@ export const Header = () => {
           <li className="">
             <Link
               className="nav-link add-button w-[200px] text-white"
-              to={paths.app.addListings.getHref()}
+              to={paths.app.owner.addListings.getHref()}
             >
               <FontAwesomeIcon icon={PlusIcon as IconProp} />{' '}
               <span className="ml-2">Add Listing</span>
