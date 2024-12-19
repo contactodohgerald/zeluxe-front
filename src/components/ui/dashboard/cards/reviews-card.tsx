@@ -5,12 +5,14 @@ import { RentalReview } from '@/types/api';
 import { formatRelativeDate } from '@/lib/utils';
 import { paths } from '@/config/paths';
 import userAvatar from '@/assets/images/user_avatar.jpg';
+import { useUser } from '@/lib/auth';
 
 export const ReviewsCard = ({
   rentalReviews,
 }: {
   rentalReviews: RentalReview[];
 }) => {
+  const user = useUser();
   // console.log('rentalReviews', rentalReviews);
   return (
     <>
@@ -55,7 +57,11 @@ export const ReviewsCard = ({
                 {/* footer */}
                 <div className="absolute bottom-[1.2rem]">
                   <Link
-                    to={paths.app.review.getHref(review?.id)}
+                    to={
+                      user?.data?.role?.name === 'admin'
+                        ? paths.app.admin.review.getHref(review?.id)
+                        : paths.app.owner.review.getHref(review?.id)
+                    }
                     className="font-raleway text-[0.68rem] font-semibold leading-[1.4rem] tracking-[0.03em] text-primary"
                   >
                     View all reviews

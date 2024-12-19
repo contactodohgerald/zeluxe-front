@@ -121,7 +121,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
       ErrorBoundary: AppRootErrorBoundary,
       children: [
         {
-          path: paths.app.ownerDashboard.path,
+          path: paths.app.owner.dashboard.path,
           lazy: async () => {
             const { DashboardRoute } = await import(
               './routes/app/owners/dashboard'
@@ -133,7 +133,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           ErrorBoundary: AppRootErrorBoundary,
         },
         {
-          path: paths.app.adminDashboard.path,
+          path: paths.app.admin.dashboard.path,
           lazy: async () => {
             const { AdminDashboardRoute } = await import(
               './routes/app/admin/dashboard'
@@ -145,7 +145,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           ErrorBoundary: AppRootErrorBoundary,
         },
         {
-          path: paths.app.addListings.path,
+          path: paths.app.owner.addListings.path,
           lazy: async () => {
             const { AddListingRoute } = await import(
               './routes/app/owners/listings/add-listing'
@@ -157,7 +157,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           ErrorBoundary: AppRootErrorBoundary,
         },
         {
-          path: paths.app.myListings.path,
+          path: paths.app.owner.myListings.path,
           lazy: async () => {
             const { MyListingRoute } = await import(
               './routes/app/owners/listings/my-listing'
@@ -169,7 +169,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           ErrorBoundary: AppRootErrorBoundary,
         },
         {
-          path: paths.app.adminListings.path,
+          path: paths.app.admin.listings.path,
           lazy: async () => {
             const { MyAdminListingRoute } = await import(
               './routes/app/admin/listings/my-listing'
@@ -181,7 +181,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           ErrorBoundary: AppRootErrorBoundary,
         },
         {
-          path: paths.app.listing.path,
+          path: paths.app.owner.listing.path,
           lazy: async () => {
             const { ListingRoute } = await import(
               './routes/app/owners/listings/listing'
@@ -196,7 +196,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           path: paths.app.rentals.path,
           lazy: async () => {
             const { RentalsRoute } = await import(
-              './routes/app/owners/rentals/rentals'
+              './routes/app/rentals/rentals'
             );
             return {
               Component: RentalsRoute,
@@ -207,9 +207,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
         {
           path: paths.app.rental.path,
           lazy: async () => {
-            const { RentalRoute } = await import(
-              './routes/app/owners/rentals/rental'
-            );
+            const { RentalRoute } = await import('./routes/app/rentals/rental');
             return {
               Component: RentalRoute,
             };
@@ -217,7 +215,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           ErrorBoundary: AppRootErrorBoundary,
         },
         {
-          path: paths.app.bookings.path,
+          path: paths.app.owner.bookings.path,
           lazy: async () => {
             const { BookingsRoute } = await import(
               './routes/app/owners/bookings/bookings'
@@ -229,7 +227,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           ErrorBoundary: AppRootErrorBoundary,
         },
         {
-          path: paths.app.booking.path,
+          path: paths.app.owner.booking.path,
           lazy: async () => {
             const { BookingRoute } = await import(
               './routes/app/owners/bookings/booking'
@@ -241,10 +239,34 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           ErrorBoundary: AppRootErrorBoundary,
         },
         {
+          path: paths.app.admin.bookings.path,
+          lazy: async () => {
+            const { BookingsRoute } = await import(
+              './routes/app/admin/bookings/bookings'
+            );
+            return {
+              Component: BookingsRoute,
+            };
+          },
+          ErrorBoundary: AppRootErrorBoundary,
+        },
+        {
+          path: paths.app.admin.booking.path,
+          lazy: async () => {
+            const { BookingRoute } = await import(
+              './routes/app/admin/bookings/booking'
+            );
+            return {
+              Component: BookingRoute,
+            };
+          },
+          ErrorBoundary: AppRootErrorBoundary,
+        },
+        {
           path: paths.app.search.path,
           lazy: async () => {
             const { SearchRentalsRoute } = await import(
-              './routes/app/owners/rentals/search'
+              './routes/app/rentals/search'
             );
             return {
               Component: SearchRentalsRoute,
@@ -253,7 +275,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           ErrorBoundary: AppRootErrorBoundary,
         },
         {
-          path: paths.app.reviews.path,
+          path: paths.app.owner.reviews.path,
           lazy: async () => {
             const { ReviewsRoute } = await import(
               './routes/app/owners/reviews/reviews'
@@ -265,7 +287,7 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           ErrorBoundary: AppRootErrorBoundary,
         },
         {
-          path: paths.app.review.path,
+          path: paths.app.owner.review.path,
           lazy: async () => {
             const { ReviewRoute } = await import(
               './routes/app/owners/reviews/review'
@@ -277,7 +299,31 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           ErrorBoundary: AppRootErrorBoundary,
         },
         {
-          path: paths.app.settings.path,
+          path: paths.app.admin.reviews.path,
+          lazy: async () => {
+            const { AdminReviewsRoute } = await import(
+              './routes/app/admin/reviews/reviews'
+            );
+            return {
+              Component: AdminReviewsRoute,
+            };
+          },
+          ErrorBoundary: AppRootErrorBoundary,
+        },
+        {
+          path: paths.app.admin.review.path,
+          lazy: async () => {
+            const { AdminReviewRoute } = await import(
+              './routes/app/admin/reviews/review'
+            );
+            return {
+              Component: AdminReviewRoute,
+            };
+          },
+          ErrorBoundary: AppRootErrorBoundary,
+        },
+        {
+          path: paths.app.admin.settings.path,
           lazy: async () => {
             const { SettingsRoute } = await import(
               './routes/app/admin/settings'
@@ -289,9 +335,23 @@ export const createAppRouter = (_queryClient: QueryClient) =>
           ErrorBoundary: AppRootErrorBoundary,
         },
         {
-          path: paths.app.profile.path,
+          path: paths.app.admin.profile.path,
           lazy: async () => {
-            const { ProfileRoute } = await import('./routes/app/profile');
+            const { ProfileRoute } = await import(
+              './routes/app/admin/profiles/profile'
+            );
+            return {
+              Component: ProfileRoute,
+            };
+          },
+          ErrorBoundary: AppRootErrorBoundary,
+        },
+        {
+          path: paths.app.owner.profile.path,
+          lazy: async () => {
+            const { ProfileRoute } = await import(
+              './routes/app/owners/profiles/profile'
+            );
             return {
               Component: ProfileRoute,
             };

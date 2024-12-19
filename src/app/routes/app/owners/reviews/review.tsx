@@ -1,7 +1,7 @@
 import { ContentLayout } from '@/components/layouts';
 import { Spinner } from '@/components/ui/spinner';
-import { useReview } from '@/features/reviews/api/get-review';
-import { ReviewView } from '@/features/reviews/component/review-view';
+import { useReview } from '@/features/reviews/owners/api/get-review';
+import { ReviewView } from '@/features/reviews/owners/component/review-view';
 import { Card } from 'antd';
 import { useParams } from 'react-router-dom';
 

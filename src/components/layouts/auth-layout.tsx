@@ -21,9 +21,9 @@ export const AuthLayout = ({ children, title }: LayoutProps) => {
       const redirectTo =
         searchParams.get('redirectTo') ||
         (user?.data?.role?.name === 'owner'
-          ? paths.app.ownerDashboard.getHref()
+          ? paths.app.owner.dashboard.getHref()
           : user?.data?.role?.name === 'admin'
-            ? paths.app.adminDashboard.getHref()
+            ? paths.app.admin.dashboard.getHref()
             : paths.home.getHref());
 
       navigate(redirectTo, { replace: true });

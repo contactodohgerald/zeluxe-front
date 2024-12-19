@@ -8,8 +8,10 @@ import userAvatar from '@/assets/images/user_avatar.jpg';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { paths } from '@/config/paths';
+import { useUser } from '@/lib/auth';
 
 export const GetRentalView = ({ rentalId }: { rentalId: string }) => {
+  const user = useUser();
   const rentalQuery = useRental({ rentalId });
   const rental = rentalQuery?.data?.data as Rental;
   //   console.log('rental-reviews',rental?.reviews)
@@ -270,7 +272,11 @@ export const GetRentalView = ({ rentalId }: { rentalId: string }) => {
                   </div>
                   <div className="mt-8 w-full rounded border border-success bg-transparent px-4 py-2.5 text-center">
                     <Link
-                      to={paths.app.reviews.getHref()}
+                      to={
+                        user?.data?.role?.name === 'admin'
+                          ? paths.app.admin.reviews.getHref()
+                          : paths.app.owner.reviews.getHref()
+                      }
                       type="button"
                       className="font-semibold hover:text-secondary"
                     >

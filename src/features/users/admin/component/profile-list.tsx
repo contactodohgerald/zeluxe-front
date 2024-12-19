@@ -2,7 +2,7 @@ import { useUser } from '@/lib/auth';
 import { Card } from 'antd';
 import { PencilIcon } from '@/components/ui/svgs';
 import { ProfileTabs } from '@/components/ui/dashboard/tabs';
-import ProfileImg from '../../../assets/images/dashboard_profile.jpeg';
+import ProfileImg from '@/assets/images/dashboard_profile.jpeg';
 import {
   createUploadsInputSchema,
   useCreateUpload,
@@ -10,18 +10,18 @@ import {
 import { useEffect, useState } from 'react';
 import { useNotifications } from '@/components/ui/notifications';
 import { formatErrors, onError } from '@/lib/utils';
-import { useListings } from '@/features/listings/owners/api/get-listings';
-import { useRentalReviews } from '@/features/reviews/api/get-reviews';
 import { useRentals } from '@/features/guest/api/get-rentals';
 import { Listing, Rental } from '@/types/api';
+import { useAdminListings } from '@/features/listings/admin/api/get-listings';
+import { useAdminRentalReviews } from '@/features/reviews/admin/api/get-reviews';
 
 export const ProfileList = () => {
   const { addNotification } = useNotifications();
   const [uploadedImages, setUploadedImages] = useState<string | null>(null);
   const user = useUser();
   const uploadFiles = useCreateUpload();
-  const listingQuery = useListings();
-  const reviewQuery = useRentalReviews();
+  const listingQuery = useAdminListings();
+  const reviewQuery = useAdminRentalReviews();
   const rentalQuery = useRentals();
   const listings = listingQuery?.data?.data;
   const reviews = reviewQuery?.data?.data;

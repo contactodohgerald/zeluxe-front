@@ -30,9 +30,9 @@ export const LoginRoute = () => {
                       redirectTo
                         ? `${redirectTo}`
                         : role === 'owner'
-                          ? paths.app.ownerDashboard.getHref()
+                          ? paths.app.owner.dashboard.getHref()
                           : role === 'admin'
-                            ? paths.app.adminDashboard.getHref()
+                            ? paths.app.admin.dashboard.getHref()
                             : paths.home.getHref()
                     }`,
                     {

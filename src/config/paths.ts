@@ -71,29 +71,97 @@ export const paths = {
       path: '/app',
       getHref: () => '/app',
     },
-    ownerDashboard: {
-      path: '/app/owners',
-      getHref: () => '/app/owners',
+    owner: {
+      dashboard: {
+        path: '/app',
+        getHref: () => '/app',
+      },
+      addListings: {
+        path: '/app/add-listing',
+        getHref: () => '/app/add-listing',
+      },
+      myListings: {
+        path: '/app/my-listing',
+        getHref: () => '/app/my-listing',
+      },
+      listing: {
+        path: '/app/listing/:listingId',
+        getHref: (listingId: string) => `/app/listing/${listingId}`,
+      },
+      // rentals: {
+      //   path: '/app/rentals',
+      //   getHref: () => '/app/rentals',
+      // },
+      // rental: {
+      //   path: '/app/rentals/:rentalId',
+      //   getHref: (rentalId: string) => `/app/rentals/${rentalId}`,
+      // },
+      bookings: {
+        path: '/app/bookings',
+        getHref: () => '/app/bookings',
+      },
+      booking: {
+        path: '/app/bookings/:bookingId',
+        getHref: (bookingId: string) => `/app/bookings/${bookingId}`,
+      },
+      reviews: {
+        path: '/app/reviews',
+        getHref: () => '/app/reviews',
+      },
+      review: {
+        path: '/app/reviews/:reviewId',
+        getHref: (reviewId: string) => `/app/reviews/${reviewId}`,
+      },
+      profile: {
+        path: '/app/profile',
+        getHref: () => '/app/profile',
+      },
     },
-    adminDashboard: {
-      path: '/app/admin',
-      getHref: () => '/app/admin',
-    },
-    addListings: {
-      path: '/app/add-listing',
-      getHref: () => '/app/add-listing',
-    },
-    myListings: {
-      path: '/app/owners/my-listing',
-      getHref: () => '/app/owners/my-listing',
-    },
-    adminListings: {
-      path: '/app/admin/my-listings',
-      getHref: () => '/app/admin/my-listings',
-    },
-    listing: {
-      path: '/app/admin/listing/:listingId',
-      getHref: (listingId: string) => `/app/admin/listing/${listingId}`,
+    admin: {
+      dashboard: {
+        path: '/app/admin',
+        getHref: () => '/app/admin',
+      },
+      listings: {
+        path: '/app/admin/my-listings',
+        getHref: () => '/app/admin/my-listings',
+      },
+      listing: {
+        path: '/app/admin/listing/:listingId',
+        getHref: (listingId: string) => `/app/admin/listing/${listingId}`,
+      },
+      // rentals: {
+      //   path: '/app/admin/rentals',
+      //   getHref: () => '/app/admin/rentals',
+      // },
+      // rental: {
+      //   path: '/app/admin/rentals/:rentalId',
+      //   getHref: (rentalId: string) => `/app/admin/rentals/${rentalId}`,
+      // },
+      bookings: {
+        path: '/app/admin/bookings',
+        getHref: () => '/app/admin/bookings',
+      },
+      booking: {
+        path: '/app/admin/bookings/:bookingId',
+        getHref: (bookingId: string) => `/app/admin/bookings/${bookingId}`,
+      },
+      reviews: {
+        path: '/app/admin/reviews',
+        getHref: () => '/app/admin/reviews',
+      },
+      review: {
+        path: '/app/admin/reviews/:reviewId',
+        getHref: (reviewId: string) => `/app/admin/reviews/${reviewId}`,
+      },
+      settings: {
+        path: '/app/admin/settings',
+        getHref: () => '/app/admin/settings',
+      },
+      profile: {
+        path: '/app/admin/profile',
+        getHref: () => '/app/admin/profile',
+      },
     },
     rentals: {
       path: '/app/rentals',
@@ -103,33 +171,9 @@ export const paths = {
       path: '/app/rentals/:rentalId',
       getHref: (rentalId: string) => `/app/rentals/${rentalId}`,
     },
-    bookings: {
-      path: '/app/bookings',
-      getHref: () => '/app/bookings',
-    },
-    booking: {
-      path: '/app/bookings/:bookingId',
-      getHref: (bookingId: string) => `/app/bookings/${bookingId}`,
-    },
-    reviews: {
-      path: '/app/reviews',
-      getHref: () => '/app/reviews',
-    },
-    review: {
-      path: '/app/reviews/:reviewId',
-      getHref: (reviewId: string) => `/app/reviews/${reviewId}`,
-    },
-    settings: {
-      path: '/app/admin/settings',
-      getHref: () => '/app/admin/settings',
-    },
     search: {
       path: '/app/search-results',
       getHref: () => '/app/search-results',
-    },
-    profile: {
-      path: '/app/profile',
-      getHref: () => '/app/profile',
     },
     logout: {
       path: '/logout',
@@ -139,4 +183,3 @@ export const paths = {
 } as const;
 
 export const commonPaths = {};
-// madelynn14@example.com

@@ -15,13 +15,15 @@ import { Authorization, ROLES } from '@/lib/authorization';
 import { useApproveListing } from '@/features/listings/admin/api/approve-listing';
 import { Button } from '@/components/ui/button';
 import { useRejectListing } from '@/features/listings/admin/api/reject-listing';
+import { useUser } from '@/lib/auth';
 
 type MyListingsTabCardProps = {
   listings: Active[] | Drafts[] | Reviewing[] | Rejected[] | Closed[];
 };
 export const MyListingsTabCard = ({ listings }: MyListingsTabCardProps) => {
   const { addNotification } = useNotifications();
-  console.log('listings', listings);
+  const user = useUser();
+  // console.log('listings', listings);
   const publish = usePublishListing({
     mutationConfig: {
       onSuccess: () => {
@@ -164,12 +166,13 @@ export const MyListingsTabCard = ({ listings }: MyListingsTabCardProps) => {
               <p className="mb-[0.63rem] font-montserrat text-[1.1rem] font-semibold leading-[1.32rem] tracking-[0.03em] text-primary">
                 ₦{Number(listing?.price)}
               </p>
-              <Button className="mb-[0.58rem] rounded-[0.63rem] bg-primary bg-transparent p-[0.6rem] font-raleway text-[0.63rem] font-medium leading-[0.74rem] tracking-[0.03em] text-white shadow-none backdrop-blur-[10.09px] backdrop-filter">
+              <Button className="mb-[0.58rem] rounded-[0.63rem] bg-primary p-[0.6rem] font-raleway text-[0.63rem] font-medium leading-[0.74rem] tracking-[0.03em] text-white shadow-none backdrop-blur-[10.09px] backdrop-filter">
                 {listing?.address?.nearest_landmark},{' '}
                 {listing?.address.country.name}
               </Button>
               <p className="mb-[0.63rem] font-raleway text-[0.87rem] font-[400] leading-[1.02rem] tracking-[0.03em] text-black">
-                {/* {listing?.reviews}  */}0 reviews
+                {listing?.reviews.length || 0}{' '}
+                {listing?.reviews.length <= 1 ? 'review' : 'reviews'}
               </p>
               <p className="font-raleway text-[0.87rem] font-[400] leading-[1.02rem] tracking-[0.03em] text-black">
                 {/* {listing?.owner?.status}  */}0 contact
@@ -190,7 +193,11 @@ export const MyListingsTabCard = ({ listings }: MyListingsTabCardProps) => {
               {listing.status !== 'active' ? (
                 <div className="mb-[0.6rem]">
                   <Link
-                    to={paths.app.listing.getHref(listing?.id)}
+                    to={
+                      user?.data?.role?.name === 'admin'
+                        ? paths.app.admin.listing.getHref(listing?.id)
+                        : paths.app.owner.listing.getHref(listing?.id)
+                    }
                     className="flex items-center text-warning"
                   >
                     <EditIcon className="md:ml-4" />

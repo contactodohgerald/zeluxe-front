@@ -1,7 +1,7 @@
 import { ContentLayout } from '@/components/layouts';
 import { Spinner } from '@/components/ui/spinner';
-import { useRentalBooking } from '@/features/ bookings/api/get-rental-booking';
-import { BookingView } from '@/features/ bookings/component/booking-view';
+import { useRentalBooking } from '@/features/ bookings/owners/api/get-rental-booking';
+import { BookingView } from '@/features/ bookings/owners/component/booking-view';
 import { Card } from 'antd';
 import { useParams } from 'react-router-dom';
 
