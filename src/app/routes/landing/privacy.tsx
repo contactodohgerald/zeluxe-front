@@ -5,162 +5,242 @@ import { Header } from '@/components/ui/header';
 export const PrivacyRoute = () => {
   return (
     <>
-      <Head description="Welcome to Zeluxe Listings About Page" />
+      <Head description="Welcome to DNest Privacy Page" />
       <Header />
       <main>
-        <div className="my-12 py-12">
+        <div className="mb-12 mt-2 pb-12 pt-2">
           <div className="container mx-auto px-[15px]">
             <div className="p-6">
-              <h1 className="mb-4 text-3xl font-bold text-gray-900">
-                Privacy Policy
+              <h1 className="mb-4 text-xl font-bold text-gray-900">
+                Privacy Policy for DNest
               </h1>
               <p className="mb-4 text-sm text-gray-600">
-                Effective Date: <strong>17-12-2024</strong> | Last Updated:{' '}
-                <strong>17-12-2024</strong>
+                Welcome to DNest! This Privacy Policy explains how we collect,
+                use, disclose, and safeguard your information when you use our
+                hospitality, property, and rental management application. Your
+                privacy is important to us, and we are committed to protecting
+                it. By using DNest, you agree to the terms outlined in this
+                Privacy Policy. If you do not agree, please discontinue use of
+                the app immediately.
               </p>
-
-              <p className="mb-6">
-                At Dnest Listings and Rentals, we are committed to protecting
-                your privacy and ensuring that your personal information is
-                handled securely and responsibly. This Privacy Policy outlines
-                how we collect, use, disclose, and protect your information when
-                you use our website, mobile application, and services
-                (collectively, the "Platform"). By accessing or using our
-                Platform, you agree to the terms of this Privacy Policy.
-              </p>
-
-              <h2 className="mb-2 text-2xl font-semibold text-gray-800">
+              <h2 className="mb-2 text-lg font-semibold text-gray-800">
                 1. Information We Collect
               </h2>
-              <p className="mb-4">
-                We collect the following types of information when you interact
-                with our Platform:
+              <p className="mb-4 text-sm">
+                We collect the following types of information:
               </p>
-
-              <h3 className="mb-2 text-xl font-medium text-gray-700">
-                a. Personal Information
+              <h3 className="mb-2 text-lg font-medium text-gray-700">
+                1.1 Personal Information
               </h3>
               <ul className="mb-4 ml-6 list-disc">
-                <li>Name</li>
-                <li>Email address</li>
-                <li>Phone number</li>
-                <li>Billing and mailing address</li>
-                <li>Payment information (e.g., credit card or bank details)</li>
+                <li className="text-sm">Name</li>
+                <li className="text-sm">Email address</li>
+                <li className="text-sm">Phone number</li>
               </ul>
 
-              <h3 className="mb-2 text-xl font-medium text-gray-700">
-                b. Account Information
+              <h3 className="mb-2 text-lg font-medium text-gray-700">
+                1.2 Property and Rental Information
               </h3>
-              <p className="mb-4">
-                When you create an account or list a property, we may collect:
-              </p>
               <ul className="mb-4 ml-6 list-disc">
-                <li>Username</li>
-                <li>Profile picture</li>
-                <li>Property details (e.g., address, description, pricing)</li>
-              </ul>
-
-              <h3 className="mb-2 text-xl font-medium text-gray-700">
-                c. Usage Data
-              </h3>
-              <p className="mb-4">
-                Information about how you use the Platform, including:
-              </p>
-              <ul className="mb-4 ml-6 list-disc">
-                <li>IP address</li>
-                <li>Browser type and version</li>
-                <li>
-                  Device information (e.g., operating system, mobile device ID)
+                <li className="text-sm">
+                  Property details, including addresses, descriptions, and
+                  rental rates.
                 </li>
-                <li>Pages viewed and actions taken on the Platform</li>
-                <li>Cookies and similar technologies</li>
+                <li className="text-sm">
+                  Tenant and landlord contact information.
+                </li>
               </ul>
 
-              <h3 className="mb-2 text-xl font-medium text-gray-700">
-                d. Location Data
-              </h3>
-              <p className="mb-4">
-                With your consent, we may collect location data to provide
-                localized services, such as nearby property listings.
-              </p>
-
-              <h2 className="mb-2 text-2xl font-semibold text-gray-800">
+              <h3 className="mb-2 text-lg font-medium text-gray-700">
                 2. How We Use Your Information
-              </h2>
-              <p className="mb-4">We use the information we collect to:</p>
-              <ul className="mb-4 ml-6 list-decimal">
-                <li>
-                  Facilitate property listings, bookings, and rental agreements.
+              </h3>
+              <p className="mb-4 text-sm">We use the collected data to:</p>
+              <ul className="mb-4 ml-6 list-disc">
+                <li className="text-sm">
+                  Facilitate property rentals, bookings, and hospitality
+                  management.
                 </li>
-                <li>
-                  Analyze user behavior to enhance functionality and user
-                  experience.
+                <li className="text-sm">
+                  Verify user identities and prevent fraudulent activities.
                 </li>
-                <li>
-                  Send notifications, updates, and customer support
-                  communications.
+                <li className="text-sm">
+                  Provide customer support and respond to inquiries.
                 </li>
-                <li>
-                  Handle payments securely for bookings or other transactions.
+                <li className="text-sm">
+                  Improve app performance, features, and security.
                 </li>
-                <li>Verify user identities and detect fraudulent activity.</li>
-                <li>
-                  Share offers, promotions, and other marketing content (with
-                  your consent).
+                <li className="text-sm">
+                  Send notifications, promotional offers, and service updates.
                 </li>
               </ul>
 
-              <h2 className="mb-2 text-2xl font-semibold text-gray-800">
-                3. How We Share Your Information
+              <h3 className="mb-2 text-lg font-medium text-gray-700">
+                3. Sharing of Information
+              </h3>
+              <p className="mb-4 text-sm">
+                We may share your information in the following circumstances:
+              </p>
+              <ul className="mb-4 ml-6 list-disc">
+                <li className="text-sm">
+                  <strong>With Service Providers:</strong> To assist with
+                  payment processing, identity verification, or customer
+                </li>
+                <li className="text-sm">
+                  <strong>With Business Partners:</strong> For promotional
+                  offers or property management services.
+                </li>
+                <li className="text-sm">
+                  <strong>For Legal Obligations:</strong> When required by law
+                  or to protect our legal rights.
+                </li>
+                <li className="text-sm">
+                  <strong>During Business Transactions:</strong> If DNest is
+                  involved in a merger, sale, or acquisition.
+                </li>
+              </ul>
+              <p className="mb-4 text-sm">
+                We do not sell your personal information to third parties.
+              </p>
+              <h3 className="mb-2 text-lg font-medium text-gray-700">
+                4. Data Retention
+              </h3>
+              <p className="mb-4 text-sm">
+                We retain your data for as long as necessary to provide our
+                services or comply with legal obligations. Once the data is no
+                longer required, it is securely deleted.
+              </p>
+              <h3 className="mb-2 text-lg font-medium text-gray-700">
+                5. Security Measures
+              </h3>
+              <p className="mb-4">
+                We implement the following security measures to protect your
+                information:
+              </p>
+              <ul className="mb-4 ml-6 list-disc">
+                <li className="text-sm">
+                  Encryption of sensitive data during transmission and storage.
+                </li>
+                <li className="text-sm">
+                  Regular vulnerability assessments and audits.
+                </li>
+                <li className="text-sm">
+                  Restricted access to personal information by authorized
+                  personnel only.
+                </li>
+              </ul>
+              <p className="mb-4">
+                Despite our efforts, no method of data transmission or storage
+                is completely secure. Users are encouraged to protect their
+                account credentials.
+              </p>
+              <h2 className="mb-2 text-lg font-semibold text-gray-800">
+                6. Cookies and Tracking Technologies
               </h2>
-              <p className="mb-4">
-                We do not sell your personal information. However, we may share
-                your information with:
+              <p className="mb-4 text-sm">
+                We use cookies and similar technologies to:
               </p>
-              <h3 className="mb-2 text-xl font-medium text-gray-700">
-                a. Service Providers
-              </h3>
-              <p className="mb-4">
-                Third-party vendors who help us operate the Platform, such as
-                payment processors, cloud service providers, and analytics
-                tools.
-              </p>
-              <h3 className="mb-2 text-xl font-medium text-gray-700">
-                b. Business Partners
-              </h3>
-              <p className="mb-4">
-                Partners who collaborate with us to offer services, such as
-                property managers or rental agencies.
+              <ul className="mb-4 ml-6 list-disc">
+                <li className="text-sm">Personalize your app experience.</li>
+                <li className="text-sm">Analyze app performance.</li>
+              </ul>
+              <p className="text-sm text-gray-500">
+                You can manage cookie preferences through your device settings.
               </p>
 
-              <h2 className="mb-2 text-2xl font-semibold text-gray-800">
+              <h2 className="mb-2 text-lg font-semibold text-gray-800">
+                7. Your Privacy Rights
+              </h2>
+              <p className="mb-4 text-sm">
+                Depending on your location, you may have the following rights:
+              </p>
+              <ul className="mb-4 ml-6 list-disc">
+                <li className="text-sm">
+                  <strong>Access:</strong> Request a copy of your personal data.
+                </li>
+                <li className="text-sm">
+                  <strong>Correction:</strong> Request corrections to inaccurate
+                  or incomplete data.
+                </li>
+                <li className="text-sm">
+                  <strong>Deletion:</strong> Request deletion of your personal
+                  data (see Section 9).
+                </li>
+                <li className="text-sm">
+                  <strong>Objection:</strong> Object to the processing of your
+                  data for certain purposes.
+                </li>
+                <li className="text-sm">
+                  <strong>Data Portability:</strong> Request your data in a
+                  portable format.
+                </li>
+              </ul>
+              <p className="text-sm text-gray-500">
+                To exercise your rights, contact us at{' '}
+                <a href="mailto:support@dnest.com">support@dnest.com.</a>
+              </p>
+
+              <h2 className="mb-2 text-lg font-semibold text-gray-800">
+                8. Data Deletion
+              </h2>
+              <p className="mb-4 text-sm">
+                We respect your right to delete your data. You can request
+                deletion of your account and associated <br /> information by:
+              </p>
+              <ul className="mb-4 ml-6 list-decimal">
+                <li className="text-sm">
+                  Navigating to the <strong>Settings</strong> section in the
+                  DNest app.
+                </li>
+                <li className="text-sm">
+                  Selecting <strong>"Delete Account"</strong> and following the
+                  prompts.
+                </li>
+                <li className="text-sm">
+                  Alternatively, contacting us at{' '}
+                  <a href="mailto:support@dnest.com"></a> with your account
+                  details.
+                </li>
+                <p className="mb-4 text-sm">Once the request is verified:</p>
+                <li className="text-sm">
+                  Your data will be permanently deleted within{' '}
+                  <strong>30 days</strong>, except for data required by law.
+                </li>
+                <li className="text-sm">
+                  Any shared information may remain with third parties, as
+                  governed by their privacy policies.
+                </li>
+              </ul>
+              <h2 className="mb-2 text-lg font-semibold text-gray-800">
+                9. Changes to This Privacy Policy
+              </h2>
+              <p className="mb-4 text-sm">
+                We may update this Privacy Policy from time to time. Changes
+                will be notified via:
+              </p>
+              <ul className="mb-4 ml-6 list-disc">
+                <li className="text-sm">In-app notifications.</li>
+                <p className="mb-4 text-sm">
+                  Continued use of the app after updates signifies acceptance of
+                  the revised policy.
+                </p>
+              </ul>
+              <h2 className="mb-2 text-lg font-semibold text-gray-800">
                 10. Contact Us
               </h2>
-              <p className="mb-4">
-                If you have any questions or concerns about this Privacy Policy,
-                please contact us at:
+              <p className="mb-4 text-sm">
+                For questions or concerns about this Privacy Policy, please
+                contact us at:
               </p>
-              <ul className="mb-4 ml-6 list-none">
-                <li>
-                  <strong>Email:</strong>{' '}
-                  <a href="mailto:support@dnest.com" className="text-blue-500">
-                    support@dnest.com
-                  </a>
+              <ul className="mb-4 ml-6 list-disc">
+                <li className="text-sm">
+                  <strong>Email: </strong>
+                  <a href="mailto:support@dnest.com">support@dnest.com</a>
                 </li>
-                <li>
-                  <strong>Phone:</strong> +1 (800) 123-4567
-                </li>
-                <li>
-                  <strong>Mailing Address:</strong> Dnest Listings and Rentals,
-                  Address Line 1, City, State, ZIP Code
+                <li className="text-sm">
+                  <strong>Phone:</strong>{' '}
+                  <a href="telephone:+2347031250097">+2347031250097</a>
                 </li>
               </ul>
-
-              <p className="text-sm text-gray-500">
-                Your trust is important to us, and we are committed to
-                safeguarding your privacy while providing exceptional service.
-                Thank you for choosing Dnest Listings and Rentals!
-              </p>
             </div>
           </div>
         </div>
