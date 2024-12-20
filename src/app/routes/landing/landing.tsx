@@ -73,7 +73,7 @@ export const LandingRoute = () => {
 
   return (
     <>
-      <Head description="Welcome to Zeluxe Listings Home Page" />
+      <Head description="Welcome to DNest Listings Home Page" />
       <Header />
       <main>
         <div className="hero-area bg-1 overly text-center">
